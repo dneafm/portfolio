@@ -76,14 +76,14 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[26rem] w-full max-w-[32rem] items-center justify-center overflow-visible md:mt-0 md:h-[42rem] md:max-w-[50rem] lg:h-[54rem] lg:max-w-[58rem]"
+          className="relative mx-auto -mt-1 flex h-[28rem] w-full max-w-[34rem] items-center justify-center overflow-visible px-8 md:mt-0 md:h-[46rem] md:max-w-[54rem] md:px-12 lg:h-[58rem] lg:max-w-[62rem] lg:px-16"
         >
           <div className="absolute inset-x-[10%] bottom-[10%] h-[30%] rounded-full bg-blue-200/8 blur-3xl dark:bg-blue-500/8" />
           <div className="absolute left-1/2 top-[6%] h-[24%] w-[34%] -translate-x-1/2 rounded-full bg-white/8 blur-3xl dark:bg-white/4" />
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[18rem] w-[18rem] rounded-full border border-zinc-300/16 dark:border-zinc-700/20 md:h-[30rem] md:w-[30rem]"
+            className="absolute h-[15rem] w-[15rem] rounded-full border border-zinc-300/16 dark:border-zinc-700/20 md:h-[26rem] md:w-[26rem]"
           >
             <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-blue-500/70 md:h-5" />
             <div className="absolute bottom-0 left-1/2 h-4 w-px -translate-x-1/2 bg-violet-500/55 md:h-5" />
@@ -94,7 +94,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[12rem] w-[12rem] rounded-full border border-dashed border-zinc-400/14 dark:border-zinc-600/18 md:h-[22rem] md:w-[22rem] md:border-2"
+            className="absolute h-[10rem] w-[10rem] rounded-full border border-dashed border-zinc-400/14 dark:border-zinc-600/18 md:h-[18rem] md:w-[18rem] md:border-2"
           />
 
           <Suspense
@@ -111,7 +111,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            className="absolute left-[7%] top-[18%] hidden h-20 w-20 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-24 md:w-24"
+            className="absolute left-[10%] top-[20%] hidden h-16 w-16 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-20 md:w-20"
           >
             <div className="absolute inset-[18%] rounded-full border border-dashed border-blue-500/45" />
             <div className="absolute left-1/2 top-0 h-3 w-px -translate-x-1/2 bg-zinc-500" />
@@ -123,7 +123,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[17%] right-[6%] hidden h-24 w-24 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-32 md:w-32"
+            className="absolute bottom-[19%] right-[10%] hidden h-20 w-20 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-24 md:w-24"
           >
             <div className="absolute inset-[16%] rounded-full border-2 border-dashed border-violet-500/40" />
             <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-zinc-500" />

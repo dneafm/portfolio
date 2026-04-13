@@ -131,25 +131,26 @@ function PrismGem() {
   const beamRef = useRef<Mesh>(null);
 
   const gemGeometry = useMemo(() => {
-    const geometry = new CylinderGeometry(0.34, 0.92, 2.42, 7, 5, false);
+    const geometry = new CylinderGeometry(0.22, 0.74, 2.88, 6, 7, false);
     const position = geometry.attributes.position;
     const deformed = new Float32Array(position.array.length);
 
     for (let i = 0; i < position.count; i += 1) {
-      const x = position.getX(i) * 0.82;
-      const y = position.getY(i) * 1.08;
-      const z = position.getZ(i) * 0.76;
+      const x = position.getX(i) * 0.72;
+      const y = position.getY(i) * 1.18;
+      const z = position.getZ(i) * 0.68;
       const angle = Math.atan2(z, x);
       const radial = Math.sqrt(x * x + z * z);
-      const shardStep = Math.round((angle / (Math.PI / 3.5)) * 2) / 2;
-      const ridge = Math.cos(shardStep * 1.7 + y * 2.6) * 0.12;
-      const jagA = Math.sin(y * 11.5 + angle * 6.2) * 0.08;
-      const jagB = Math.cos(radial * 13.5 - y * 8.4) * 0.05;
-      const pinch = y > 0.72 ? 0.78 : y < -0.78 ? 0.86 : 1;
-      const scale = (1 + ridge + jagA + jagB) * pinch;
+      const shardStep = Math.round((angle / (Math.PI / 3)) * 2) / 2;
+      const ridge = Math.cos(shardStep * 2.2 + y * 3.1) * 0.18;
+      const jagA = Math.sin(y * 13.5 + angle * 7.2) * 0.12;
+      const jagB = Math.cos(radial * 15.5 - y * 9.4) * 0.08;
+      const edgeBias = Math.pow(Math.abs(Math.cos(angle * 3)), 2) * 0.18;
+      const tipPinch = y > 1.18 ? 0.48 : y > 0.84 ? 0.64 : y < -1.1 ? 0.72 : y < -0.82 ? 0.84 : 1;
+      const scale = (1 + ridge + jagA + jagB + edgeBias) * tipPinch;
 
       deformed[i * 3] = x * scale;
-      deformed[i * 3 + 1] = y * (1 + Math.sin(angle * 3.5) * 0.06);
+      deformed[i * 3 + 1] = y * (1 + Math.sin(angle * 3) * 0.03);
       deformed[i * 3 + 2] = z * scale;
     }
 
@@ -157,8 +158,8 @@ function PrismGem() {
     geometry.computeVertexNormals();
     return geometry;
   }, []);
-  const coreGeometry = useMemo(() => new CylinderGeometry(0.18, 0.44, 1.88, 6, 3, false), []);
-  const haloGeometry = useMemo(() => new CylinderGeometry(0.42, 1.02, 2.68, 7, 6, true), []);
+  const coreGeometry = useMemo(() => new CylinderGeometry(0.1, 0.3, 2.06, 6, 4, false), []);
+  const haloGeometry = useMemo(() => new CylinderGeometry(0.24, 0.82, 3.12, 6, 7, true), []);
   const beamGeometry = useMemo(() => new CylinderGeometry(0.14, 0.42, 4.2, 32, 1, true), []);
 
   const coreMaterial = useMemo(
@@ -232,28 +233,28 @@ function PrismGem() {
 
   return (
     <group ref={groupRef}>
-      <OrbitBand color="#88b7ff" scale={1.18} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.18} markerScale={0.036} />
-      <OrbitBand color="#c7c6ff" scale={0.98} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.15} markerScale={0.03} />
-      <OrbitBand color="#83d5ff" scale={1.34} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.09} markerScale={0.024} />
+      <OrbitBand color="#88b7ff" scale={1.02} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.16} markerScale={0.03} />
+      <OrbitBand color="#c7c6ff" scale={0.84} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.12} markerScale={0.026} />
+      <OrbitBand color="#83d5ff" scale={1.14} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.08} markerScale={0.02} />
 
-      <MechanicalGear position={[-2.22, 1.22, -0.82]} scale={0.28} speed={0.28} color="#9ebcff" />
-      <MechanicalGear position={[2.18, -0.98, -0.76]} scale={0.42} speed={-0.2} color="#c8c9ff" />
-      <MechanicalGear position={[1.7, 1.62, -1.2]} scale={0.18} speed={0.34} color="#8ed7ff" />
+      <MechanicalGear position={[-1.84, 1.02, -0.82]} scale={0.2} speed={0.28} color="#9ebcff" />
+      <MechanicalGear position={[1.88, -0.84, -0.76]} scale={0.3} speed={-0.2} color="#c8c9ff" />
+      <MechanicalGear position={[1.42, 1.3, -1.2]} scale={0.14} speed={0.34} color="#8ed7ff" />
 
       <mesh ref={beamRef} geometry={beamGeometry} position={[0, 0, -0.2]} material={beamMaterial} />
-      <mesh ref={coreRef} geometry={coreGeometry} scale={[0.9, 1.12, 0.84]} material={coreMaterial} />
+      <mesh ref={coreRef} geometry={coreGeometry} scale={[0.86, 1.06, 0.8]} material={coreMaterial} />
 
-      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.02, 1.24, 1]}>
+      <mesh ref={gemRef} geometry={gemGeometry} scale={[0.9, 1.14, 0.88]}>
         <MeshTransmissionMaterial
           backside
           samples={6}
           resolution={256}
-          thickness={1.45}
-          roughness={0.06}
+          thickness={1.18}
+          roughness={0.05}
           chromaticAberration={0.025}
           anisotropy={0.24}
-          distortion={0.045}
-          distortionScale={0.11}
+          distortion={0.035}
+          distortionScale={0.09}
           temporalDistortion={0.02}
           iridescence={0.18}
           iridescenceIOR={1.16}
@@ -264,7 +265,7 @@ function PrismGem() {
         />
       </mesh>
 
-      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.02, 1.12, 0.96]} material={haloMaterial} />
+      <mesh ref={haloRef} geometry={haloGeometry} scale={[0.92, 1.08, 0.9]} material={haloMaterial} />
 
       <mesh position={[1.52, 0.44, 0.52]} scale={0.05}>
         <sphereGeometry args={[1, 14, 14]} />
@@ -280,9 +281,9 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-[-8%] z-10 overflow-visible">
+    <div className="absolute inset-[-10%] z-10 overflow-visible">
       <Canvas
-        camera={{ position: [0, 0, 9.6], fov: 20 }}
+        camera={{ position: [0, 0, 10.8], fov: 18 }}
         dpr={[1, 1.75]}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ gl }) => gl.setClearColor("#000000", 0)}
