@@ -25,7 +25,7 @@ export function Layout() {
       <div className="fixed inset-0 pointer-events-none z-[9998] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[size:100%_4px,3px_100%] opacity-[0.03] dark:opacity-[0.07]" />
 
       {/* Top Navigation */}
-      <header className="sticky top-0 z-50 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md md:sticky">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-default">
             <div className="w-2.5 h-2.5 bg-blue-600 rounded-sm group-hover:rotate-45 transition-transform" />
@@ -68,7 +68,7 @@ export function Layout() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-12 md:py-24">
+      <main className="flex-1 max-w-5xl mx-auto w-full px-6 pt-28 pb-12 md:py-24">
         <Outlet />
       </main>
 
