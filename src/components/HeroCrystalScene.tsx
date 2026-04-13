@@ -42,6 +42,7 @@ type GemConfig = {
   opacity?: number;
   debrisCount?: number;
   debrisRadius?: number;
+  geometryDetail?: number;
 };
 
 const GRID_GEMS: GemConfig[] = [
@@ -61,17 +62,18 @@ const GRID_GEMS: GemConfig[] = [
     id: "purple-blue",
     shape: "violet-prism",
     position: [-2.75, 1.85, -0.2],
-    scale: 0.66,
-    colors: ["#1a5fff", "#893bff"],
-    debrisColors: ["#2b74ff", "#9b57ff"],
-    glow: 0.42,
+    scale: 0.68,
+    colors: ["#1662ff", "#8d36ff"],
+    debrisColors: ["#2678ff", "#a155ff"],
+    glow: 0.48,
     pulse: 1.35,
     rotation: [-0.28, 0.48, -0.12],
     floatSeed: 0.8,
     materialType: "phong",
     opacity: 0.95,
-    debrisCount: 9,
-    debrisRadius: 0.82,
+    debrisCount: 11,
+    debrisRadius: 0.88,
+    geometryDetail: 1,
   },
   {
     id: "gold-yellow",
@@ -202,13 +204,13 @@ function applyVertexGradient(geometry: BufferGeometry, start: string, end: strin
   return nonIndexed;
 }
 
-function createGemGeometry(shape: GemShape) {
+function createGemGeometry(shape: GemShape, detail = 0) {
   const base =
     shape === "magenta-star"
-      ? new TetrahedronGeometry(1.05, 0)
+      ? new TetrahedronGeometry(1.05, Math.max(0, detail - 1))
       : shape === "violet-prism" || shape === "deep-plum"
-        ? new IcosahedronGeometry(0.95, 0)
-        : new OctahedronGeometry(1, 0);
+        ? new IcosahedronGeometry(0.95, detail)
+        : new OctahedronGeometry(1, detail);
 
   const geometry = base.toNonIndexed();
   const position = geometry.attributes.position;
@@ -228,7 +230,13 @@ function createGemGeometry(shape: GemShape) {
       case "violet-prism": {
         const apexBias = y > 0 ? 1.18 : 0.9;
         const shoulder = Math.max(0, -y) * 0.22;
-        vector.set(x * 0.68 + z * 0.12 + Math.sign(x) * shoulder * 0.08, y * apexBias, z * 0.82 - shoulder * 0.06);
+        const ridge = Math.sin((x - z) * 5.4) * 0.028 + Math.cos((x + y) * 4.8) * 0.024;
+        const edgeBias = (Math.abs(x) + Math.abs(z)) * 0.045;
+        vector.set(
+          x * 0.68 + z * 0.12 + Math.sign(x) * shoulder * 0.08 + Math.sign(x || 1) * ridge,
+          y * apexBias + ridge * 0.6,
+          z * 0.82 - shoulder * 0.06 - Math.sign(z || 1) * edgeBias * 0.4,
+        );
         break;
       }
       case "gold-core": {
@@ -340,8 +348,14 @@ function FacetedGem({ config, hero = false, ghost = false }: { config: GemConfig
   const ref = useRef<Group>(null);
   const shellRef = useRef<Mesh>(null);
   const coreRef = useRef<Mesh>(null);
-  const geometry = useMemo(() => applyVertexGradient(createGemGeometry(config.shape), config.colors[0], config.colors[1]), [config.colors, config.shape]);
-  const glowGeometry = useMemo(() => applyVertexGradient(createGemGeometry(config.shape), config.colors[0], config.colors[1]), [config.colors, config.shape]);
+  const geometry = useMemo(
+    () => applyVertexGradient(createGemGeometry(config.shape, config.geometryDetail ?? 0), config.colors[0], config.colors[1]),
+    [config.colors, config.geometryDetail, config.shape],
+  );
+  const glowGeometry = useMemo(
+    () => applyVertexGradient(createGemGeometry(config.shape, config.geometryDetail ?? 0), config.colors[0], config.colors[1]),
+    [config.colors, config.geometryDetail, config.shape],
+  );
   const phongMaterial = useMemo(
     () =>
       new MeshPhongMaterial({
