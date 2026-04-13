@@ -76,32 +76,18 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[28rem] w-full max-w-[34rem] items-center justify-center overflow-visible px-8 md:mt-0 md:h-[46rem] md:max-w-[54rem] md:px-12 lg:h-[58rem] lg:max-w-[62rem] lg:px-16"
+          className="relative mx-auto -mt-1 flex h-[30rem] w-screen max-w-none items-center justify-center overflow-visible px-0 md:mt-0 md:h-[48rem] lg:h-[60rem]"
         >
-          <div className="absolute inset-x-[10%] bottom-[10%] h-[30%] rounded-full bg-blue-200/8 blur-3xl dark:bg-blue-500/8" />
-          <div className="absolute left-1/2 top-[6%] h-[24%] w-[34%] -translate-x-1/2 rounded-full bg-white/8 blur-3xl dark:bg-white/4" />
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[15rem] w-[15rem] rounded-full border border-zinc-300/16 dark:border-zinc-700/20 md:h-[26rem] md:w-[26rem]"
-          >
-            <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-blue-500/70 md:h-5" />
-            <div className="absolute bottom-0 left-1/2 h-4 w-px -translate-x-1/2 bg-violet-500/55 md:h-5" />
-            <div className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-blue-500/45 md:w-5" />
-            <div className="absolute right-0 top-1/2 h-px w-4 -translate-y-1/2 bg-violet-500/45 md:w-5" />
-          </motion.div>
-
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[10rem] w-[10rem] rounded-full border border-dashed border-zinc-400/14 dark:border-zinc-600/18 md:h-[18rem] md:w-[18rem] md:border-2"
-          />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:120px_120px] [mask-image:radial-gradient(circle_at_center,black,transparent_78%)] mix-blend-soft-light opacity-70" />
+          <div className="absolute inset-x-[8%] bottom-[8%] h-[34%] rounded-full bg-blue-300/10 blur-3xl dark:bg-blue-500/10" />
+          <div className="absolute left-1/2 top-[8%] h-[28%] w-[36%] -translate-x-1/2 rounded-full bg-white/8 blur-3xl dark:bg-white/5" />
+          <div className="absolute right-[8%] top-[14%] h-[56%] w-[44%] rounded-full bg-violet-500/10 blur-[120px] dark:bg-violet-500/14" />
 
           <Suspense
             fallback={
               <div className="absolute inset-0 z-10">
-                <div className="absolute inset-x-[24%] bottom-[18%] h-20 rounded-full bg-blue-500/20 blur-3xl md:inset-x-[22%] md:bottom-[16%] md:h-28" />
-                <div className="absolute left-1/2 top-1/2 h-[15rem] w-[11rem] -translate-x-1/2 -translate-y-[56%] rounded-[45%] border border-white/25 bg-gradient-to-b from-white/30 via-blue-400/35 to-violet-500/25 shadow-[0_0_80px_rgba(59,130,246,0.28)] backdrop-blur-sm md:h-[24rem] md:w-[17rem]" />
+                <div className="absolute inset-x-[20%] bottom-[14%] h-24 rounded-full bg-blue-500/20 blur-3xl md:h-32" />
+                <div className="absolute left-1/2 top-1/2 h-[17rem] w-[12rem] -translate-x-1/2 -translate-y-[54%] rounded-[45%] border border-white/20 bg-gradient-to-b from-white/30 via-blue-400/35 to-violet-500/25 shadow-[0_0_90px_rgba(59,130,246,0.3)] backdrop-blur-sm md:h-[26rem] md:w-[18rem]" />
               </div>
             }
           >
@@ -109,38 +95,14 @@ export function Hero() {
           </Suspense>
 
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            className="absolute left-[10%] top-[20%] hidden h-16 w-16 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-20 md:w-20"
-          >
-            <div className="absolute inset-[18%] rounded-full border border-dashed border-blue-500/45" />
-            <div className="absolute left-1/2 top-0 h-3 w-px -translate-x-1/2 bg-zinc-500" />
-            <div className="absolute bottom-0 left-1/2 h-3 w-px -translate-x-1/2 bg-zinc-500" />
-            <div className="absolute left-0 top-1/2 h-px w-3 -translate-y-1/2 bg-zinc-500" />
-            <div className="absolute right-0 top-1/2 h-px w-3 -translate-y-1/2 bg-zinc-500" />
-          </motion.div>
-
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[19%] right-[10%] hidden h-20 w-20 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-24 md:w-24"
-          >
-            <div className="absolute inset-[16%] rounded-full border-2 border-dashed border-violet-500/40" />
-            <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-zinc-500" />
-            <div className="absolute bottom-0 left-1/2 h-4 w-px -translate-x-1/2 bg-zinc-500" />
-            <div className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-zinc-500" />
-            <div className="absolute right-0 top-1/2 h-px w-4 -translate-y-1/2 bg-zinc-500" />
-          </motion.div>
-
-          <motion.div
-            animate={{ opacity: [0.18, 0.48, 0.18] }}
-            transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[15%] top-[56%] h-px w-16 bg-gradient-to-r from-transparent via-blue-300/70 to-transparent md:left-[20%] md:w-24"
+            animate={{ opacity: [0.18, 0.44, 0.18] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[8%] top-[58%] h-px w-24 bg-gradient-to-r from-transparent via-blue-300/70 to-transparent md:w-36"
           />
           <motion.div
-            animate={{ opacity: [0.16, 0.42, 0.16] }}
-            transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-            className="absolute right-[12%] top-[30%] hidden h-px w-24 bg-gradient-to-r from-transparent via-violet-300/70 to-transparent md:block md:w-28"
+            animate={{ opacity: [0.16, 0.36, 0.16] }}
+            transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="absolute right-[8%] top-[26%] hidden h-px w-28 bg-gradient-to-r from-transparent via-violet-300/70 to-transparent md:block md:w-40"
           />
         </motion.div>
       </div>
