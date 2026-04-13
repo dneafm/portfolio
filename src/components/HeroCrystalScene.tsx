@@ -131,35 +131,34 @@ function PrismGem() {
   const beamRef = useRef<Mesh>(null);
 
   const gemGeometry = useMemo(() => {
-    const geometry = new CylinderGeometry(0.22, 0.74, 2.88, 6, 7, false);
+    const geometry = new IcosahedronGeometry(1.4, 1);
     const position = geometry.attributes.position;
     const deformed = new Float32Array(position.array.length);
 
     for (let i = 0; i < position.count; i += 1) {
-      const x = position.getX(i) * 0.72;
-      const y = position.getY(i) * 1.18;
-      const z = position.getZ(i) * 0.68;
+      const x = position.getX(i);
+      const y = position.getY(i);
+      const z = position.getZ(i);
       const angle = Math.atan2(z, x);
       const radial = Math.sqrt(x * x + z * z);
-      const shardStep = Math.round((angle / (Math.PI / 3)) * 2) / 2;
-      const ridge = Math.cos(shardStep * 2.2 + y * 3.1) * 0.18;
-      const jagA = Math.sin(y * 13.5 + angle * 7.2) * 0.12;
-      const jagB = Math.cos(radial * 15.5 - y * 9.4) * 0.08;
-      const edgeBias = Math.pow(Math.abs(Math.cos(angle * 3)), 2) * 0.18;
-      const tipPinch = y > 1.18 ? 0.48 : y > 0.84 ? 0.64 : y < -1.1 ? 0.72 : y < -0.82 ? 0.84 : 1;
-      const scale = (1 + ridge + jagA + jagB + edgeBias) * tipPinch;
+      const faceSnap = Math.sign(x) * 0.12 + Math.sign(z) * 0.1;
+      const ridge = Math.cos(angle * 4 + y * 2.8) * 0.16;
+      const jagA = Math.sin(y * 10.5 + angle * 6.8) * 0.13;
+      const jagB = Math.cos(radial * 9.2 - y * 6.4) * 0.08;
+      const chunky = 1.1 + faceSnap + ridge + jagA + jagB;
+      const yScale = 0.88 + Math.abs(y) * 0.22;
 
-      deformed[i * 3] = x * scale;
-      deformed[i * 3 + 1] = y * (1 + Math.sin(angle * 3) * 0.03);
-      deformed[i * 3 + 2] = z * scale;
+      deformed[i * 3] = x * chunky * 0.98;
+      deformed[i * 3 + 1] = y * yScale;
+      deformed[i * 3 + 2] = z * chunky * 0.82;
     }
 
     geometry.setAttribute("position", new BufferAttribute(deformed, 3));
     geometry.computeVertexNormals();
     return geometry;
   }, []);
-  const coreGeometry = useMemo(() => new CylinderGeometry(0.1, 0.3, 2.06, 6, 4, false), []);
-  const haloGeometry = useMemo(() => new CylinderGeometry(0.24, 0.82, 3.12, 6, 7, true), []);
+  const coreGeometry = useMemo(() => new IcosahedronGeometry(0.82, 0), []);
+  const haloGeometry = useMemo(() => new IcosahedronGeometry(1.7, 0), []);
   const beamGeometry = useMemo(() => new CylinderGeometry(0.14, 0.42, 4.2, 32, 1, true), []);
 
   const coreMaterial = useMemo(
@@ -168,11 +167,11 @@ function PrismGem() {
         color: new Color("#accfff"),
         emissive: new Color("#4f78ff"),
         emissiveIntensity: 0.48,
-        roughness: 0.08,
-        metalness: 0.54,
+        roughness: 0.2,
+        metalness: 0.42,
         reflectivity: 1,
         clearcoat: 1,
-        clearcoatRoughness: 0.02,
+        clearcoatRoughness: 0.08,
       }),
     [],
   );
@@ -182,7 +181,7 @@ function PrismGem() {
       new MeshBasicMaterial({
         color: new Color("#8fc7ff"),
         transparent: true,
-        opacity: 0.055,
+        opacity: 0.05,
         blending: AdditiveBlending,
         side: DoubleSide,
         depthWrite: false,
@@ -242,30 +241,30 @@ function PrismGem() {
       <MechanicalGear position={[1.42, 1.3, -1.2]} scale={0.14} speed={0.34} color="#8ed7ff" />
 
       <mesh ref={beamRef} geometry={beamGeometry} position={[0, 0, -0.2]} material={beamMaterial} />
-      <mesh ref={coreRef} geometry={coreGeometry} scale={[0.86, 1.06, 0.8]} material={coreMaterial} />
+      <mesh ref={coreRef} geometry={coreGeometry} scale={[1.06, 1.12, 0.88]} material={coreMaterial} />
 
-      <mesh ref={gemRef} geometry={gemGeometry} scale={[0.9, 1.14, 0.88]}>
+      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.24, 1.32, 0.96]}>
         <MeshTransmissionMaterial
           backside
           samples={6}
           resolution={256}
-          thickness={1.18}
-          roughness={0.05}
-          chromaticAberration={0.025}
-          anisotropy={0.24}
-          distortion={0.035}
-          distortionScale={0.09}
-          temporalDistortion={0.02}
-          iridescence={0.18}
+          thickness={1.46}
+          roughness={0.2}
+          chromaticAberration={0.018}
+          anisotropy={0.1}
+          distortion={0.12}
+          distortionScale={0.2}
+          temporalDistortion={0.03}
+          iridescence={0.1}
           iridescenceIOR={1.16}
           clearcoat={1}
           attenuationColor="#8ca7ff"
-          attenuationDistance={1.9}
-          color="#fbfdff"
+          attenuationDistance={1.5}
+          color="#eef4ff"
         />
       </mesh>
 
-      <mesh ref={haloRef} geometry={haloGeometry} scale={[0.92, 1.08, 0.9]} material={haloMaterial} />
+      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.12, 1.18, 0.98]} material={haloMaterial} />
 
       <mesh position={[1.52, 0.44, 0.52]} scale={0.05}>
         <sphereGeometry args={[1, 14, 14]} />
