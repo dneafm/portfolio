@@ -78,12 +78,12 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[32rem] w-full min-w-0 max-w-[44rem] items-center justify-center overflow-visible px-0 md:mt-0 md:h-[46rem] md:max-w-[48rem] lg:h-[56rem] lg:max-w-[52rem]"
+          className="relative mx-auto -mt-1 flex h-[28rem] w-full min-w-0 max-w-[38rem] items-center justify-center overflow-visible px-0 md:mt-0 md:h-[40rem] md:max-w-[42rem] lg:h-[48rem] lg:max-w-[46rem]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:120px_120px] [mask-image:radial-gradient(circle_at_center,black,transparent_78%)] mix-blend-soft-light opacity-70" />
-          <div className="absolute inset-x-[4%] bottom-[6%] h-[38%] rounded-full bg-blue-300/10 blur-3xl dark:bg-blue-500/10" />
-          <div className="absolute left-1/2 top-[8%] h-[28%] w-[36%] -translate-x-1/2 rounded-full bg-white/8 blur-3xl dark:bg-white/5" />
-          <div className="absolute right-[8%] top-[14%] h-[56%] w-[44%] rounded-full bg-violet-500/10 blur-[120px] dark:bg-violet-500/14" />
+          <div className="absolute inset-x-[5%] bottom-[8%] h-[34%] rounded-full bg-blue-300/12 blur-3xl dark:bg-blue-500/14" />
+          <div className="absolute left-1/2 top-[10%] h-[24%] w-[34%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6" />
+          <div className="absolute right-[10%] top-[16%] h-[50%] w-[40%] rounded-full bg-violet-500/14 blur-[120px] dark:bg-violet-500/18" />
 
           <Suspense
             fallback={

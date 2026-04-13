@@ -26,17 +26,17 @@ type HeroGemConfig = {
 
 const HERO_GEM: HeroGemConfig = {
   id: "blue_purple_irregular_gem",
-  position: [-0.18, -0.02, 0],
-  scale: [1.02, 1.74, 0.98],
+  position: [-0.08, -0.04, 0],
+  scale: [0.86, 1.48, 0.82],
   colors: {
-    top: "#0F52BA",
-    bottom: "#9966CC",
-    highlight: "#FFFFFF",
+    top: "#2A73FF",
+    bottom: "#8F52FF",
+    highlight: "#F8FBFF",
   },
-  roughness: 0.05,
-  metalness: 0.1,
-  transmission: 0.4,
-  opacity: 0.42,
+  roughness: 0.04,
+  metalness: 0.12,
+  transmission: 0.46,
+  opacity: 0.5,
   rotationSpeed: {
     x: 0.0011,
     y: 0.0048,
@@ -153,7 +153,10 @@ function applyVerticalGradient(geometry: THREE.BufferGeometry, top: string, bott
     const t = THREE.MathUtils.clamp((y - minY) / rangeY, 0, 1);
     const ridgeBias = Math.sin((x - z) * 8.6) * 0.08 + Math.cos((x * 1.7 + z) * 6.8) * 0.06;
     const cavity = THREE.MathUtils.clamp(0.78 + ridgeBias - Math.abs(x * 0.18) - Math.abs(z * 0.14), 0.56, 1.08);
-    const color = end.clone().lerp(start, THREE.MathUtils.clamp(t + ridgeBias * 0.32, 0, 1)).multiplyScalar(cavity);
+    const color = end
+      .clone()
+      .lerp(start, THREE.MathUtils.clamp(t + ridgeBias * 0.32, 0, 1))
+      .multiplyScalar(cavity * 1.08);
 
     colors[i * 3] = THREE.MathUtils.clamp(color.r, 0, 1);
     colors[i * 3 + 1] = THREE.MathUtils.clamp(color.g, 0, 1);
@@ -168,8 +171,8 @@ function FitCamera() {
   const { camera } = useThree();
 
   useEffect(() => {
-    camera.position.set(0, -0.02, 7.4);
-    camera.lookAt(-0.16, -0.02, 0);
+    camera.position.set(0, -0.02, 8.2);
+    camera.lookAt(-0.08, -0.04, 0);
     camera.updateProjectionMatrix();
   }, [camera]);
 
@@ -203,7 +206,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
     );
 
     if (materialRef.current) {
-      materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, hovered ? 0.3 : 0.14, 0.12);
+      materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, hovered ? 0.4 : 0.22, 0.12);
     }
 
     if (innerGlowRef.current) {
@@ -229,7 +232,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
           <meshBasicMaterial
             vertexColors
             transparent
-            opacity={0.08}
+            opacity={0.11}
             blending={THREE.AdditiveBlending}
             depthWrite={false}
           />
@@ -264,7 +267,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
         <meshBasicMaterial
           color={config.colors.bottom}
           transparent
-          opacity={hovered ? 0.24 : 0.14}
+          opacity={hovered ? 0.34 : 0.22}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -274,7 +277,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
         <meshBasicMaterial
           color={config.colors.highlight}
           transparent
-          opacity={hovered ? 0.16 : 0.1}
+          opacity={hovered ? 0.2 : 0.12}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -299,9 +302,9 @@ function SceneComposition() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-0 z-0 overflow-visible pointer-events-auto">
+    <div className="absolute inset-0 z-0 overflow-visible pointer-events-auto saturate-[1.18]">
       <Canvas
-        camera={{ position: [0, -0.02, 7.4], fov: 18, near: 0.1, far: 100 }}
+        camera={{ position: [0, -0.02, 8.2], fov: 18, near: 0.1, far: 100 }}
         dpr={[1, 1.8]}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ gl, scene }) => {
@@ -312,14 +315,14 @@ export function HeroCrystalScene() {
         style={{ background: "transparent" }}
       >
         <FitCamera />
-        <fog attach="fog" args={["#d7ddff", 18, 34]} />
-        <ambientLight intensity={0.42} color="#c8d6ff" />
+        <fog attach="fog" args={["#cfd6ff", 18, 34]} />
+        <ambientLight intensity={0.46} color="#d2dcff" />
         <directionalLight position={[6, 7, 8]} intensity={2.4} color="#ffffff" />
-        <directionalLight position={[-6, 3, 6]} intensity={1.5} color="#87a8ff" />
-        <directionalLight position={[2, -2, 5]} intensity={1.3} color="#c190ff" />
-        <pointLight position={[3.4, 2.2, 4.6]} intensity={6.8} distance={20} color="#ffffff" />
-        <pointLight position={[-1.4, 1.2, 4.2]} intensity={4.8} distance={18} color="#7aa4ff" />
-        <pointLight position={[1.4, -2.2, 3.2]} intensity={4.2} distance={15} color="#9966CC" />
+        <directionalLight position={[-6, 3, 6]} intensity={1.7} color="#73a2ff" />
+        <directionalLight position={[2, -2, 5]} intensity={1.45} color="#b57dff" />
+        <pointLight position={[3.4, 2.2, 4.6]} intensity={7.2} distance={20} color="#ffffff" />
+        <pointLight position={[-1.4, 1.2, 4.2]} intensity={5.4} distance={18} color="#5b9dff" />
+        <pointLight position={[1.4, -2.2, 3.2]} intensity={4.8} distance={15} color="#8F52FF" />
         <SceneComposition />
       </Canvas>
     </div>
