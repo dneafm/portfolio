@@ -20,38 +20,49 @@ export function VNG() {
         </>
       }
       artifacts={
-        <div className="grid sm:grid-cols-2 gap-4">
-          <div className="aspect-square bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group">
-            <LazyVideo 
-              src="/232.mp4" 
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              showControls
-            />
-            <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
+        <div className="space-y-8">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="aspect-square bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group">
+              <LazyVideo 
+                src="/232.mp4" 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                showControls
+              />
+              <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
+            </div>
+            <div className="aspect-square bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group">
+              <LazyVideo 
+                src="/244.mp4" 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                showControls
+              />
+              <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
+            </div>
+            <div className="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group sm:col-span-2">
+              <LazyVideo 
+                src="/Comp2.mp4" 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                showControls
+              />
+              <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
+            </div>
           </div>
-          <div className="aspect-square bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group">
-            <LazyVideo 
-              src="/244.mp4" 
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              showControls
-            />
-            <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
-          </div>
-          <div className="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group sm:col-span-2">
-            <LazyVideo 
-              src="/Comp2.mp4" 
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              showControls
-            />
-            <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
-          </div>
-          <div className="aspect-video bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden relative group sm:col-span-2">
-            <LazyVideo 
-              src="/vng-4.mp4" 
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              showControls
-            />
-            <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 mb-4">Image campaign set</p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {['1', '2', '3', '4', '5', '6'].map((image) => (
+                <div key={image} className="bg-zinc-900 border border-zinc-800 overflow-hidden relative group rounded-sm">
+                  <img
+                    src={`/vng/vng-${image}.png`}
+                    alt={`VNG campaign visual ${image}`}
+                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-500 pointer-events-none" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       }
