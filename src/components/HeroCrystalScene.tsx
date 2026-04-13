@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import { motion } from "motion/react";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
@@ -353,19 +353,29 @@ function PrismGem() {
           <meshPhysicalMaterial
             vertexColors
             flatShading
-            roughness={0.09}
+            roughness={0.11}
             metalness={0.04}
             transmission={0.08}
             thickness={1.05}
             ior={1.48}
-            reflectivity={1}
-            clearcoat={1}
-            clearcoatRoughness={0.018}
+            reflectivity={0.88}
+            clearcoat={0.9}
+            clearcoatRoughness={0.05}
             transparent
             opacity={1}
             emissive={new THREE.Color("#374dff")}
-            emissiveIntensity={0.12}
+            emissiveIntensity={0.16}
           />
+        </mesh>
+
+        <mesh position={[0.04, -0.04, 0.68]} rotation={[0.06, -0.18, 0.14]} scale={[0.56, 0.82, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color="#6a30ff" transparent opacity={0.22} depthWrite={false} />
+        </mesh>
+
+        <mesh position={[-0.04, -0.34, 0.62]} rotation={[-0.08, -0.14, -0.12]} scale={[0.32, 0.42, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color="#c86cff" transparent opacity={0.14} depthWrite={false} />
         </mesh>
 
         <mesh ref={shellRef} geometry={geometry} scale={1.045}>
@@ -412,19 +422,17 @@ export function HeroCrystalScene() {
 
       <Canvas camera={{ position: [0.16, 0.18, 9.2], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
-        <ambientLight intensity={0.28} color="#d8deff" />
-        <directionalLight position={[4.8, 6.2, 5.8]} intensity={2.6} color="#ffffff" />
-        <directionalLight position={[-4.2, 2.4, 5.2]} intensity={1.5} color="#87b0ff" />
-        <pointLight position={[2.2, 2.8, 4.2]} intensity={1.55} color="#ffffff" />
-        <pointLight position={[-2.4, 0.8, 3.2]} intensity={1.1} color="#56a8ff" />
-        <pointLight position={[1.8, -1.8, 2.6]} intensity={0.9} color="#b165ff" />
-        <spotLight position={[0.6, 4.6, 3.8]} angle={0.32} penumbra={1} intensity={2.2} color="#eef3ff" />
+        <ambientLight intensity={0.18} color="#bfcaff" />
+        <directionalLight position={[4.8, 6.2, 5.8]} intensity={1.5} color="#dfe6ff" />
+        <directionalLight position={[-4.2, 2.4, 5.2]} intensity={1.2} color="#6d9bff" />
+        <pointLight position={[2.2, 2.8, 4.2]} intensity={0.9} color="#dfe7ff" />
+        <pointLight position={[-2.4, 0.8, 3.2]} intensity={0.95} color="#4e8fff" />
+        <pointLight position={[1.8, -1.8, 2.6]} intensity={0.72} color="#a45fff" />
+        <spotLight position={[0.6, 4.6, 3.8]} angle={0.32} penumbra={1} intensity={1.4} color="#c6d9ff" />
 
         <Float speed={0.82} rotationIntensity={0.02} floatIntensity={0.14}>
           <PrismGem />
         </Float>
-
-        <Environment preset="studio" />
       </Canvas>
     </div>
   );
