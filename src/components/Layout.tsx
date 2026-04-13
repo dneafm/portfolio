@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 
 const navItems = [
@@ -15,6 +16,7 @@ const navItems = [
 
 export function Layout() {
   const { theme, toggleTheme } = useTheme();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col relative bg-zinc-50 dark:bg-zinc-950 dossier-grid text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
@@ -34,7 +36,7 @@ export function Layout() {
             </span>
           </div>
           
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-3 md:gap-8">
             <nav className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
                 <NavLink
@@ -60,11 +62,41 @@ export function Layout() {
               {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </button>
 
-            <div className="md:hidden">
-              <span className="font-mono text-[10px] font-bold text-zinc-400">MENU</span>
-            </div>
+            <button
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              className="md:hidden inline-flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 px-3 py-2 text-zinc-500 dark:text-zinc-400"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Menu</span>
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md">
+            <nav className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-1">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "rounded-lg px-3 py-3 font-mono text-[11px] font-bold uppercase tracking-widest transition-all",
+                      isActive
+                        ? "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"
+                        : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-blue-600 dark:hover:text-blue-400"
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
