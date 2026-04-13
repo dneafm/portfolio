@@ -1,87 +1,197 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, MeshTransmissionMaterial } from "@react-three/drei";
+import { Environment, Float } from "@react-three/drei";
 import { motion } from "motion/react";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
-import {
-  AdditiveBlending,
-  Color,
-  CylinderGeometry,
-  DoubleSide,
-  MeshBasicMaterial,
-  MeshPhysicalMaterial,
-  OctahedronGeometry,
-  RingGeometry,
-  Shape,
-  ShapeGeometry,
-  TorusGeometry,
-} from "three";
+import * as THREE from "three";
 
-function createGearShape(teeth = 14, outerRadius = 1, innerRadius = 0.74, toothDepth = 0.14) {
-  const shape = new Shape();
-  const steps = teeth * 2;
-
-  for (let i = 0; i <= steps; i += 1) {
-    const angle = (i / steps) * Math.PI * 2;
-    const radius = i % 2 === 0 ? outerRadius + toothDepth : outerRadius;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
-
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
-  }
-
-  const hole = new Shape();
-  hole.absarc(0, 0, innerRadius, 0, Math.PI * 2, true);
-  shape.holes.push(hole);
-
-  return shape;
-}
-
-function MechanicalGear({
-  position,
-  scale,
-  speed,
-  color,
-}: {
+type ShardConfig = {
   position: [number, number, number];
   scale: number;
+  rotation: [number, number, number];
   speed: number;
-  color: string;
-}) {
-  const ref = useRef<Group>(null);
-  const gearGeometry = useMemo(() => new ShapeGeometry(createGearShape(14, 1, 0.74, 0.14)), []);
-  const innerRing = useMemo(() => new RingGeometry(0.18, 0.34, 48), []);
+  top: string;
+  bottom: string;
+  glow: string;
+  opacity: number;
+};
 
-  useFrame((state) => {
-    if (!ref.current) return;
-    ref.current.rotation.z = state.clock.getElapsedTime() * speed;
-  });
+const SHARDS: ShardConfig[] = [
+  {
+    position: [1.42, 1.18, -0.28],
+    scale: 0.24,
+    rotation: [0.2, -0.5, 0.4],
+    speed: -0.18,
+    top: "#8a5cff",
+    bottom: "#d54cff",
+    glow: "#bf63ff",
+    opacity: 0.76,
+  },
+  {
+    position: [-1.36, 0.62, 0.18],
+    scale: 0.22,
+    rotation: [-0.3, 0.2, -0.4],
+    speed: 0.16,
+    top: "#41a5ff",
+    bottom: "#2f63ff",
+    glow: "#4ea4ff",
+    opacity: 0.74,
+  },
+  {
+    position: [-1.56, -0.72, 0.1],
+    scale: 0.2,
+    rotation: [0.18, 0.4, 0.26],
+    speed: -0.14,
+    top: "#3b96ff",
+    bottom: "#3f69ff",
+    glow: "#54a8ff",
+    opacity: 0.72,
+  },
+  {
+    position: [1.12, -1.5, 0.2],
+    scale: 0.18,
+    rotation: [-0.16, -0.28, -0.22],
+    speed: 0.15,
+    top: "#9b63ff",
+    bottom: "#db64ff",
+    glow: "#c66cff",
+    opacity: 0.72,
+  },
+  {
+    position: [-1.38, -1.36, -0.12],
+    scale: 0.1,
+    rotation: [0.22, -0.36, 0.4],
+    speed: 0.22,
+    top: "#934dff",
+    bottom: "#cb58ff",
+    glow: "#b25cff",
+    opacity: 0.7,
+  },
+];
 
-  return (
-    <group ref={ref} position={position} scale={scale}>
-      <mesh geometry={gearGeometry}>
-        <meshBasicMaterial
-          color={color}
-          transparent
-          opacity={0.22}
-          side={DoubleSide}
-          blending={AdditiveBlending}
-          depthWrite={false}
-        />
-      </mesh>
-      <mesh geometry={innerRing}>
-        <meshBasicMaterial
-          color="#dbe7ff"
-          transparent
-          opacity={0.32}
-          side={DoubleSide}
-          blending={AdditiveBlending}
-          depthWrite={false}
-        />
-      </mesh>
-    </group>
-  );
+function triangulateFace(face: number[]) {
+  const triangles: Array<[number, number, number]> = [];
+
+  for (let i = 1; i < face.length - 1; i += 1) {
+    triangles.push([face[0], face[i], face[i + 1]]);
+  }
+
+  return triangles;
+}
+
+function createCrystalGeometry() {
+  const vertices: Array<[number, number, number]> = [
+    [0.06, 1.36, 0.04],
+    [0.58, 0.96, 0.22],
+    [0.22, 0.96, 0.72],
+    [-0.28, 0.96, 0.5],
+    [-0.66, 0.78, 0.12],
+    [-0.5, 0.92, -0.32],
+    [-0.08, 0.98, -0.54],
+    [0.34, 0.9, -0.16],
+    [0.94, 0.34, 0.18],
+    [0.54, 0.22, 0.86],
+    [-0.16, 0.42, 0.72],
+    [-0.88, 0.08, 0.26],
+    [-1.02, -0.18, -0.04],
+    [-0.48, 0.0, -0.8],
+    [0.32, 0.12, -0.9],
+    [0.86, -0.08, -0.18],
+    [0.72, -0.58, 0.26],
+    [0.26, -0.78, 0.62],
+    [-0.34, -0.64, 0.56],
+    [-0.76, -0.88, 0.18],
+    [-0.52, -1.0, -0.34],
+    [0.04, -1.18, -0.56],
+    [0.42, -1.02, -0.28],
+    [0.58, -0.78, 0.0],
+    [0.12, -1.42, 0.06],
+  ];
+
+  const faces: number[][] = [
+    [0, 1, 2],
+    [0, 2, 3],
+    [0, 3, 4],
+    [0, 4, 5],
+    [0, 5, 6],
+    [0, 6, 7],
+    [0, 7, 1],
+    [1, 8, 9, 2],
+    [2, 9, 10, 3],
+    [3, 10, 11, 4],
+    [4, 11, 12, 5],
+    [5, 12, 13, 6],
+    [6, 13, 14, 7],
+    [7, 14, 15, 1],
+    [1, 15, 8],
+    [8, 16, 17, 9],
+    [9, 17, 18, 10],
+    [10, 18, 19, 11],
+    [11, 19, 20, 12],
+    [12, 20, 21, 13],
+    [13, 21, 22, 14],
+    [14, 22, 23, 15],
+    [15, 23, 16, 8],
+    [16, 24, 17],
+    [17, 24, 18],
+    [18, 24, 19],
+    [19, 24, 20],
+    [20, 24, 21],
+    [21, 24, 22],
+    [22, 24, 23],
+    [23, 24, 16],
+  ];
+
+  const positions: number[] = [];
+
+  for (const face of faces) {
+    for (const [a, b, c] of triangulateFace(face)) {
+      positions.push(...vertices[a], ...vertices[b], ...vertices[c]);
+    }
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
+function tintCrystalGeometry(geometry: THREE.BufferGeometry, top: string, bottom: string) {
+  const position = geometry.attributes.position;
+  const colors = new Float32Array(position.count * 3);
+
+  let minY = Infinity;
+  let maxY = -Infinity;
+  for (let i = 0; i < position.count; i += 1) {
+    const y = position.getY(i);
+    minY = Math.min(minY, y);
+    maxY = Math.max(maxY, y);
+  }
+
+  const rangeY = Math.max(maxY - minY, 0.0001);
+  const topColor = new THREE.Color(top).convertLinearToSRGB();
+  const bottomColor = new THREE.Color(bottom).convertLinearToSRGB();
+
+  for (let i = 0; i < position.count; i += 1) {
+    const x = position.getX(i);
+    const y = position.getY(i);
+    const z = position.getZ(i);
+    const vertical = THREE.MathUtils.clamp((y - minY) / rangeY, 0, 1);
+    const facetNoise = Math.sin((x * 4.2 - z * 7.4) * 1.3) * 0.12 + Math.cos((x * 2.1 + z * 6.2) * 1.15) * 0.1;
+    const edgeBias = THREE.MathUtils.clamp(1.02 - Math.abs(x) * 0.18 - Math.abs(z) * 0.12, 0.76, 1.12);
+    const blended = bottomColor
+      .clone()
+      .lerp(topColor, THREE.MathUtils.clamp(vertical + facetNoise * 0.45, 0, 1))
+      .multiplyScalar(edgeBias);
+
+    colors[i * 3] = THREE.MathUtils.clamp(blended.r, 0, 1);
+    colors[i * 3 + 1] = THREE.MathUtils.clamp(blended.g, 0, 1);
+    colors[i * 3 + 2] = THREE.MathUtils.clamp(blended.b, 0, 1);
+  }
+
+  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+  return geometry;
 }
 
 function OrbitBand({
@@ -90,17 +200,15 @@ function OrbitBand({
   rotation,
   speed,
   opacity,
-  markerScale,
 }: {
   color: string;
   scale: number;
   rotation: [number, number, number];
   speed: [number, number, number];
   opacity: number;
-  markerScale: number;
 }) {
   const ref = useRef<Group>(null);
-  const orbitGeometry = useMemo(() => new TorusGeometry(2.14, 0.01, 10, 260), []);
+  const orbitGeometry = useMemo(() => new THREE.TorusGeometry(2.08, 0.01, 10, 260), []);
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -113,12 +221,58 @@ function OrbitBand({
   return (
     <group ref={ref} scale={scale} rotation={rotation}>
       <mesh geometry={orbitGeometry}>
-        <meshBasicMaterial color={color} transparent opacity={opacity} blending={AdditiveBlending} depthWrite={false} />
+        <meshBasicMaterial color={color} transparent opacity={opacity} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      <mesh position={[2.14, 0, 0]} scale={markerScale}>
-        <sphereGeometry args={[1, 18, 18]} />
-        <meshBasicMaterial color="#f8fbff" transparent opacity={0.92} />
+    </group>
+  );
+}
+
+function CrystalShard({ config }: { config: ShardConfig }) {
+  const ref = useRef<Group>(null);
+  const geometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), config.top, config.bottom), [config.bottom, config.top]);
+  const edgeGeometry = useMemo(() => new THREE.EdgesGeometry(geometry, 18), [geometry]);
+
+  useFrame((state) => {
+    if (!ref.current) return;
+    const t = state.clock.getElapsedTime();
+    ref.current.rotation.x = config.rotation[0] + Math.sin(t * 0.8 + config.position[0]) * 0.08;
+    ref.current.rotation.y = config.rotation[1] + t * config.speed;
+    ref.current.rotation.z = config.rotation[2] + Math.cos(t * 0.7 + config.position[1]) * 0.06;
+    ref.current.position.y = config.position[1] + Math.sin(t * 1.1 + config.position[0] * 0.6) * 0.05;
+  });
+
+  return (
+    <group ref={ref} position={config.position} scale={config.scale} rotation={config.rotation}>
+      <mesh geometry={geometry}>
+        <meshPhysicalMaterial
+          vertexColors
+          flatShading
+          roughness={0.08}
+          metalness={0.05}
+          transmission={0.34}
+          thickness={0.9}
+          ior={1.38}
+          reflectivity={0.9}
+          clearcoat={1}
+          clearcoatRoughness={0.03}
+          transparent
+          opacity={config.opacity}
+          emissive={new THREE.Color(config.glow)}
+          emissiveIntensity={0.12}
+        />
       </mesh>
+      <mesh geometry={geometry} scale={1.05}>
+        <meshBasicMaterial
+          color={config.glow}
+          transparent
+          opacity={0.07}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+      <lineSegments geometry={edgeGeometry}>
+        <lineBasicMaterial color="#dfe8ff" transparent opacity={0.18} depthWrite={false} />
+      </lineSegments>
     </group>
   );
 }
@@ -127,155 +281,115 @@ function PrismGem() {
   const groupRef = useRef<Group>(null);
   const gemRef = useRef<Mesh>(null);
   const coreRef = useRef<Mesh>(null);
-  const innerShellRef = useRef<Mesh>(null);
-  const haloRef = useRef<Mesh>(null);
-  const beamRef = useRef<Mesh>(null);
+  const shellRef = useRef<Mesh>(null);
+  const highlightARef = useRef<Mesh>(null);
+  const highlightBRef = useRef<Mesh>(null);
 
-  const gemGeometry = useMemo(() => new OctahedronGeometry(1.02, 2), []);
-  const innerShellGeometry = useMemo(() => new OctahedronGeometry(0.84, 1), []);
-  const coreGeometry = useMemo(() => new OctahedronGeometry(0.62, 1), []);
-  const haloGeometry = useMemo(() => new OctahedronGeometry(1.12, 2), []);
-  const beamGeometry = useMemo(() => new CylinderGeometry(0.07, 0.24, 3.5, 24, 1, true), []);
-
-  const coreMaterial = useMemo(
-    () =>
-      new MeshPhysicalMaterial({
-        color: new Color("#c3dcff"),
-        emissive: new Color("#6a68ff"),
-        emissiveIntensity: 1.18,
-        roughness: 0.08,
-        metalness: 0.18,
-        reflectivity: 1,
-        clearcoat: 1,
-        clearcoatRoughness: 0.01,
-      }),
-    [],
-  );
-
-  const innerShellMaterial = useMemo(
-    () =>
-      new MeshPhysicalMaterial({
-        color: new Color("#99c8ff"),
-        emissive: new Color("#7b72ff"),
-        emissiveIntensity: 0.38,
-        roughness: 0.12,
-        metalness: 0.08,
-        transparent: true,
-        opacity: 0.32,
-        transmission: 0.45,
-        thickness: 0.8,
-        ior: 1.18,
-        clearcoat: 1,
-        clearcoatRoughness: 0.04,
-      }),
-    [],
-  );
-
-  const haloMaterial = useMemo(
-    () =>
-      new MeshBasicMaterial({
-        color: new Color("#8ab7ff"),
-        transparent: true,
-        opacity: 0.075,
-        blending: AdditiveBlending,
-        side: DoubleSide,
-        depthWrite: false,
-      }),
-    [],
-  );
-
-  const beamMaterial = useMemo(
-    () =>
-      new MeshBasicMaterial({
-        color: new Color("#8aa1ff"),
-        transparent: true,
-        opacity: 0.09,
-        blending: AdditiveBlending,
-        side: DoubleSide,
-        depthWrite: false,
-      }),
-    [],
-  );
+  const geometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), "#56a8ff", "#bf66ff"), []);
+  const edgeGeometry = useMemo(() => new THREE.EdgesGeometry(geometry, 16), [geometry]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
     if (groupRef.current) {
-      groupRef.current.rotation.y = -0.64 + t * 0.12;
-      groupRef.current.rotation.z = 0.58 + Math.sin(t * 0.28) * 0.028;
-      groupRef.current.rotation.x = 0.16 + Math.cos(t * 0.22) * 0.02;
-      groupRef.current.position.y = -0.12 + Math.sin(t * 0.8) * 0.07;
+      groupRef.current.rotation.y = -0.12 + t * 0.1;
+      groupRef.current.rotation.z = 0.24 + Math.sin(t * 0.32) * 0.03;
+      groupRef.current.rotation.x = -0.08 + Math.cos(t * 0.26) * 0.018;
+      groupRef.current.position.y = 0.08 + Math.sin(t * 0.88) * 0.06;
     }
 
     if (gemRef.current) {
-      gemRef.current.rotation.x = Math.sin(t * 0.24) * 0.06;
-      gemRef.current.rotation.z = Math.cos(t * 0.22) * 0.04;
+      gemRef.current.rotation.x = Math.sin(t * 0.4) * 0.04;
+      gemRef.current.rotation.z = Math.cos(t * 0.25) * 0.03;
     }
 
     if (coreRef.current) {
-      coreRef.current.rotation.y = -t * 0.26;
-      coreRef.current.rotation.x = Math.sin(t * 0.3) * 0.08;
+      coreRef.current.rotation.y = -t * 0.2;
+      coreRef.current.rotation.z = Math.sin(t * 0.22) * 0.03;
     }
 
-    if (innerShellRef.current) {
-      innerShellRef.current.rotation.y = t * 0.18;
-      innerShellRef.current.rotation.z = Math.sin(t * 0.34) * 0.06;
+    if (shellRef.current) {
+      const scale = 1.045 + Math.sin(t * 1.2) * 0.008;
+      shellRef.current.scale.set(scale, scale, scale);
     }
 
-    if (haloRef.current) {
-      haloRef.current.scale.setScalar(1.008 + Math.sin(t * 1.1) * 0.012);
+    if (highlightARef.current) {
+      highlightARef.current.material.opacity = 0.14 + Math.sin(t * 1.1) * 0.03;
     }
 
-    if (beamRef.current) {
-      beamRef.current.rotation.y = -t * 0.08;
+    if (highlightBRef.current) {
+      highlightBRef.current.material.opacity = 0.08 + Math.cos(t * 1.3) * 0.02;
     }
   });
 
   return (
-    <group ref={groupRef}>
-      <group scale={0.8} position={[0, -0.06, 0]}>
-        <OrbitBand color="#80b4ff" scale={1.02} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.24} markerScale={0.036} />
-        <OrbitBand color="#af98ff" scale={0.9} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.18} markerScale={0.03} />
-        <OrbitBand color="#67dbff" scale={1.16} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.12} markerScale={0.024} />
+    <group ref={groupRef} position={[0.02, 0.22, 0]}>
+      <OrbitBand color="#6f96ff" scale={1.02} rotation={[0.94, 0.22, 0.56]} speed={[0.018, 0.07, 0.04]} opacity={0.14} />
+      <OrbitBand color="#9b78ff" scale={0.9} rotation={[0.18, 1.18, 1.28]} speed={[-0.026, -0.08, 0.03]} opacity={0.12} />
 
-        <MechanicalGear position={[-2.08, 1.14, -0.82]} scale={0.24} speed={0.28} color="#8caeff" />
-        <MechanicalGear position={[2.02, -0.92, -0.76]} scale={0.38} speed={-0.2} color="#b6a6ff" />
-        <MechanicalGear position={[1.58, 1.48, -1.2]} scale={0.16} speed={0.34} color="#5fd8ff" />
+      {SHARDS.map((config, index) => (
+        <CrystalShard key={`${config.position.join("-")}-${index}`} config={config} />
+      ))}
 
-        <mesh ref={beamRef} geometry={beamGeometry} position={[0.02, -0.08, -0.12]} material={beamMaterial} />
-        <mesh ref={coreRef} geometry={coreGeometry} scale={[0.66, 1.86, 0.66]} material={coreMaterial} />
-        <mesh ref={innerShellRef} geometry={innerShellGeometry} scale={[0.75, 2, 0.75]} material={innerShellMaterial} />
-
-        <mesh ref={gemRef} geometry={gemGeometry} scale={[0.82, 2.14, 0.82]}>
-          <MeshTransmissionMaterial
-            backside
-            samples={8}
-            resolution={512}
-            thickness={2.8}
-            roughness={0.006}
-            chromaticAberration={0.055}
-            anisotropy={0.42}
-            distortion={0.008}
-            distortionScale={0.03}
-            temporalDistortion={0.015}
-            iridescence={0.38}
-            iridescenceIOR={1.2}
-            clearcoat={1}
-            attenuationColor="#7380ff"
-            attenuationDistance={1.9}
-            color="#f7f9ff"
+      <group scale={[1.34, 0.96, 1.08]}>
+        <mesh ref={coreRef} geometry={geometry} scale={0.56}>
+          <meshPhysicalMaterial
+            color="#4b1fb9"
+            roughness={0.18}
+            metalness={0}
+            transmission={0.02}
+            thickness={0.8}
+            ior={1.34}
+            transparent
+            opacity={0.12}
+            clearcoat={0.8}
+            clearcoatRoughness={0.1}
+            emissive={new THREE.Color("#4621ba")}
+            emissiveIntensity={0.04}
           />
         </mesh>
 
-        <mesh ref={haloRef} geometry={haloGeometry} scale={[0.92, 2.24, 0.92]} material={haloMaterial} />
-
-        <mesh position={[1.28, 0.88, 0.64]} scale={0.052}>
-          <sphereGeometry args={[1, 14, 14]} />
-          <meshBasicMaterial color="#f8fbff" transparent opacity={0.95} />
+        <mesh ref={gemRef} geometry={geometry}>
+          <meshPhysicalMaterial
+            vertexColors
+            flatShading
+            roughness={0.09}
+            metalness={0.04}
+            transmission={0.08}
+            thickness={1.05}
+            ior={1.48}
+            reflectivity={1}
+            clearcoat={1}
+            clearcoatRoughness={0.018}
+            transparent
+            opacity={1}
+            emissive={new THREE.Color("#374dff")}
+            emissiveIntensity={0.12}
+          />
         </mesh>
-        <mesh position={[-0.96, -0.44, 0.42]} scale={0.036}>
-          <sphereGeometry args={[1, 14, 14]} />
-          <meshBasicMaterial color="#cfd8ff" transparent opacity={0.82} />
+
+        <mesh ref={shellRef} geometry={geometry} scale={1.045}>
+          <meshBasicMaterial
+            color="#dbe6ff"
+            transparent
+            opacity={0.008}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </mesh>
+
+        <lineSegments geometry={edgeGeometry}>
+          <lineBasicMaterial color="#edf4ff" transparent opacity={0.08} depthWrite={false} />
+        </lineSegments>
+
+        <mesh ref={highlightARef} position={[0.14, 0.24, 0.72]} rotation={[0.18, -0.46, 0.22]} scale={[0.16, 1.18, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.14} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </mesh>
+
+        <mesh ref={highlightBRef} position={[-0.22, -0.08, 0.66]} rotation={[-0.08, -0.24, -0.18]} scale={[0.1, 0.76, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color="#f7d6ff" transparent opacity={0.08} blending={THREE.AdditiveBlending} depthWrite={false} />
         </mesh>
       </group>
     </group>
@@ -284,30 +398,29 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-0 z-10 origin-center scale-[0.76] saturate-[1.35] md:scale-[0.82] lg:scale-[0.86]">
+    <div className="absolute inset-0 z-10 origin-center scale-[0.62] saturate-[1.42] md:scale-[0.68] lg:scale-[0.72]">
+      <motion.div
+        animate={{ opacity: [0.08, 0.2, 0.08] }}
+        transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute inset-x-[24%] top-[16%] h-24 rounded-full bg-blue-400/12 blur-3xl md:h-30"
+      />
       <motion.div
         animate={{ opacity: [0.08, 0.18, 0.08] }}
-        transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute inset-x-[24%] top-[18%] h-24 rounded-full bg-blue-400/12 blur-3xl md:inset-x-[22%] md:h-28"
-      />
-      <motion.div
-        animate={{ opacity: [0.08, 0.16, 0.08] }}
-        transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        className="pointer-events-none absolute left-[16%] top-[12%] h-24 w-24 rounded-full bg-violet-400/12 blur-3xl md:h-36 md:w-36"
+        transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+        className="pointer-events-none absolute right-[16%] top-[20%] h-28 w-28 rounded-full bg-violet-400/12 blur-3xl md:h-40 md:w-40"
       />
 
-      <Canvas camera={{ position: [0, -0.08, 8.4], fov: 24 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
-        <fog attach="fog" args={["#060916", 9.5, 16.5]} />
-        <ambientLight intensity={0.26} />
-        <directionalLight position={[5, 6, 5]} intensity={2.8} color="#ffffff" />
-        <directionalLight position={[-4, 1, 5]} intensity={1.35} color="#8bb6ff" />
-        <pointLight position={[0.4, 2.8, 4]} intensity={1.7} color="#ffffff" />
-        <pointLight position={[2.4, -0.3, 2.8]} intensity={1.05} color="#71a4ff" />
-        <pointLight position={[-2.2, 1.7, 1.9]} intensity={0.8} color="#dfe7ff" />
-        <pointLight position={[0, -1.8, 2.4]} intensity={0.52} color="#8f7dff" />
-        <spotLight position={[0, 4.4, 3.1]} angle={0.3} penumbra={1} intensity={2.4} color="#dbe7ff" />
+      <Canvas camera={{ position: [0.16, 0.18, 9.2], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
+        <fog attach="fog" args={["#070915", 9, 16]} />
+        <ambientLight intensity={0.28} color="#d8deff" />
+        <directionalLight position={[4.8, 6.2, 5.8]} intensity={2.6} color="#ffffff" />
+        <directionalLight position={[-4.2, 2.4, 5.2]} intensity={1.5} color="#87b0ff" />
+        <pointLight position={[2.2, 2.8, 4.2]} intensity={1.55} color="#ffffff" />
+        <pointLight position={[-2.4, 0.8, 3.2]} intensity={1.1} color="#56a8ff" />
+        <pointLight position={[1.8, -1.8, 2.6]} intensity={0.9} color="#b165ff" />
+        <spotLight position={[0.6, 4.6, 3.8]} angle={0.32} penumbra={1} intensity={2.2} color="#eef3ff" />
 
-        <Float speed={0.9} rotationIntensity={0.03} floatIntensity={0.18}>
+        <Float speed={0.82} rotationIntensity={0.02} floatIntensity={0.14}>
           <PrismGem />
         </Float>
 
