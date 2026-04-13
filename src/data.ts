@@ -75,33 +75,70 @@ export const notes = [
   }
 ];
 
-export const experiments = [
+export type ExperimentVisualType =
+  | "signal-triage"
+  | "bot-control"
+  | "note-compiler"
+  | "ops-workflow"
+  | "community-router"
+  | "sybil-triage";
+
+export type Experiment = {
+  id: string;
+  title: string;
+  status: string;
+  description: string;
+  details: string;
+  visual: ExperimentVisualType;
+};
+
+export const experiments: Experiment[] = [
   {
     id: "exp-01",
     title: "Crypto Signal Triage Surface",
     status: "Concept",
     description: "A concept for reviewing market signals, research fragments, and watchlist movement in one focused environment designed for faster scanning and prioritization.",
-    details: "This experiment explores a high-density triage interface for crypto analysts. It uses a 'signal-first' layout where raw data is automatically categorized and prioritized based on user-defined weights."
+    details: "This experiment explores a high-density triage interface for crypto analysts. It uses a signal-first layout where raw data is automatically categorized, weighted, and surfaced for faster operator review.",
+    visual: "signal-triage"
   },
   {
     id: "exp-02",
     title: "Bot Control Panel Concept",
     status: "Concept / Early prototype",
     description: "An operator-facing dashboard idea for supervising automated trading flows while keeping manual intervention clear, fast, and deliberate.",
-    details: "A supervision interface for algorithmic trading. The focus is on 'intervention latency'—how quickly an operator can understand a bot's state and take manual control if necessary."
+    details: "A supervision interface for algorithmic trading. The focus is on intervention latency, how quickly an operator can understand a bot's state, inspect its alerts, and take manual control if needed.",
+    visual: "bot-control"
   },
   {
     id: "exp-03",
     title: "AI Note Compiler",
     status: "In progress",
     description: "A workflow experiment for converting raw notes, scattered observations, and incomplete research into more structured summaries, insights, and reusable knowledge.",
-    details: "Using LLMs to synthesize fragmented research. The tool takes voice notes, screenshots, and text snippets and builds a cohesive knowledge graph."
+    details: "Using LLMs to synthesize fragmented research. The tool takes voice notes, screenshots, references, and text snippets, then restructures them into clearer insight objects and reusable knowledge blocks.",
+    visual: "note-compiler"
   },
   {
     id: "exp-04",
     title: "Internal Ops Workflow Tool",
     status: "Concept",
     description: "A lightweight internal-tool concept aimed at reducing friction in recurring coordination, structured input, and operational follow-through.",
-    details: "A tool for managing 'operational debt' in small teams. It focuses on closing the loop on recurring tasks that often fall through the cracks."
+    details: "A tool for managing operational debt in small teams. It focuses on recurring tasks, structured updates, and closing the loop on things that usually slip between handoffs.",
+    visual: "ops-workflow"
+  },
+  {
+    id: "exp-05",
+    title: "Community Signal & Sentiment Router",
+    status: "Concept",
+    description: "An AI-assisted triage interface that ingests Discord/Telegram feeds and categorizes them by urgency, relevance, and follow-up intent.",
+    details: "This explores a routing layer for community operations. The goal is to turn noisy incoming chat streams into sorted queues for support, product feedback, reputation risk, and growth opportunities.",
+    visual: "community-router"
+  },
+  {
+    id: "exp-06",
+    title: "On-Chain Retention & Sybil Triage",
+    status: "Concept",
+    description: "A visual matrix dashboard that plots users based on their on-chain behavior versus their social and product engagement signals.",
+    details: "This experiment maps retention quality and sybil suspicion into one operator surface. It is meant to help teams separate real user value from incentive-only activity faster.",
+    visual: "sybil-triage"
   }
 ];
