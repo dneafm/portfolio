@@ -8,11 +8,11 @@ const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 const TAGS = ["Crypto", "Systems", "Operator", "AI", "Design"];
 
 const ORBIT_CARDS = [
-  { label: "Crypto", orbit: "outer" as const, size: "sm" as const, start: 18, duration: 40, direction: 1 as const },
-  { label: "Systems", orbit: "outer" as const, size: "md" as const, start: 118, duration: 40, direction: 1 as const },
-  { label: "Operator", orbit: "outer" as const, size: "md" as const, start: 218, duration: 40, direction: 1 as const },
-  { label: "AI", orbit: "inner" as const, size: "sm" as const, start: 74, duration: 28, direction: -1 as const },
-  { label: "Design", orbit: "inner" as const, size: "md" as const, start: 228, duration: 28, direction: -1 as const },
+  { label: "Crypto", orbit: "outer" as const, size: "sm" as const, start: 16, duration: 40, direction: 1 as const },
+  { label: "Systems", orbit: "outer" as const, size: "md" as const, start: 132, duration: 40, direction: 1 as const },
+  { label: "Operator", orbit: "outer" as const, size: "md" as const, start: 238, duration: 40, direction: 1 as const },
+  { label: "AI", orbit: "inner" as const, size: "sm" as const, start: 72, duration: 28, direction: -1 as const },
+  { label: "Design", orbit: "inner" as const, size: "md" as const, start: 218, duration: 28, direction: -1 as const },
 ];
 
 function OrbitLabelCard({
@@ -34,11 +34,13 @@ function OrbitLabelCard({
     orbit === "outer"
       ? "h-[15rem] w-[15rem] md:h-[26rem] md:w-[26rem]"
       : "h-[10rem] w-[10rem] md:h-[18rem] md:w-[18rem]";
-  const radiusClass = orbit === "outer" ? "-translate-y-[7.9rem] md:-translate-y-[13.8rem]" : "-translate-y-[5.4rem] md:-translate-y-[9.5rem]";
+  const anchorClass = orbit === "outer" ? "-translate-y-[7.55rem] md:-translate-y-[13.15rem]" : "-translate-y-[5.15rem] md:-translate-y-[9.05rem]";
+  const armClass = orbit === "outer" ? "h-7 md:h-10" : "h-6 md:h-8";
+  const hubClass = orbit === "outer" ? "h-4 w-4 md:h-5 md:w-5" : "h-3.5 w-3.5 md:h-4 md:w-4";
   const cardClass =
     size === "md"
-      ? "min-w-[8.8rem] px-3.5 py-2.5 text-[10px] tracking-[0.22em] md:min-w-[10.5rem] md:px-4 md:py-3 md:text-[11px]"
-      : "min-w-[6.2rem] px-3 py-2.5 text-[10px] tracking-[0.22em] md:min-w-[7rem] md:px-3.5 md:py-3 md:text-[11px]";
+      ? "min-w-[8.6rem] px-3.5 py-2.5 text-[10px] tracking-[0.22em] md:min-w-[10.4rem] md:px-4 md:py-3 md:text-[11px]"
+      : "min-w-[6.1rem] px-3 py-2.5 text-[10px] tracking-[0.22em] md:min-w-[6.9rem] md:px-3.5 md:py-3 md:text-[11px]";
   const end = start + direction * 360;
 
   return (
@@ -48,7 +50,11 @@ function OrbitLabelCard({
       style={{ rotate: `${start}deg` }}
       className={`pointer-events-none absolute left-1/2 top-1/2 z-20 ${orbitClass} -translate-x-1/2 -translate-y-1/2`}
     >
-      <div className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 ${radiusClass} items-center justify-center`}>
+      <div className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 ${anchorClass} flex-col items-center`}>
+        <div className={`${hubClass} rounded-full border border-zinc-400/35 bg-white/70 shadow-[0_8px_24px_rgba(15,23,42,0.16)] backdrop-blur-sm dark:border-zinc-600/40 dark:bg-zinc-950/55`}>
+          <div className="absolute inset-[24%] rounded-full border border-dashed border-blue-500/45 dark:border-blue-400/40" />
+        </div>
+        <div className={`w-px ${armClass} bg-gradient-to-b from-zinc-400/55 via-zinc-300/45 to-transparent dark:from-zinc-500/55 dark:via-zinc-700/45`} />
         <motion.div
           animate={{ rotate: -end }}
           transition={{ duration, repeat: Infinity, ease: "linear" }}

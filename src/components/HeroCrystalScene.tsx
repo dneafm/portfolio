@@ -141,16 +141,19 @@ function PrismGem() {
       const z = position.getZ(i);
       const angle = Math.atan2(z, x);
       const radial = Math.sqrt(x * x + z * z);
+      const directionBias = Math.max(0, z) * 0.38 - Math.max(0, -z) * 0.12 + x * 0.08;
       const faceSnap = Math.sign(x) * 0.12 + Math.sign(z) * 0.1;
       const ridge = Math.cos(angle * 4 + y * 2.8) * 0.16;
       const jagA = Math.sin(y * 10.5 + angle * 6.8) * 0.13;
       const jagB = Math.cos(radial * 9.2 - y * 6.4) * 0.08;
-      const chunky = 1.1 + faceSnap + ridge + jagA + jagB;
-      const yScale = 0.88 + Math.abs(y) * 0.22;
+      const dentA = Math.exp(-((x - 0.46) ** 2 * 9 + (y + 0.08) ** 2 * 12 + (z - 0.18) ** 2 * 16)) * 0.3;
+      const dentB = Math.exp(-((x + 0.34) ** 2 * 11 + (y - 0.36) ** 2 * 10 + (z + 0.16) ** 2 * 18)) * 0.22;
+      const chunky = 1.06 + directionBias + faceSnap + ridge + jagA + jagB - dentA - dentB;
+      const yScale = 0.86 + Math.abs(y) * 0.24 - dentA * 0.08;
 
-      deformed[i * 3] = x * chunky * 0.98;
+      deformed[i * 3] = x * chunky * 0.96;
       deformed[i * 3 + 1] = y * yScale;
-      deformed[i * 3 + 2] = z * chunky * 0.82;
+      deformed[i * 3 + 2] = z * (0.72 + directionBias * 0.38 + jagA * 0.08) - dentA * 0.16 - dentB * 0.08;
     }
 
     geometry.setAttribute("position", new BufferAttribute(deformed, 3));
@@ -206,14 +209,16 @@ function PrismGem() {
     const t = state.clock.getElapsedTime();
 
     if (groupRef.current) {
-      groupRef.current.rotation.y = t * 0.18;
-      groupRef.current.rotation.z = Math.sin(t * 0.3) * 0.045;
+      groupRef.current.rotation.y = 0.34 + t * 0.16;
+      groupRef.current.rotation.x = -0.16 + Math.sin(t * 0.22) * 0.035;
+      groupRef.current.rotation.z = -0.18 + Math.sin(t * 0.3) * 0.04;
       groupRef.current.position.y = Math.sin(t * 0.8) * 0.1;
     }
 
     if (gemRef.current) {
-      gemRef.current.rotation.x = Math.sin(t * 0.24) * 0.08;
-      gemRef.current.rotation.z = Math.cos(t * 0.22) * 0.05;
+      gemRef.current.rotation.x = -0.28 + Math.sin(t * 0.24) * 0.07;
+      gemRef.current.rotation.y = 0.26 + Math.cos(t * 0.18) * 0.05;
+      gemRef.current.rotation.z = 0.18 + Math.cos(t * 0.22) * 0.04;
     }
 
     if (coreRef.current) {
@@ -241,9 +246,9 @@ function PrismGem() {
       <MechanicalGear position={[1.42, 1.3, -1.2]} scale={0.14} speed={0.34} color="#8ed7ff" />
 
       <mesh ref={beamRef} geometry={beamGeometry} position={[0, 0, -0.2]} material={beamMaterial} />
-      <mesh ref={coreRef} geometry={coreGeometry} scale={[1.06, 1.12, 0.88]} material={coreMaterial} />
+      <mesh ref={coreRef} geometry={coreGeometry} scale={[1.02, 1.08, 0.82]} material={coreMaterial} />
 
-      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.24, 1.32, 0.96]}>
+      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.18, 1.26, 0.92]}>
         <MeshTransmissionMaterial
           backside
           samples={6}
@@ -264,7 +269,7 @@ function PrismGem() {
         />
       </mesh>
 
-      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.12, 1.18, 0.98]} material={haloMaterial} />
+      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.06, 1.14, 0.94]} material={haloMaterial} />
 
       <mesh position={[1.52, 0.44, 0.52]} scale={0.05}>
         <sphereGeometry args={[1, 14, 14]} />
@@ -280,9 +285,9 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-[-10%] z-10 overflow-visible">
+    <div className="absolute inset-[-12%] z-10 overflow-visible">
       <Canvas
-        camera={{ position: [0, 0, 10.8], fov: 18 }}
+        camera={{ position: [0, 0, 12.8], fov: 17 }}
         dpr={[1, 1.75]}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ gl }) => gl.setClearColor("#000000", 0)}
