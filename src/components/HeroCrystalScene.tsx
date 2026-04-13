@@ -8,6 +8,7 @@ import {
   Color,
   IcosahedronGeometry,
   MeshBasicMaterial,
+  MeshPhongMaterial,
   MeshPhysicalMaterial,
   OctahedronGeometry,
   TetrahedronGeometry,
@@ -37,6 +38,10 @@ type GemConfig = {
   pulse?: number;
   rotation?: [number, number, number];
   floatSeed?: number;
+  materialType?: "physical" | "phong";
+  opacity?: number;
+  debrisCount?: number;
+  debrisRadius?: number;
 };
 
 const GRID_GEMS: GemConfig[] = [
@@ -56,13 +61,17 @@ const GRID_GEMS: GemConfig[] = [
     id: "purple-blue",
     shape: "violet-prism",
     position: [-2.75, 1.85, -0.2],
-    scale: 0.62,
-    colors: ["#8d5bff", "#54a1ff"],
-    debrisColors: ["#8c66ff", "#6eb3ff"],
-    glow: 0.34,
+    scale: 0.66,
+    colors: ["#1a5fff", "#893bff"],
+    debrisColors: ["#2b74ff", "#9b57ff"],
+    glow: 0.42,
     pulse: 1.35,
-    rotation: [-0.2, 0.4, -0.16],
+    rotation: [-0.28, 0.48, -0.12],
     floatSeed: 0.8,
+    materialType: "phong",
+    opacity: 0.95,
+    debrisCount: 9,
+    debrisRadius: 0.82,
   },
   {
     id: "gold-yellow",
@@ -217,7 +226,9 @@ function createGemGeometry(shape: GemShape) {
         break;
       }
       case "violet-prism": {
-        vector.set(x * 0.76 + z * 0.08, y * 1.12, z * 0.94);
+        const apexBias = y > 0 ? 1.18 : 0.9;
+        const shoulder = Math.max(0, -y) * 0.22;
+        vector.set(x * 0.68 + z * 0.12 + Math.sign(x) * shoulder * 0.08, y * apexBias, z * 0.82 - shoulder * 0.06);
         break;
       }
       case "gold-core": {
@@ -331,6 +342,18 @@ function FacetedGem({ config, hero = false, ghost = false }: { config: GemConfig
   const coreRef = useRef<Mesh>(null);
   const geometry = useMemo(() => applyVertexGradient(createGemGeometry(config.shape), config.colors[0], config.colors[1]), [config.colors, config.shape]);
   const glowGeometry = useMemo(() => applyVertexGradient(createGemGeometry(config.shape), config.colors[0], config.colors[1]), [config.colors, config.shape]);
+  const phongMaterial = useMemo(
+    () =>
+      new MeshPhongMaterial({
+        vertexColors: true,
+        flatShading: true,
+        shininess: 100,
+        specular: new Color("#ffffff"),
+        transparent: true,
+        opacity: config.opacity ?? 0.95,
+      }),
+    [config.opacity],
+  );
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -370,20 +393,24 @@ function FacetedGem({ config, hero = false, ghost = false }: { config: GemConfig
   return (
     <group ref={ref} position={config.position} scale={config.scale} rotation={config.rotation}>
       <mesh ref={shellRef} geometry={geometry}>
-        <meshPhysicalMaterial
-          vertexColors
-          roughness={hero ? 0.24 : 0.34}
-          metalness={hero ? 0.08 : 0.04}
-          reflectivity={1}
-          clearcoat={1}
-          clearcoatRoughness={0.06}
-          transmission={hero ? 0.08 : 0.02}
-          thickness={hero ? 0.8 : 0.24}
-          ior={1.24}
-          flatShading
-          emissive={new Color(config.colors[1])}
-          emissiveIntensity={config.glow ?? 0.28}
-        />
+        {config.materialType === "phong" ? (
+          <primitive object={phongMaterial} attach="material" />
+        ) : (
+          <meshPhysicalMaterial
+            vertexColors
+            roughness={hero ? 0.24 : 0.34}
+            metalness={hero ? 0.08 : 0.04}
+            reflectivity={1}
+            clearcoat={1}
+            clearcoatRoughness={0.06}
+            transmission={hero ? 0.08 : 0.02}
+            thickness={hero ? 0.8 : 0.24}
+            ior={1.24}
+            flatShading
+            emissive={new Color(config.colors[1])}
+            emissiveIntensity={config.glow ?? 0.28}
+          />
+        )}
       </mesh>
 
       <mesh ref={coreRef} geometry={glowGeometry} scale={hero ? 0.58 : 0.52}>
@@ -403,8 +430,8 @@ function FacetedGem({ config, hero = false, ghost = false }: { config: GemConfig
       <GemDebris
         colors={config.debrisColors}
         scale={hero ? 0.15 : 0.08}
-        radius={hero ? 1.4 : 0.76}
-        count={hero ? 11 : 7}
+        radius={hero ? 1.4 : (config.debrisRadius ?? 0.76)}
+        count={hero ? 11 : (config.debrisCount ?? 7)}
         seed={config.floatSeed ?? 0}
       />
     </group>
