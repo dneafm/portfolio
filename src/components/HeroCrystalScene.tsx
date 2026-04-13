@@ -27,7 +27,7 @@ type HeroGemConfig = {
 const HERO_GEM: HeroGemConfig = {
   id: "blue_purple_irregular_gem",
   position: [-0.04, -0.06, 0],
-  scale: [0.78, 1.38, 0.74],
+  scale: [0.82, 1.42, 0.78],
   colors: {
     top: "#2A73FF",
     bottom: "#8F52FF",
@@ -36,7 +36,7 @@ const HERO_GEM: HeroGemConfig = {
   roughness: 0.04,
   metalness: 0.12,
   transmission: 0.46,
-  opacity: 0.62,
+  opacity: 0.58,
   rotationSpeed: {
     x: 0.0011,
     y: 0.0048,
@@ -171,7 +171,7 @@ function FitCamera() {
   const { camera } = useThree();
 
   useEffect(() => {
-    camera.position.set(0, -0.02, 8.8);
+    camera.position.set(0, -0.02, 8.6);
     camera.lookAt(-0.04, -0.06, 0);
     camera.updateProjectionMatrix();
   }, [camera]);
@@ -206,7 +206,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
     );
 
     if (materialRef.current) {
-      materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, hovered ? 0.55 : 0.3, 0.12);
+      materialRef.current.emissiveIntensity = THREE.MathUtils.lerp(materialRef.current.emissiveIntensity, hovered ? 0.48 : 0.28, 0.12);
     }
 
     if (innerGlowRef.current) {
@@ -232,7 +232,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
           <meshBasicMaterial
             vertexColors
             transparent
-            opacity={0.14}
+            opacity={0.13}
             blending={THREE.AdditiveBlending}
             depthWrite={false}
           />
@@ -267,7 +267,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
         <meshBasicMaterial
           color={config.colors.bottom}
           transparent
-          opacity={hovered ? 0.42 : 0.28}
+          opacity={hovered ? 0.38 : 0.28}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -277,7 +277,7 @@ function HeroGem({ config, ghost = false }: { config: HeroGemConfig; ghost?: boo
         <meshBasicMaterial
           color={config.colors.highlight}
           transparent
-          opacity={hovered ? 0.24 : 0.16}
+          opacity={hovered ? 0.22 : 0.16}
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
@@ -302,9 +302,9 @@ function SceneComposition() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-0 z-0 origin-center scale-[0.88] overflow-visible pointer-events-auto saturate-[1.28] md:scale-[0.9] lg:scale-[0.94]">
+    <div className="absolute inset-0 z-0 overflow-visible pointer-events-auto saturate-[1.22]">
       <Canvas
-        camera={{ position: [0, -0.02, 8.8], fov: 18, near: 0.1, far: 100 }}
+        camera={{ position: [0, -0.02, 8.6], fov: 18, near: 0.1, far: 100 }}
         dpr={[1, 1.8]}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ gl, scene }) => {
