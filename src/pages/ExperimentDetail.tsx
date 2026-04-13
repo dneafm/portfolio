@@ -11,8 +11,8 @@ export function ExperimentDetail() {
   if (!exp) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-6">
-        <h1 className="text-2xl font-bold">Experiment not found</h1>
-        <Link to="/experiments" className="text-blue-600 hover:underline">Back to Experiments</Link>
+        <h1 className="text-2xl font-bold">Operator Lab entry not found</h1>
+        <Link to="/operator-lab" className="text-blue-600 hover:underline">Back to Operator Lab</Link>
       </div>
     );
   }
@@ -25,7 +25,7 @@ export function ExperimentDetail() {
     >
       <header className="space-y-8">
         <Link 
-          to="/experiments" 
+          to="/operator-lab" 
           className="inline-flex items-center gap-2 text-zinc-400 hover:text-blue-600 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

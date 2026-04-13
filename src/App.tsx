@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Casefiles } from "./pages/Casefiles";
@@ -29,8 +29,10 @@ export default function App() {
             <Route path="casefiles/kyber-network" element={<KyberNetwork />} />
             <Route path="casefiles/factor" element={<Factor />} />
             <Route path="casefiles/vng" element={<VNG />} />
-            <Route path="experiments" element={<Experiments />} />
-            <Route path="experiments/:id" element={<ExperimentDetail />} />
+            <Route path="operator-lab" element={<Experiments />} />
+            <Route path="operator-lab/:id" element={<ExperimentDetail />} />
+            <Route path="experiments" element={<Navigate to="/operator-lab" replace />} />
+            <Route path="experiments/:id" element={<Navigate to="/operator-lab" replace />} />
             <Route path="notes" element={<Notes />} />
             <Route path="notes/:id" element={<NoteDetail />} />
             <Route path="cv" element={<CV />} />

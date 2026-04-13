@@ -78,7 +78,7 @@ export function Home() {
           {[
             { id: "kyber-network", title: "Kyber Network", label: "KYBER_NETWORK_ASSETS", desc: "Designing clarity inside a fast-moving DeFi environment.", media: { type: "image", src: "/Untitled.png" } },
             { id: "factor", title: "Factor", label: "FACTOR_SYSTEMS", desc: "Building reusable systems for faster, more consistent design execution.", media: { type: "video", src: "/Anim.mp4" } },
-            { id: "operator-lab", title: "Operator Lab", label: "OPERATOR_LAB_EXPERIMENTS", desc: "Exploring workflow tools, research surfaces, and operator-oriented systems.", media: { type: "image", src: "/Untitled (1).png" }, link: "/experiments" }
+            { id: "operator-lab", title: "Operator Lab", label: "OPERATOR_LAB_SYSTEMS", desc: "Exploring workflow tools, research surfaces, and operator-oriented systems.", media: { type: "image", src: "/Untitled (1).png" }, link: "/operator-lab" }
           ].map((casefile, i) => (
             <Link key={casefile.id} to={casefile.link || `/casefiles/${casefile.id}`} className="group block space-y-6">
               <div className="aspect-[4/3] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden flex items-center justify-center rounded-xl transition-all duration-500 group-hover:border-blue-500/30 group-hover:shadow-2xl group-hover:shadow-blue-500/5">

@@ -9,7 +9,7 @@ export function Experiments() {
       <header className="space-y-6 max-w-3xl">
         <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Operator Lab</h1>
         <p className="text-zinc-500 dark:text-zinc-400 text-xl font-medium leading-relaxed">
-          A self-initiated exploration bridging past roles and future directions. This lab focuses on reducing cognitive load in repeated workflows and making dense information easier to scan, prioritize, and act on through focused experiments.
+          A self-initiated exploration bridging past roles and future directions. Operator Lab focuses on reducing cognitive load in repeated workflows and making dense information easier to scan, prioritize, and act on through focused operator systems.
         </p>
       </header>
 
@@ -23,7 +23,7 @@ export function Experiments() {
             transition={{ duration: 0.8, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
           >
             <Link 
-              to={`/experiments/${exp.id}`}
+              to={`/operator-lab/${exp.id}`}
               className="group relative block bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm hover:border-blue-500/30 dark:hover:border-blue-400/20 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 p-8 space-y-8 rounded-2xl overflow-hidden"
             >
               {/* Corner Accents */}
