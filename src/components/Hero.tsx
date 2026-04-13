@@ -9,14 +9,16 @@ const TAGS = ["Crypto", "Systems", "Operator", "AI", "Design"];
 
 export function Hero() {
   return (
-    <section className="relative overflow-visible py-16 md:min-h-[88vh] md:py-28">
+    <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-visible py-16 md:min-h-[100svh] md:py-28">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.12),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.10),transparent_24%),radial-gradient(circle_at_50%_75%,rgba(255,255,255,0.06),transparent_30%)]" />
-        <div className="absolute inset-x-0 top-24 h-px bg-gradient-to-r from-transparent via-zinc-300/80 to-transparent dark:via-zinc-700/80 md:top-28" />
-        <div className="absolute inset-x-0 bottom-12 h-px bg-gradient-to-r from-transparent via-zinc-300/80 to-transparent dark:via-zinc-700/80 md:bottom-28" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.14),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.15),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,244,245,0.92))] dark:bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.2),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.16),transparent_32%),linear-gradient(180deg,rgba(9,9,11,0.95),rgba(3,7,18,0.98))]" />
+        <div className="absolute inset-0 w-screen opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-start gap-8 px-6 md:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div className="absolute left-1/2 top-[9%] -z-[1] h-[74vh] w-[74vh] min-h-[420px] min-w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,102,255,0.14),transparent_58%)] blur-3xl" />
+      <div className="absolute left-1/2 top-[8%] -z-[1] h-[72vh] w-[72vh] min-h-[420px] min-w-[420px] -translate-x-1/2 opacity-30 blur-[52px] [clip-path:polygon(50%_0%,88%_18%,95%_46%,71%_80%,50%_100%,27%_82%,7%_58%,12%_18%)] bg-[linear-gradient(180deg,rgba(33,97,235,0.9),rgba(153,102,204,0.8))]" />
+
+      <div className="relative z-10 mx-auto grid min-h-[100svh] w-full max-w-[1440px] items-start gap-8 px-6 md:gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,10 +78,10 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[30rem] w-screen max-w-none items-center justify-center overflow-visible px-0 md:mt-0 md:h-[48rem] lg:h-[60rem]"
+          className="relative mx-auto -mt-1 flex h-[34rem] w-screen max-w-none items-center justify-center overflow-visible px-0 md:mt-0 md:h-[52rem] lg:h-[64rem]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:120px_120px] [mask-image:radial-gradient(circle_at_center,black,transparent_78%)] mix-blend-soft-light opacity-70" />
-          <div className="absolute inset-x-[8%] bottom-[8%] h-[34%] rounded-full bg-blue-300/10 blur-3xl dark:bg-blue-500/10" />
+          <div className="absolute inset-x-[4%] bottom-[6%] h-[38%] rounded-full bg-blue-300/10 blur-3xl dark:bg-blue-500/10" />
           <div className="absolute left-1/2 top-[8%] h-[28%] w-[36%] -translate-x-1/2 rounded-full bg-white/8 blur-3xl dark:bg-white/5" />
           <div className="absolute right-[8%] top-[14%] h-[56%] w-[44%] rounded-full bg-violet-500/10 blur-[120px] dark:bg-violet-500/14" />
 
