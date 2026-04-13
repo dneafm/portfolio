@@ -64,75 +64,64 @@ function blendColors(a: string, b: string, t: number) {
 }
 
 function createIrregularAmethystGeometry() {
-  const vertices: Array<[number, number, number]> = [
-    [0, 1.38, 0.02],
-    [0.22, 1.08, 0.18],
-    [-0.14, 1.02, 0.28],
-    [-0.3, 0.92, -0.04],
-    [0.08, 0.96, -0.32],
-    [0.44, 0.62, 0.08],
-    [0.18, 0.52, 0.44],
-    [-0.2, 0.56, 0.36],
-    [-0.46, 0.44, 0.02],
-    [-0.26, 0.38, -0.34],
-    [0.16, 0.44, -0.48],
-    [0.46, 0.28, -0.12],
-    [0.36, 0.02, 0.28],
-    [0.02, -0.08, 0.5],
-    [-0.34, 0.04, 0.24],
-    [-0.52, -0.12, -0.06],
-    [-0.18, -0.08, -0.46],
-    [0.24, -0.02, -0.42],
-    [0.48, -0.18, -0.02],
-    [0.22, -0.5, 0.24],
-    [-0.08, -0.56, 0.32],
-    [-0.34, -0.48, 0],
-    [-0.08, -0.72, -0.22],
-    [0.12, -0.86, 0.02],
+  const apex: [number, number, number] = [0.02, 1.42, 0.01];
+  const bottom: [number, number, number] = [0.04, -1.02, -0.03];
+  const upperRing: Array<[number, number, number]> = [
+    [0.3, 1.0, 0.16],
+    [0.1, 0.98, 0.34],
+    [-0.2, 0.92, 0.26],
+    [-0.34, 0.82, 0.02],
+    [-0.22, 0.86, -0.24],
+    [0.06, 0.94, -0.36],
+    [0.28, 0.9, -0.18],
+    [0.38, 0.8, 0.02],
   ];
-
-  const faces: number[][] = [
-    [0, 1, 2],
-    [0, 2, 3],
-    [0, 3, 4],
-    [0, 4, 1],
-    [1, 5, 6, 2],
-    [2, 6, 7, 3],
-    [3, 7, 8, 9],
-    [3, 9, 4],
-    [4, 10, 11, 1],
-    [1, 11, 5],
-    [6, 12, 13],
-    [6, 13, 7],
-    [7, 14, 8],
-    [8, 14, 15],
-    [9, 15, 16],
-    [9, 16, 10, 4],
-    [10, 17, 18, 11],
-    [11, 18, 12, 5],
-    [5, 12, 6],
-    [13, 19, 20],
-    [13, 20, 14, 7],
-    [14, 20, 21, 15],
-    [15, 21, 22, 16],
-    [16, 22, 23, 17],
-    [17, 23, 19, 18],
-    [18, 19, 12],
-    [12, 19, 13],
-    [20, 19, 23],
-    [20, 23, 22, 21],
+  const midRing: Array<[number, number, number]> = [
+    [0.52, 0.46, 0.14],
+    [0.24, 0.38, 0.48],
+    [-0.12, 0.44, 0.42],
+    [-0.46, 0.34, 0.14],
+    [-0.54, 0.22, -0.12],
+    [-0.2, 0.3, -0.5],
+    [0.18, 0.34, -0.54],
+    [0.46, 0.24, -0.18],
+  ];
+  const lowerRing: Array<[number, number, number]> = [
+    [0.38, -0.18, 0.22],
+    [0.16, -0.24, 0.42],
+    [-0.18, -0.16, 0.34],
+    [-0.42, -0.24, 0.08],
+    [-0.34, -0.34, -0.2],
+    [-0.06, -0.42, -0.36],
+    [0.18, -0.34, -0.28],
+    [0.34, -0.28, -0.06],
   ];
 
   const positions: number[] = [];
 
-  for (const face of faces) {
-    for (let i = 1; i < face.length - 1; i += 1) {
-      const tri = [face[0], face[i], face[i + 1]];
-      for (const index of tri) {
-        const [x, y, z] = vertices[index];
-        positions.push(x, y, z);
-      }
+  const pushTriangle = (a: [number, number, number], b: [number, number, number], c: [number, number, number]) => {
+    positions.push(...a, ...b, ...c);
+  };
+
+  const connectRing = (topRing: Array<[number, number, number]>, bottomRing: Array<[number, number, number]>) => {
+    for (let i = 0; i < topRing.length; i += 1) {
+      const next = (i + 1) % topRing.length;
+      pushTriangle(topRing[i], bottomRing[i], bottomRing[next]);
+      pushTriangle(topRing[i], bottomRing[next], topRing[next]);
     }
+  };
+
+  for (let i = 0; i < upperRing.length; i += 1) {
+    const next = (i + 1) % upperRing.length;
+    pushTriangle(apex, upperRing[i], upperRing[next]);
+  }
+
+  connectRing(upperRing, midRing);
+  connectRing(midRing, lowerRing);
+
+  for (let i = 0; i < lowerRing.length; i += 1) {
+    const next = (i + 1) % lowerRing.length;
+    pushTriangle(lowerRing[i], bottom, lowerRing[next]);
   }
 
   const geometry = new BufferGeometry();
