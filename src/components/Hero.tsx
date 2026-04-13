@@ -7,6 +7,60 @@ const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 
 const TAGS = ["Crypto", "Systems", "Operator", "AI", "Design"];
 
+const ORBIT_CARDS = [
+  { label: "Crypto", orbit: "outer" as const, size: "sm" as const, start: 18, duration: 40 },
+  { label: "Systems", orbit: "outer" as const, size: "md" as const, start: 118, duration: 40 },
+  { label: "Operator", orbit: "outer" as const, size: "md" as const, start: 218, duration: 40 },
+  { label: "AI", orbit: "inner" as const, size: "sm" as const, start: 74, duration: 28 },
+  { label: "Design", orbit: "inner" as const, size: "md" as const, start: 228, duration: 28 },
+];
+
+function OrbitLabelCard({
+  label,
+  orbit,
+  size,
+  start,
+  duration,
+}: {
+  label: string;
+  orbit: "outer" | "inner";
+  size: "sm" | "md";
+  start: number;
+  duration: number;
+}) {
+  const orbitClass =
+    orbit === "outer"
+      ? "h-[15rem] w-[15rem] md:h-[26rem] md:w-[26rem]"
+      : "h-[10rem] w-[10rem] md:h-[18rem] md:w-[18rem]";
+  const translateClass = orbit === "outer" ? "-translate-y-[7.9rem] md:-translate-y-[13.8rem]" : "-translate-y-[5.4rem] md:-translate-y-[9.5rem]";
+  const cardClass =
+    size === "md"
+      ? "min-w-[8.8rem] px-3.5 py-2.5 text-[10px] tracking-[0.22em] md:min-w-[10.5rem] md:px-4 md:py-3 md:text-[11px]"
+      : "min-w-[6.2rem] px-3 py-2.5 text-[10px] tracking-[0.22em] md:min-w-[7rem] md:px-3.5 md:py-3 md:text-[11px]";
+
+  return (
+    <motion.div
+      animate={{ rotate: start + 360 }}
+      transition={{ duration, repeat: Infinity, ease: "linear" }}
+      style={{ rotate: `${start}deg` }}
+      className={`pointer-events-none absolute left-1/2 top-1/2 z-20 ${orbitClass} -translate-x-1/2 -translate-y-1/2`}
+    >
+      <motion.div
+        animate={{ rotate: -(start + 360) }}
+        transition={{ duration, repeat: Infinity, ease: "linear" }}
+        style={{ rotate: `${-start}deg` }}
+        className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 ${translateClass} items-center justify-center`}
+      >
+        <div
+          className={`rounded-[1.25rem] border border-zinc-300/70 bg-white/72 text-center font-black uppercase text-zinc-600 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/52 dark:text-zinc-300 ${cardClass}`}
+        >
+          {label}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export function Hero() {
   return (
     <section className="relative overflow-visible py-16 md:min-h-[88vh] md:py-28">
@@ -143,15 +197,9 @@ export function Hero() {
             className="absolute right-[12%] top-[30%] hidden h-px w-24 bg-gradient-to-r from-transparent via-violet-300/70 to-transparent md:block md:w-28"
           />
 
-          <div className="absolute left-[50%] top-[11%] -translate-x-1/2 rounded-full border border-zinc-300/70 bg-white/65 px-3 py-2 text-[9px] font-black uppercase tracking-[0.24em] text-zinc-500 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/45 dark:text-zinc-400 md:left-[44%] md:top-[8%] md:text-[10px]">
-            design
-          </div>
-          <div className="absolute bottom-[18%] left-[5%] rounded-full border border-zinc-300/70 bg-white/65 px-3 py-2 text-[9px] font-black uppercase tracking-[0.24em] text-zinc-500 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/45 dark:text-zinc-400 md:bottom-[20%] md:left-[10%] md:text-[10px]">
-            systems
-          </div>
-          <div className="absolute right-[6%] top-[28%] rounded-full border border-zinc-300/70 bg-white/65 px-3 py-2 text-[9px] font-black uppercase tracking-[0.24em] text-zinc-500 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/45 dark:text-zinc-400 md:right-[18%] md:top-[18%] md:text-[10px]">
-            operator
-          </div>
+          {ORBIT_CARDS.map((card) => (
+            <OrbitLabelCard key={card.label} {...card} />
+          ))}
         </motion.div>
       </div>
     </section>
