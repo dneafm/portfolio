@@ -1,6 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Float, MeshTransmissionMaterial, OrbitControls } from "@react-three/drei";
-import { motion } from "motion/react";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
 import {
@@ -8,6 +7,7 @@ import {
   Color,
   CylinderGeometry,
   DoubleSide,
+  BufferAttribute,
   IcosahedronGeometry,
   MeshBasicMaterial,
   MeshPhysicalMaterial,
@@ -130,9 +130,35 @@ function PrismGem() {
   const haloRef = useRef<Mesh>(null);
   const beamRef = useRef<Mesh>(null);
 
-  const gemGeometry = useMemo(() => new IcosahedronGeometry(1.02, 1), []);
-  const coreGeometry = useMemo(() => new IcosahedronGeometry(0.68, 0), []);
-  const haloGeometry = useMemo(() => new IcosahedronGeometry(1.15, 2), []);
+  const gemGeometry = useMemo(() => {
+    const geometry = new CylinderGeometry(0.34, 0.92, 2.42, 7, 5, false);
+    const position = geometry.attributes.position;
+    const deformed = new Float32Array(position.array.length);
+
+    for (let i = 0; i < position.count; i += 1) {
+      const x = position.getX(i) * 0.82;
+      const y = position.getY(i) * 1.08;
+      const z = position.getZ(i) * 0.76;
+      const angle = Math.atan2(z, x);
+      const radial = Math.sqrt(x * x + z * z);
+      const shardStep = Math.round((angle / (Math.PI / 3.5)) * 2) / 2;
+      const ridge = Math.cos(shardStep * 1.7 + y * 2.6) * 0.12;
+      const jagA = Math.sin(y * 11.5 + angle * 6.2) * 0.08;
+      const jagB = Math.cos(radial * 13.5 - y * 8.4) * 0.05;
+      const pinch = y > 0.72 ? 0.78 : y < -0.78 ? 0.86 : 1;
+      const scale = (1 + ridge + jagA + jagB) * pinch;
+
+      deformed[i * 3] = x * scale;
+      deformed[i * 3 + 1] = y * (1 + Math.sin(angle * 3.5) * 0.06);
+      deformed[i * 3 + 2] = z * scale;
+    }
+
+    geometry.setAttribute("position", new BufferAttribute(deformed, 3));
+    geometry.computeVertexNormals();
+    return geometry;
+  }, []);
+  const coreGeometry = useMemo(() => new CylinderGeometry(0.18, 0.44, 1.88, 6, 3, false), []);
+  const haloGeometry = useMemo(() => new CylinderGeometry(0.42, 1.02, 2.68, 7, 6, true), []);
   const beamGeometry = useMemo(() => new CylinderGeometry(0.14, 0.42, 4.2, 32, 1, true), []);
 
   const coreMaterial = useMemo(
@@ -206,28 +232,28 @@ function PrismGem() {
 
   return (
     <group ref={groupRef}>
-      <OrbitBand color="#88b7ff" scale={1.12} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.24} markerScale={0.04} />
-      <OrbitBand color="#c7c6ff" scale={0.92} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.2} markerScale={0.034} />
-      <OrbitBand color="#83d5ff" scale={1.28} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.12} markerScale={0.028} />
+      <OrbitBand color="#88b7ff" scale={1.18} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.18} markerScale={0.036} />
+      <OrbitBand color="#c7c6ff" scale={0.98} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.15} markerScale={0.03} />
+      <OrbitBand color="#83d5ff" scale={1.34} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.09} markerScale={0.024} />
 
       <MechanicalGear position={[-2.22, 1.22, -0.82]} scale={0.28} speed={0.28} color="#9ebcff" />
       <MechanicalGear position={[2.18, -0.98, -0.76]} scale={0.42} speed={-0.2} color="#c8c9ff" />
       <MechanicalGear position={[1.7, 1.62, -1.2]} scale={0.18} speed={0.34} color="#8ed7ff" />
 
       <mesh ref={beamRef} geometry={beamGeometry} position={[0, 0, -0.2]} material={beamMaterial} />
-      <mesh ref={coreRef} geometry={coreGeometry} scale={[0.94, 1.54, 0.94]} material={coreMaterial} />
+      <mesh ref={coreRef} geometry={coreGeometry} scale={[0.9, 1.12, 0.84]} material={coreMaterial} />
 
-      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.02, 1.96, 1.02]}>
+      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.02, 1.24, 1]}>
         <MeshTransmissionMaterial
           backside
           samples={6}
           resolution={256}
-          thickness={1.95}
-          roughness={0.015}
+          thickness={1.45}
+          roughness={0.06}
           chromaticAberration={0.025}
           anisotropy={0.24}
-          distortion={0.015}
-          distortionScale={0.04}
+          distortion={0.045}
+          distortionScale={0.11}
           temporalDistortion={0.02}
           iridescence={0.18}
           iridescenceIOR={1.16}
@@ -238,7 +264,7 @@ function PrismGem() {
         />
       </mesh>
 
-      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.08, 2.06, 1.08]} material={haloMaterial} />
+      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.02, 1.12, 0.96]} material={haloMaterial} />
 
       <mesh position={[1.52, 0.44, 0.52]} scale={0.05}>
         <sphereGeometry args={[1, 14, 14]} />
@@ -254,21 +280,14 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-0 z-10">
-      <motion.div
-        animate={{ opacity: [0.12, 0.24, 0.12] }}
-        transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute inset-x-[22%] bottom-[16%] h-24 rounded-full bg-blue-400/10 blur-3xl md:inset-x-[18%] md:h-32"
-      />
-      <motion.div
-        animate={{ opacity: [0.08, 0.16, 0.08] }}
-        transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-        className="pointer-events-none absolute left-[16%] top-[12%] h-24 w-24 rounded-full bg-violet-300/8 blur-3xl md:h-36 md:w-36"
-      />
-
-      <Canvas camera={{ position: [0, 0.08, 6.6], fov: 28 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
-        <color attach="background" args={["#02030a"]} />
-        <fog attach="fog" args={["#02030a", 7.5, 15]} />
+    <div className="absolute inset-[-8%] z-10 overflow-visible">
+      <Canvas
+        camera={{ position: [0, 0, 9.6], fov: 20 }}
+        dpr={[1, 1.75]}
+        gl={{ alpha: true, antialias: true }}
+        onCreated={({ gl }) => gl.setClearColor("#000000", 0)}
+        style={{ background: "transparent", overflow: "visible" }}
+      >
         <ambientLight intensity={0.34} />
         <directionalLight position={[5, 6, 5]} intensity={2.3} color="#ffffff" />
         <directionalLight position={[-4, 1, 5]} intensity={1.2} color="#8bb6ff" />

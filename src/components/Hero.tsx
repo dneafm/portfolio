@@ -9,7 +9,7 @@ const TAGS = ["Crypto", "Systems", "Operator", "AI", "Design"];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden py-16 md:min-h-[88vh] md:py-28">
+    <section className="relative overflow-visible py-16 md:min-h-[88vh] md:py-28">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.12),transparent_28%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.10),transparent_24%),radial-gradient(circle_at_50%_75%,rgba(255,255,255,0.06),transparent_30%)]" />
         <div className="absolute inset-x-0 top-24 h-px bg-gradient-to-r from-transparent via-zinc-300/80 to-transparent dark:via-zinc-700/80 md:top-28" />
@@ -76,15 +76,14 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[22rem] w-full max-w-[24rem] items-center justify-center md:mt-0 md:h-[34rem] md:max-w-[40rem] lg:h-[44rem]"
+          className="relative mx-auto -mt-1 flex h-[26rem] w-full max-w-[32rem] items-center justify-center overflow-visible md:mt-0 md:h-[42rem] md:max-w-[50rem] lg:h-[54rem] lg:max-w-[58rem]"
         >
-          <div className="absolute inset-0 rounded-[2.75rem] bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.18),transparent_12%),radial-gradient(circle_at_50%_40%,rgba(96,165,250,0.12),transparent_24%),radial-gradient(circle_at_50%_78%,rgba(76,29,149,0.10),transparent_28%),linear-gradient(180deg,rgba(10,14,28,0.14)_0%,rgba(2,6,23,0.02)_48%,rgba(2,6,23,0)_100%)] dark:bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.09),transparent_14%),radial-gradient(circle_at_50%_42%,rgba(96,165,250,0.14),transparent_24%),radial-gradient(circle_at_50%_80%,rgba(109,40,217,0.18),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0.46)_0%,rgba(2,6,23,0.14)_54%,rgba(2,6,23,0)_100%)]" />
-          <div className="absolute inset-x-[14%] bottom-[13%] h-[28%] rounded-full border border-zinc-300/20 bg-blue-200/8 blur-3xl dark:border-zinc-700/20 dark:bg-blue-500/8" />
-          <div className="absolute left-1/2 top-[8%] h-[26%] w-[38%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/5" />
+          <div className="absolute inset-x-[10%] bottom-[10%] h-[30%] rounded-full bg-blue-200/8 blur-3xl dark:bg-blue-500/8" />
+          <div className="absolute left-1/2 top-[6%] h-[24%] w-[34%] -translate-x-1/2 rounded-full bg-white/8 blur-3xl dark:bg-white/4" />
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[16rem] w-[16rem] rounded-full border border-zinc-300/22 dark:border-zinc-700/28 md:h-[27rem] md:w-[27rem]"
+            className="absolute h-[18rem] w-[18rem] rounded-full border border-zinc-300/16 dark:border-zinc-700/20 md:h-[30rem] md:w-[30rem]"
           >
             <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-blue-500/70 md:h-5" />
             <div className="absolute bottom-0 left-1/2 h-4 w-px -translate-x-1/2 bg-violet-500/55 md:h-5" />
@@ -95,7 +94,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[11rem] w-[11rem] rounded-full border border-dashed border-zinc-400/18 dark:border-zinc-600/22 md:h-[20rem] md:w-[20rem] md:border-2"
+            className="absolute h-[12rem] w-[12rem] rounded-full border border-dashed border-zinc-400/14 dark:border-zinc-600/18 md:h-[22rem] md:w-[22rem] md:border-2"
           />
 
           <Suspense
