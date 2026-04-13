@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Linkedin, Twitter, ArrowUpRight } from "lucide-react";
+import { Mail, Linkedin, Twitter, ArrowUpRight, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ContactNode {
@@ -9,7 +9,7 @@ interface ContactNode {
   subtitle: string;
   value: string;
   meta: string[];
-  icon: React.ElementType;
+  icon: LucideIcon;
   href: string;
   type: "primary" | "secondary";
 }

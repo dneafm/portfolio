@@ -78,7 +78,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[34rem] w-screen max-w-none items-center justify-center overflow-visible px-0 md:mt-0 md:h-[52rem] lg:h-[64rem]"
+          className="relative mx-auto -mt-1 flex h-[32rem] w-full min-w-0 max-w-[44rem] items-center justify-center overflow-visible px-0 md:mt-0 md:h-[46rem] md:max-w-[48rem] lg:h-[56rem] lg:max-w-[52rem]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:120px_120px] [mask-image:radial-gradient(circle_at_center,black,transparent_78%)] mix-blend-soft-light opacity-70" />
           <div className="absolute inset-x-[4%] bottom-[6%] h-[38%] rounded-full bg-blue-300/10 blur-3xl dark:bg-blue-500/10" />
