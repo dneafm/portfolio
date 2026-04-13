@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, MeshTransmissionMaterial, OrbitControls } from "@react-three/drei";
+import { Billboard, Environment, Float, MeshTransmissionMaterial, OrbitControls, Text } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
 import {
@@ -16,6 +16,59 @@ import {
   ShapeGeometry,
   TorusGeometry,
 } from "three";
+
+const ORBIT_LABELS = [
+  {
+    label: "Crypto",
+    scale: 1.02,
+    rotation: [0.9, 0.26, 0.38] as [number, number, number],
+    speed: [0.025, 0.11, 0.05] as [number, number, number],
+    radius: 2.14,
+    angle: 0.14,
+    cardSize: [0.9, 0.28] as [number, number],
+    arm: 0.16,
+  },
+  {
+    label: "Systems",
+    scale: 1.02,
+    rotation: [0.9, 0.26, 0.38] as [number, number, number],
+    speed: [0.025, 0.11, 0.05] as [number, number, number],
+    radius: 2.14,
+    angle: 2.2,
+    cardSize: [1.18, 0.32] as [number, number],
+    arm: 0.18,
+  },
+  {
+    label: "Operator",
+    scale: 1.02,
+    rotation: [0.9, 0.26, 0.38] as [number, number, number],
+    speed: [0.025, 0.11, 0.05] as [number, number, number],
+    radius: 2.14,
+    angle: 4.08,
+    cardSize: [1.22, 0.32] as [number, number],
+    arm: 0.18,
+  },
+  {
+    label: "AI",
+    scale: 0.84,
+    rotation: [0.22, 1.02, 1.22] as [number, number, number],
+    speed: [-0.03, -0.09, 0.04] as [number, number, number],
+    radius: 2.14,
+    angle: 1.26,
+    cardSize: [0.72, 0.25] as [number, number],
+    arm: 0.13,
+  },
+  {
+    label: "Design",
+    scale: 0.84,
+    rotation: [0.22, 1.02, 1.22] as [number, number, number],
+    speed: [-0.03, -0.09, 0.04] as [number, number, number],
+    radius: 2.14,
+    angle: 3.8,
+    cardSize: [1.02, 0.28] as [number, number],
+    arm: 0.15,
+  },
+];
 
 function createGearShape(teeth = 14, outerRadius = 1, innerRadius = 0.74, toothDepth = 0.14) {
   const shape = new Shape();
@@ -119,6 +172,78 @@ function OrbitBand({
         <sphereGeometry args={[1, 18, 18]} />
         <meshBasicMaterial color="#f8fbff" transparent opacity={0.92} />
       </mesh>
+    </group>
+  );
+}
+
+function OrbitLabel3D({
+  label,
+  scale,
+  rotation,
+  speed,
+  radius,
+  angle,
+  cardSize,
+  arm,
+}: {
+  label: string;
+  scale: number;
+  rotation: [number, number, number];
+  speed: [number, number, number];
+  radius: number;
+  angle: number;
+  cardSize: [number, number];
+  arm: number;
+}) {
+  const ref = useRef<Group>(null);
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+  const tangent = angle + Math.PI / 2;
+  const isLarge = cardSize[0] > 1;
+
+  useFrame((state) => {
+    if (!ref.current) return;
+    const t = state.clock.getElapsedTime();
+    ref.current.rotation.x = rotation[0] + t * speed[0];
+    ref.current.rotation.y = rotation[1] + t * speed[1];
+    ref.current.rotation.z = rotation[2] + t * speed[2];
+  });
+
+  return (
+    <group ref={ref} scale={scale} rotation={rotation}>
+      <group position={[x, y, 0]} rotation={[0, 0, tangent]}>
+        <mesh>
+          <circleGeometry args={[isLarge ? 0.1 : 0.085, 32]} />
+          <meshBasicMaterial color="#edf4ff" transparent opacity={0.9} />
+        </mesh>
+        <mesh position={[0, arm * 0.5, 0]}>
+          <planeGeometry args={[0.018, arm]} />
+          <meshBasicMaterial color="#aac5ff" transparent opacity={0.55} side={DoubleSide} />
+        </mesh>
+        <Billboard position={[0, arm + cardSize[1] * 0.5, 0]} follow lockX={false} lockY={false} lockZ={false}>
+          <group>
+            <mesh>
+              <planeGeometry args={cardSize} />
+              <meshBasicMaterial color="#f7faff" transparent opacity={0.82} side={DoubleSide} />
+            </mesh>
+            <mesh position={[0, 0, -0.004]}>
+              <planeGeometry args={[cardSize[0] * 1.04, cardSize[1] * 1.12]} />
+              <meshBasicMaterial color="#6f9dff" transparent opacity={0.12} side={DoubleSide} />
+            </mesh>
+            <Text
+              position={[0, 0, 0.006]}
+              fontSize={isLarge ? 0.105 : 0.098}
+              color="#5b6577"
+              anchorX="center"
+              anchorY="middle"
+              letterSpacing={0.08}
+              maxWidth={cardSize[0] * 0.82}
+            >
+              {label.toUpperCase()}
+            </Text>
+          </group>
+        </Billboard>
+      </group>
     </group>
   );
 }
@@ -240,6 +365,9 @@ function PrismGem() {
       <OrbitBand color="#88b7ff" scale={1.02} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.16} markerScale={0.03} />
       <OrbitBand color="#c7c6ff" scale={0.84} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.12} markerScale={0.026} />
       <OrbitBand color="#83d5ff" scale={1.14} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.08} markerScale={0.02} />
+      {ORBIT_LABELS.map((labelConfig) => (
+        <OrbitLabel3D key={labelConfig.label} {...labelConfig} />
+      ))}
 
       <MechanicalGear position={[-1.84, 1.02, -0.82]} scale={0.2} speed={0.28} color="#9ebcff" />
       <MechanicalGear position={[1.88, -0.84, -0.76]} scale={0.3} speed={-0.2} color="#c8c9ff" />
