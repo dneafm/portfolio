@@ -9,7 +9,7 @@ export function Experiments() {
       <header className="space-y-6 max-w-3xl">
         <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Operator Lab</h1>
         <p className="text-zinc-500 dark:text-zinc-400 text-xl font-medium leading-relaxed">
-          A self-initiated exploration bridging past roles and future directions. Operator Lab focuses on reducing cognitive load in repeated workflows and making dense information easier to scan, prioritize, and act on through focused operator systems.
+          A self-initiated exploration bridging past roles and future directions. This lab focuses on reducing cognitive load in repeated workflows and making dense information easier to scan, prioritize, and act on through focused experiments.
         </p>
       </header>
 

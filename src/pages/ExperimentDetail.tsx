@@ -11,8 +11,8 @@ export function ExperimentDetail() {
   if (!exp) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-6">
-        <h1 className="text-2xl font-bold">Operator Lab entry not found</h1>
-        <Link to="/operator-lab" className="text-blue-600 hover:underline">Back to Operator Lab</Link>
+        <h1 className="text-2xl font-bold">Experiment not found</h1>
+        <Link to="/operator-lab" className="text-blue-600 hover:underline">Back to Experiments</Link>
       </div>
     );
   }
