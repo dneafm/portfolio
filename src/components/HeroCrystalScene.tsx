@@ -1,411 +1,452 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Billboard, Environment, Float, MeshTransmissionMaterial, OrbitControls, Text } from "@react-three/drei";
+import { Environment, Float, OrbitControls } from "@react-three/drei";
 import { useMemo, useRef } from "react";
-import type { Group, Mesh } from "three";
+import type { BufferGeometry, Group, Mesh } from "three";
 import {
   AdditiveBlending,
-  Color,
-  CylinderGeometry,
-  DoubleSide,
   BufferAttribute,
+  Color,
   IcosahedronGeometry,
   MeshBasicMaterial,
   MeshPhysicalMaterial,
-  RingGeometry,
-  Shape,
-  ShapeGeometry,
-  TorusGeometry,
+  OctahedronGeometry,
+  TetrahedronGeometry,
+  Vector3,
 } from "three";
 
-const ORBIT_LABELS = [
+type GemShape =
+  | "solar-shard"
+  | "violet-prism"
+  | "gold-core"
+  | "deep-plum"
+  | "amber-kite"
+  | "magenta-star"
+  | "sapphire-cut"
+  | "emerald-spear"
+  | "indigo-split"
+  | "hero-sun";
+
+type GemConfig = {
+  id: string;
+  shape: GemShape;
+  position: [number, number, number];
+  scale: number;
+  colors: [string, string];
+  debrisColors: [string, string];
+  glow?: number;
+  pulse?: number;
+  rotation?: [number, number, number];
+  floatSeed?: number;
+};
+
+const GRID_GEMS: GemConfig[] = [
   {
-    label: "Crypto",
-    scale: 1.02,
-    rotation: [0.9, 0.26, 0.38] as [number, number, number],
-    speed: [0.025, 0.11, 0.05] as [number, number, number],
-    radius: 2.14,
-    angle: 0.14,
-    cardSize: [0.9, 0.28] as [number, number],
-    arm: 0.16,
+    id: "red-gold",
+    shape: "solar-shard",
+    position: [-4.6, 1.85, 0.1],
+    scale: 0.64,
+    colors: ["#ff5a43", "#f8b13d"],
+    debrisColors: ["#ff7a4f", "#ffc24d"],
+    glow: 0.38,
+    pulse: 1.1,
+    rotation: [0.3, -0.2, 0.1],
+    floatSeed: 0.1,
   },
   {
-    label: "Systems",
-    scale: 1.02,
-    rotation: [0.9, 0.26, 0.38] as [number, number, number],
-    speed: [0.025, 0.11, 0.05] as [number, number, number],
-    radius: 2.14,
-    angle: 2.2,
-    cardSize: [1.18, 0.32] as [number, number],
-    arm: 0.18,
+    id: "purple-blue",
+    shape: "violet-prism",
+    position: [-2.75, 1.85, -0.2],
+    scale: 0.62,
+    colors: ["#8d5bff", "#54a1ff"],
+    debrisColors: ["#8c66ff", "#6eb3ff"],
+    glow: 0.34,
+    pulse: 1.35,
+    rotation: [-0.2, 0.4, -0.16],
+    floatSeed: 0.8,
   },
   {
-    label: "Operator",
-    scale: 1.02,
-    rotation: [0.9, 0.26, 0.38] as [number, number, number],
-    speed: [0.025, 0.11, 0.05] as [number, number, number],
-    radius: 2.14,
-    angle: 4.08,
-    cardSize: [1.22, 0.32] as [number, number],
-    arm: 0.18,
+    id: "gold-yellow",
+    shape: "gold-core",
+    position: [-0.9, 1.85, 0.15],
+    scale: 0.58,
+    colors: ["#ffd760", "#f7aa2e"],
+    debrisColors: ["#ffe07b", "#ffc143"],
+    glow: 0.42,
+    pulse: 1.22,
+    rotation: [0.18, 0.24, -0.1],
+    floatSeed: 1.2,
   },
   {
-    label: "AI",
-    scale: 0.84,
-    rotation: [0.22, 1.02, 1.22] as [number, number, number],
-    speed: [-0.03, -0.09, 0.04] as [number, number, number],
-    radius: 2.14,
-    angle: 1.26,
-    cardSize: [0.72, 0.25] as [number, number],
-    arm: 0.13,
+    id: "deep-purple",
+    shape: "deep-plum",
+    position: [-4.6, 0, -0.15],
+    scale: 0.62,
+    colors: ["#5c2fbe", "#220744"],
+    debrisColors: ["#6b39d8", "#33115d"],
+    glow: 0.22,
+    pulse: 1.55,
+    rotation: [0.12, -0.38, 0.22],
+    floatSeed: 1.75,
   },
   {
-    label: "Design",
-    scale: 0.84,
-    rotation: [0.22, 1.02, 1.22] as [number, number, number],
-    speed: [-0.03, -0.09, 0.04] as [number, number, number],
-    radius: 2.14,
-    angle: 3.8,
-    cardSize: [1.02, 0.28] as [number, number],
-    arm: 0.15,
+    id: "amber-gold",
+    shape: "amber-kite",
+    position: [-2.75, 0, 0.1],
+    scale: 0.6,
+    colors: ["#ffcb61", "#cf7b1e"],
+    debrisColors: ["#ffd071", "#de9234"],
+    glow: 0.36,
+    pulse: 1.4,
+    rotation: [-0.12, 0.2, 0.1],
+    floatSeed: 2.2,
+  },
+  {
+    id: "magenta",
+    shape: "magenta-star",
+    position: [-0.9, 0, -0.12],
+    scale: 0.58,
+    colors: ["#ff58dc", "#c12294"],
+    debrisColors: ["#ff72e6", "#db3baa"],
+    glow: 0.36,
+    pulse: 1.7,
+    rotation: [0.24, 0.32, -0.28],
+    floatSeed: 2.9,
+  },
+  {
+    id: "sapphire",
+    shape: "sapphire-cut",
+    position: [-4.6, -1.85, 0.12],
+    scale: 0.6,
+    colors: ["#1e79ff", "#103ea7"],
+    debrisColors: ["#3f91ff", "#1d56d0"],
+    glow: 0.34,
+    pulse: 1.18,
+    rotation: [0.08, -0.24, 0.16],
+    floatSeed: 3.4,
+  },
+  {
+    id: "emerald",
+    shape: "emerald-spear",
+    position: [-2.75, -1.85, -0.08],
+    scale: 0.72,
+    colors: ["#33db84", "#0d8f58"],
+    debrisColors: ["#5bf09f", "#17b66c"],
+    glow: 0.33,
+    pulse: 1.28,
+    rotation: [-0.24, 0.16, 0.2],
+    floatSeed: 3.95,
+  },
+  {
+    id: "blue-purple",
+    shape: "indigo-split",
+    position: [-0.9, -1.85, 0.05],
+    scale: 0.52,
+    colors: ["#4d8dff", "#7a52ff"],
+    debrisColors: ["#73a4ff", "#8e67ff"],
+    glow: 0.28,
+    pulse: 1.5,
+    rotation: [0.18, 0.28, -0.22],
+    floatSeed: 4.6,
   },
 ];
 
-function createGearShape(teeth = 14, outerRadius = 1, innerRadius = 0.74, toothDepth = 0.14) {
-  const shape = new Shape();
-  const steps = teeth * 2;
+function mixHex(a: string, b: string, t: number) {
+  const c1 = new Color(a);
+  const c2 = new Color(b);
+  return c1.lerp(c2, t);
+}
 
-  for (let i = 0; i <= steps; i += 1) {
-    const angle = (i / steps) * Math.PI * 2;
-    const radius = i % 2 === 0 ? outerRadius + toothDepth : outerRadius;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+function applyVertexGradient(geometry: BufferGeometry, start: string, end: string) {
+  const nonIndexed = geometry.toNonIndexed();
+  const position = nonIndexed.attributes.position;
+  const colors = new Float32Array(position.count * 3);
 
-    if (i === 0) shape.moveTo(x, y);
-    else shape.lineTo(x, y);
+  let minY = Infinity;
+  let maxY = -Infinity;
+  let minX = Infinity;
+  let maxX = -Infinity;
+
+  for (let i = 0; i < position.count; i += 1) {
+    const x = position.getX(i);
+    const y = position.getY(i);
+    minY = Math.min(minY, y);
+    maxY = Math.max(maxY, y);
+    minX = Math.min(minX, x);
+    maxX = Math.max(maxX, x);
   }
 
-  const hole = new Shape();
-  hole.absarc(0, 0, innerRadius, 0, Math.PI * 2, true);
-  shape.holes.push(hole);
+  const yRange = Math.max(0.0001, maxY - minY);
+  const xRange = Math.max(0.0001, maxX - minX);
 
-  return shape;
+  for (let i = 0; i < position.count; i += 1) {
+    const x = position.getX(i);
+    const y = position.getY(i);
+    const blend = Math.min(1, Math.max(0, (y - minY) / yRange * 0.72 + (x - minX) / xRange * 0.28));
+    const c = mixHex(start, end, blend);
+    colors[i * 3] = c.r;
+    colors[i * 3 + 1] = c.g;
+    colors[i * 3 + 2] = c.b;
+  }
+
+  nonIndexed.setAttribute("color", new BufferAttribute(colors, 3));
+  nonIndexed.computeVertexNormals();
+  return nonIndexed;
 }
 
-function MechanicalGear({
-  position,
-  scale,
-  speed,
-  color,
-}: {
-  position: [number, number, number];
-  scale: number;
-  speed: number;
-  color: string;
-}) {
-  const ref = useRef<Group>(null);
-  const gearGeometry = useMemo(() => new ShapeGeometry(createGearShape(14, 1, 0.74, 0.14)), []);
-  const innerRing = useMemo(() => new RingGeometry(0.18, 0.34, 48), []);
+function createGemGeometry(shape: GemShape) {
+  const base =
+    shape === "magenta-star"
+      ? new TetrahedronGeometry(1.05, 0)
+      : shape === "violet-prism" || shape === "deep-plum"
+        ? new IcosahedronGeometry(0.95, 0)
+        : new OctahedronGeometry(1, 0);
 
-  useFrame((state) => {
-    if (!ref.current) return;
-    ref.current.rotation.z = state.clock.getElapsedTime() * speed;
-  });
+  const geometry = base.toNonIndexed();
+  const position = geometry.attributes.position;
+  const vector = new Vector3();
 
-  return (
-    <group ref={ref} position={position} scale={scale}>
-      <mesh geometry={gearGeometry}>
-        <meshBasicMaterial
-          color={color}
-          transparent
-          opacity={0.22}
-          side={DoubleSide}
-          blending={AdditiveBlending}
-          depthWrite={false}
-        />
-      </mesh>
-      <mesh geometry={innerRing}>
-        <meshBasicMaterial
-          color="#dbe7ff"
-          transparent
-          opacity={0.32}
-          side={DoubleSide}
-          blending={AdditiveBlending}
-          depthWrite={false}
-        />
-      </mesh>
-    </group>
-  );
+  for (let i = 0; i < position.count; i += 1) {
+    vector.set(position.getX(i), position.getY(i), position.getZ(i));
+    const x = vector.x;
+    const y = vector.y;
+    const z = vector.z;
+
+    switch (shape) {
+      case "solar-shard": {
+        vector.set(x * (0.82 + Math.max(0, y) * 0.18), y * 1.18, z * 0.72 + x * 0.08);
+        break;
+      }
+      case "violet-prism": {
+        vector.set(x * 0.76 + z * 0.08, y * 1.12, z * 0.94);
+        break;
+      }
+      case "gold-core": {
+        vector.set(x * 0.88, y * 0.96, z * 0.88);
+        break;
+      }
+      case "deep-plum": {
+        vector.set(x * 0.74, y * 1.06, z * 0.82 + Math.sign(z) * 0.08);
+        break;
+      }
+      case "amber-kite": {
+        vector.set(x * 0.84 + Math.max(0, x) * 0.12, y * 1.06, z * 0.72);
+        break;
+      }
+      case "magenta-star": {
+        vector.set(x * 0.9, y * 1.18, z * 0.66 + Math.sign(x) * 0.1);
+        break;
+      }
+      case "sapphire-cut": {
+        vector.set(x * 0.84, y * 0.9, z * 1.02);
+        break;
+      }
+      case "emerald-spear": {
+        vector.set(x * 0.56, y * 1.44, z * 0.52 + y * 0.08);
+        break;
+      }
+      case "indigo-split": {
+        vector.set(x * 0.74 + Math.sign(x) * 0.12, y * 0.92, z * 0.86);
+        break;
+      }
+      case "hero-sun": {
+        const flare = Math.max(0, x) * 0.26 + Math.max(0, y) * 0.12;
+        const pinch = Math.max(0, -x) * 0.1 + Math.max(0, -z) * 0.06;
+        vector.set(
+          x * (0.92 + flare - pinch) + z * 0.06,
+          y * (1.18 + Math.abs(y) * 0.08) - Math.max(0, -y) * 0.08,
+          z * (0.68 + Math.max(0, x) * 0.1) - Math.max(0, -x) * 0.1,
+        );
+        break;
+      }
+    }
+
+    const facetJitter = 1 + Math.sin((x + y + z) * 6.2) * 0.018;
+    vector.multiplyScalar(facetJitter);
+    position.setXYZ(i, vector.x, vector.y, vector.z);
+  }
+
+  geometry.computeVertexNormals();
+  return geometry;
 }
 
-function OrbitBand({
-  color,
+function GemDebris({
+  colors,
   scale,
-  rotation,
-  speed,
-  opacity,
-  markerScale,
-}: {
-  color: string;
-  scale: number;
-  rotation: [number, number, number];
-  speed: [number, number, number];
-  opacity: number;
-  markerScale: number;
-}) {
-  const ref = useRef<Group>(null);
-  const orbitGeometry = useMemo(() => new TorusGeometry(2.14, 0.01, 10, 260), []);
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    const t = state.clock.getElapsedTime();
-    ref.current.rotation.x = rotation[0] + t * speed[0];
-    ref.current.rotation.y = rotation[1] + t * speed[1];
-    ref.current.rotation.z = rotation[2] + t * speed[2];
-  });
-
-  return (
-    <group ref={ref} scale={scale} rotation={rotation}>
-      <mesh geometry={orbitGeometry}>
-        <meshBasicMaterial color={color} transparent opacity={opacity} blending={AdditiveBlending} depthWrite={false} />
-      </mesh>
-      <mesh position={[2.14, 0, 0]} scale={markerScale}>
-        <sphereGeometry args={[1, 18, 18]} />
-        <meshBasicMaterial color="#f8fbff" transparent opacity={0.92} />
-      </mesh>
-    </group>
-  );
-}
-
-function OrbitLabel3D({
-  label,
-  scale,
-  rotation,
-  speed,
   radius,
-  angle,
-  cardSize,
-  arm,
+  seed,
+  count = 8,
 }: {
-  label: string;
+  colors: [string, string];
   scale: number;
-  rotation: [number, number, number];
-  speed: [number, number, number];
   radius: number;
-  angle: number;
-  cardSize: [number, number];
-  arm: number;
+  seed: number;
+  count?: number;
 }) {
   const ref = useRef<Group>(null);
-  const x = Math.cos(angle) * radius;
-  const y = Math.sin(angle) * radius;
-  const tangent = angle + Math.PI / 2;
-  const isLarge = cardSize[0] > 1;
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => {
+        const angle = (i / count) * Math.PI * 2 + seed;
+        const spread = radius * (0.76 + ((i * 17) % 7) / 10);
+        const y = Math.sin(seed * 3 + i * 1.7) * radius * 0.32;
+        return {
+          position: [Math.cos(angle) * spread, y, Math.sin(angle) * spread * 0.72] as [number, number, number],
+          rotation: [seed + i * 0.4, seed * 0.7 + i * 0.3, seed * 0.5 + i * 0.22] as [number, number, number],
+          scalar: scale * (0.44 + (i % 3) * 0.18),
+          color: i % 2 === 0 ? colors[0] : colors[1],
+        };
+      }),
+    [colors, count, radius, scale, seed],
+  );
 
   useFrame((state) => {
     if (!ref.current) return;
     const t = state.clock.getElapsedTime();
-    ref.current.rotation.x = rotation[0] + t * speed[0];
-    ref.current.rotation.y = rotation[1] + t * speed[1];
-    ref.current.rotation.z = rotation[2] + t * speed[2];
+    ref.current.rotation.y = t * 0.3 + seed;
+    ref.current.rotation.x = Math.sin(t * 0.5 + seed) * 0.12;
   });
 
   return (
-    <group ref={ref} scale={scale} rotation={rotation}>
-      <group position={[x, y, 0]} rotation={[0, 0, tangent]}>
-        <mesh>
-          <circleGeometry args={[isLarge ? 0.1 : 0.085, 32]} />
-          <meshBasicMaterial color="#edf4ff" transparent opacity={0.9} />
+    <group ref={ref}>
+      {pieces.map((piece, i) => (
+        <mesh key={i} position={piece.position} rotation={piece.rotation} scale={piece.scalar}>
+          <tetrahedronGeometry args={[1, 0]} />
+          <meshPhysicalMaterial
+            color={piece.color}
+            emissive={piece.color}
+            emissiveIntensity={0.26}
+            roughness={0.3}
+            metalness={0.08}
+            flatShading
+          />
         </mesh>
-        <mesh position={[0, arm * 0.5, 0]}>
-          <planeGeometry args={[0.018, arm]} />
-          <meshBasicMaterial color="#aac5ff" transparent opacity={0.55} side={DoubleSide} />
-        </mesh>
-        <Billboard position={[0, arm + cardSize[1] * 0.5, 0]} follow lockX={false} lockY={false} lockZ={false}>
-          <group>
-            <mesh>
-              <planeGeometry args={cardSize} />
-              <meshBasicMaterial color="#f7faff" transparent opacity={0.82} side={DoubleSide} />
-            </mesh>
-            <mesh position={[0, 0, -0.004]}>
-              <planeGeometry args={[cardSize[0] * 1.04, cardSize[1] * 1.12]} />
-              <meshBasicMaterial color="#6f9dff" transparent opacity={0.12} side={DoubleSide} />
-            </mesh>
-            <Text
-              position={[0, 0, 0.006]}
-              fontSize={isLarge ? 0.105 : 0.098}
-              color="#5b6577"
-              anchorX="center"
-              anchorY="middle"
-              letterSpacing={0.08}
-              maxWidth={cardSize[0] * 0.82}
-            >
-              {label.toUpperCase()}
-            </Text>
-          </group>
-        </Billboard>
-      </group>
+      ))}
     </group>
   );
 }
 
-function PrismGem() {
-  const groupRef = useRef<Group>(null);
-  const gemRef = useRef<Mesh>(null);
+function FacetedGem({ config, hero = false, ghost = false }: { config: GemConfig; hero?: boolean; ghost?: boolean }) {
+  const ref = useRef<Group>(null);
+  const shellRef = useRef<Mesh>(null);
   const coreRef = useRef<Mesh>(null);
-  const haloRef = useRef<Mesh>(null);
-  const beamRef = useRef<Mesh>(null);
-
-  const gemGeometry = useMemo(() => {
-    const geometry = new IcosahedronGeometry(1.4, 1);
-    const position = geometry.attributes.position;
-    const deformed = new Float32Array(position.array.length);
-
-    for (let i = 0; i < position.count; i += 1) {
-      const x = position.getX(i);
-      const y = position.getY(i);
-      const z = position.getZ(i);
-      const angle = Math.atan2(z, x);
-      const radial = Math.sqrt(x * x + z * z);
-      const directionBias = Math.max(0, z) * 0.38 - Math.max(0, -z) * 0.12 + x * 0.08;
-      const faceSnap = Math.sign(x) * 0.12 + Math.sign(z) * 0.1;
-      const ridge = Math.cos(angle * 4 + y * 2.8) * 0.16;
-      const jagA = Math.sin(y * 10.5 + angle * 6.8) * 0.13;
-      const jagB = Math.cos(radial * 9.2 - y * 6.4) * 0.08;
-      const dentA = Math.exp(-((x - 0.46) ** 2 * 9 + (y + 0.08) ** 2 * 12 + (z - 0.18) ** 2 * 16)) * 0.3;
-      const dentB = Math.exp(-((x + 0.34) ** 2 * 11 + (y - 0.36) ** 2 * 10 + (z + 0.16) ** 2 * 18)) * 0.22;
-      const chunky = 1.06 + directionBias + faceSnap + ridge + jagA + jagB - dentA - dentB;
-      const yScale = 0.86 + Math.abs(y) * 0.24 - dentA * 0.08;
-
-      deformed[i * 3] = x * chunky * 0.96;
-      deformed[i * 3 + 1] = y * yScale;
-      deformed[i * 3 + 2] = z * (0.72 + directionBias * 0.38 + jagA * 0.08) - dentA * 0.16 - dentB * 0.08;
-    }
-
-    geometry.setAttribute("position", new BufferAttribute(deformed, 3));
-    geometry.computeVertexNormals();
-    return geometry;
-  }, []);
-  const coreGeometry = useMemo(() => new IcosahedronGeometry(0.82, 0), []);
-  const haloGeometry = useMemo(() => new IcosahedronGeometry(1.7, 0), []);
-  const beamGeometry = useMemo(() => new CylinderGeometry(0.14, 0.42, 4.2, 32, 1, true), []);
-
-  const coreMaterial = useMemo(
-    () =>
-      new MeshPhysicalMaterial({
-        color: new Color("#accfff"),
-        emissive: new Color("#4f78ff"),
-        emissiveIntensity: 0.48,
-        roughness: 0.2,
-        metalness: 0.42,
-        reflectivity: 1,
-        clearcoat: 1,
-        clearcoatRoughness: 0.08,
-      }),
-    [],
-  );
-
-  const haloMaterial = useMemo(
-    () =>
-      new MeshBasicMaterial({
-        color: new Color("#8fc7ff"),
-        transparent: true,
-        opacity: 0.05,
-        blending: AdditiveBlending,
-        side: DoubleSide,
-        depthWrite: false,
-      }),
-    [],
-  );
-
-  const beamMaterial = useMemo(
-    () =>
-      new MeshBasicMaterial({
-        color: new Color("#6ea8ff"),
-        transparent: true,
-        opacity: 0.08,
-        blending: AdditiveBlending,
-        side: DoubleSide,
-        depthWrite: false,
-      }),
-    [],
-  );
+  const geometry = useMemo(() => applyVertexGradient(createGemGeometry(config.shape), config.colors[0], config.colors[1]), [config.colors, config.shape]);
+  const glowGeometry = useMemo(() => applyVertexGradient(createGemGeometry(config.shape), config.colors[0], config.colors[1]), [config.colors, config.shape]);
 
   useFrame((state) => {
-    const t = state.clock.getElapsedTime();
+    if (!ref.current) return;
+    const t = state.clock.getElapsedTime() + (config.floatSeed ?? 0);
+    ref.current.position.y = config.position[1] + Math.sin(t * (config.pulse ?? 1.2)) * (hero ? 0.08 : 0.05);
+    ref.current.rotation.x = (config.rotation?.[0] ?? 0) + Math.sin(t * 0.5) * 0.08;
+    ref.current.rotation.y = (config.rotation?.[1] ?? 0) + t * (hero ? 0.22 : 0.14);
+    ref.current.rotation.z = (config.rotation?.[2] ?? 0) + Math.cos(t * 0.42) * 0.06;
 
-    if (groupRef.current) {
-      groupRef.current.rotation.y = 0.34 + t * 0.16;
-      groupRef.current.rotation.x = -0.16 + Math.sin(t * 0.22) * 0.035;
-      groupRef.current.rotation.z = -0.18 + Math.sin(t * 0.3) * 0.04;
-      groupRef.current.position.y = Math.sin(t * 0.8) * 0.1;
-    }
-
-    if (gemRef.current) {
-      gemRef.current.rotation.x = -0.28 + Math.sin(t * 0.24) * 0.07;
-      gemRef.current.rotation.y = 0.26 + Math.cos(t * 0.18) * 0.05;
-      gemRef.current.rotation.z = 0.18 + Math.cos(t * 0.22) * 0.04;
+    if (shellRef.current) {
+      shellRef.current.rotation.y = -t * 0.12;
     }
 
     if (coreRef.current) {
-      coreRef.current.rotation.y = -t * 0.32;
-      coreRef.current.rotation.x = Math.sin(t * 0.28) * 0.08;
-    }
-
-    if (haloRef.current) {
-      haloRef.current.scale.setScalar(1.01 + Math.sin(t * 1.1) * 0.015);
-    }
-
-    if (beamRef.current) {
-      beamRef.current.rotation.y = -t * 0.12;
+      const s = hero ? 0.6 + Math.sin(t * 1.2) * 0.025 : 0.54 + Math.sin(t * 1.4) * 0.018;
+      coreRef.current.scale.setScalar(s);
     }
   });
 
+  if (ghost) {
+    return (
+      <group ref={ref} position={config.position} scale={config.scale} rotation={config.rotation}>
+        <mesh geometry={geometry}>
+          <meshBasicMaterial
+            vertexColors
+            transparent
+            opacity={0.08}
+            blending={AdditiveBlending}
+            depthWrite={false}
+            wireframe={false}
+          />
+        </mesh>
+      </group>
+    );
+  }
+
   return (
-    <group ref={groupRef}>
-      <OrbitBand color="#88b7ff" scale={1.02} rotation={[0.9, 0.26, 0.38]} speed={[0.025, 0.11, 0.05]} opacity={0.16} markerScale={0.03} />
-      <OrbitBand color="#c7c6ff" scale={0.84} rotation={[0.22, 1.02, 1.22]} speed={[-0.03, -0.09, 0.04]} opacity={0.12} markerScale={0.026} />
-      <OrbitBand color="#83d5ff" scale={1.14} rotation={[1.18, -0.26, 0.1]} speed={[0.02, 0.07, -0.03]} opacity={0.08} markerScale={0.02} />
-      {ORBIT_LABELS.map((labelConfig) => (
-        <OrbitLabel3D key={labelConfig.label} {...labelConfig} />
-      ))}
-
-      <MechanicalGear position={[-1.84, 1.02, -0.82]} scale={0.2} speed={0.28} color="#9ebcff" />
-      <MechanicalGear position={[1.88, -0.84, -0.76]} scale={0.3} speed={-0.2} color="#c8c9ff" />
-      <MechanicalGear position={[1.42, 1.3, -1.2]} scale={0.14} speed={0.34} color="#8ed7ff" />
-
-      <mesh ref={beamRef} geometry={beamGeometry} position={[0, 0, -0.2]} material={beamMaterial} />
-      <mesh ref={coreRef} geometry={coreGeometry} scale={[1.02, 1.08, 0.82]} material={coreMaterial} />
-
-      <mesh ref={gemRef} geometry={gemGeometry} scale={[1.18, 1.26, 0.92]}>
-        <MeshTransmissionMaterial
-          backside
-          samples={6}
-          resolution={256}
-          thickness={1.46}
-          roughness={0.2}
-          chromaticAberration={0.018}
-          anisotropy={0.1}
-          distortion={0.12}
-          distortionScale={0.2}
-          temporalDistortion={0.03}
-          iridescence={0.1}
-          iridescenceIOR={1.16}
+    <group ref={ref} position={config.position} scale={config.scale} rotation={config.rotation}>
+      <mesh ref={shellRef} geometry={geometry}>
+        <meshPhysicalMaterial
+          vertexColors
+          roughness={hero ? 0.24 : 0.34}
+          metalness={hero ? 0.08 : 0.04}
+          reflectivity={1}
           clearcoat={1}
-          attenuationColor="#8ca7ff"
-          attenuationDistance={1.5}
-          color="#eef4ff"
+          clearcoatRoughness={0.06}
+          transmission={hero ? 0.08 : 0.02}
+          thickness={hero ? 0.8 : 0.24}
+          ior={1.24}
+          flatShading
+          emissive={new Color(config.colors[1])}
+          emissiveIntensity={config.glow ?? 0.28}
         />
       </mesh>
 
-      <mesh ref={haloRef} geometry={haloGeometry} scale={[1.06, 1.14, 0.94]} material={haloMaterial} />
-
-      <mesh position={[1.52, 0.44, 0.52]} scale={0.05}>
-        <sphereGeometry args={[1, 14, 14]} />
-        <meshBasicMaterial color="#f8fbff" transparent opacity={0.95} />
+      <mesh ref={coreRef} geometry={glowGeometry} scale={hero ? 0.58 : 0.52}>
+        <meshBasicMaterial color={config.colors[0]} transparent opacity={hero ? 0.18 : 0.12} blending={AdditiveBlending} depthWrite={false} />
       </mesh>
-      <mesh position={[-1.36, -0.22, 0.38]} scale={0.032}>
-        <sphereGeometry args={[1, 14, 14]} />
-        <meshBasicMaterial color="#cfd8ff" transparent opacity={0.82} />
+
+      <mesh geometry={glowGeometry} scale={hero ? 1.15 : 1.08}>
+        <meshBasicMaterial
+          color={config.colors[0]}
+          transparent
+          opacity={hero ? 0.08 : 0.05}
+          blending={AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+
+      <GemDebris
+        colors={config.debrisColors}
+        scale={hero ? 0.15 : 0.08}
+        radius={hero ? 1.4 : 0.76}
+        count={hero ? 11 : 7}
+        seed={config.floatSeed ?? 0}
+      />
+    </group>
+  );
+}
+
+function SceneComposition() {
+  const heroConfig: GemConfig = {
+    id: "hero-sun",
+    shape: "hero-sun",
+    position: [3.65, 0.2, 0.35],
+    scale: 1.72,
+    colors: ["#ffd44f", "#ff8d1a"],
+    debrisColors: ["#ffd45d", "#ff991f"],
+    glow: 0.56,
+    pulse: 1,
+    rotation: [-0.12, 0.3, 0.16],
+    floatSeed: 0.7,
+  };
+
+  return (
+    <group>
+      <FacetedGem
+        config={{
+          ...heroConfig,
+          position: [4.15, 0.1, -2.8],
+          scale: 2.55,
+        }}
+        ghost
+      />
+
+      <group>
+        {GRID_GEMS.map((gem) => (
+          <FacetedGem key={gem.id} config={gem} />
+        ))}
+      </group>
+
+      <FacetedGem config={heroConfig} hero />
+
+      <mesh position={[-2.75, 0, -1.6]} scale={[4.1, 4.9, 1]}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial color="#d7e7ff" transparent opacity={0.035} />
       </mesh>
     </group>
   );
@@ -415,25 +456,28 @@ export function HeroCrystalScene() {
   return (
     <div className="absolute inset-[-12%] z-10 overflow-visible">
       <Canvas
-        camera={{ position: [0, 0, 12.8], fov: 17 }}
+        camera={{ position: [0, 0, 15], fov: 16 }}
         dpr={[1, 1.75]}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ gl }) => gl.setClearColor("#000000", 0)}
         style={{ background: "transparent", overflow: "visible" }}
       >
-        <ambientLight intensity={0.34} />
-        <directionalLight position={[5, 6, 5]} intensity={2.3} color="#ffffff" />
-        <directionalLight position={[-4, 1, 5]} intensity={1.2} color="#8bb6ff" />
-        <pointLight position={[0, 2.6, 3.8]} intensity={1.5} color="#ffffff" />
-        <pointLight position={[0, -2, 2.6]} intensity={0.7} color="#8f7dff" />
-        <spotLight position={[0, 4.2, 3.2]} angle={0.34} penumbra={1} intensity={2.2} color="#dbe7ff" />
+        <color attach="background" args={["#000000"]} />
+        <fog attach="fog" args={["#d5e7ff", 18, 30]} />
+        <ambientLight intensity={0.58} />
+        <directionalLight position={[8, 7, 6]} intensity={3.2} color="#ffffff" />
+        <directionalLight position={[2, 5, 8]} intensity={2.2} color="#ffd79d" />
+        <directionalLight position={[-6, 1, 6]} intensity={1.85} color="#8ab4ff" />
+        <pointLight position={[4.5, 1.5, 4]} intensity={14} distance={18} color="#ffb347" />
+        <pointLight position={[-3.2, 2.5, 3.5]} intensity={7} distance={16} color="#8cb3ff" />
+        <pointLight position={[-1.5, -3, 2.5]} intensity={4} distance={14} color="#7e5dff" />
 
-        <Float speed={0.95} rotationIntensity={0.06} floatIntensity={0.28}>
-          <PrismGem />
+        <Float speed={0.8} rotationIntensity={0.04} floatIntensity={0.16}>
+          <SceneComposition />
         </Float>
 
         <Environment preset="studio" />
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.1} />
+        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.12} />
       </Canvas>
     </div>
   );
