@@ -32,7 +32,7 @@ export function Layout() {
           <div className="flex items-center gap-3 group cursor-default">
             <div className="w-2.5 h-2.5 bg-blue-600 rounded-sm group-hover:rotate-45 transition-transform" />
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
-              Dossier_01
+              HoangPham_Portfolio
             </span>
           </div>
           

@@ -24,9 +24,9 @@ export function Home() {
         className="grid md:grid-cols-3 gap-8"
       >
         {[
-          { icon: Network, title: "Crypto Context", desc: "Experience working inside fast-moving DeFi environments where complexity, nuance, and speed shape how communication needs to work." },
-          { icon: Workflow, title: "System Thinking", desc: "Interested in reusable structures, modular workflows, and design logic that improve consistency, clarity, and execution over time." },
-          { icon: Terminal, title: "Operator Lens", desc: "Drawn toward tools, dashboards, and research surfaces built to reduce friction for people working in dense, high-context systems." }
+          { icon: Network, title: "Crypto-Native", desc: "I spent years designing inside DeFi, where things move fast, context is messy, and clarity matters more than decoration." },
+          { icon: Workflow, title: "Systems Over Screens", desc: "I care less about one-off visuals and more about structures, workflows, and reusable logic that make a team move better." },
+          { icon: Terminal, title: "Operator Shift", desc: "I’m moving toward tools, dashboards, research flows, and AI-assisted systems that help people operate with less friction." }
         ].map((item, i) => (
           <motion.div 
             key={i}
@@ -76,9 +76,9 @@ export function Home() {
         
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            { id: "kyber-network", title: "Kyber Network", label: "KYBER_NETWORK_ASSETS", desc: "Designing clarity inside a fast-moving DeFi environment.", media: { type: "image", src: "/Untitled.png" } },
-            { id: "factor", title: "Factor", label: "FACTOR_SYSTEMS", desc: "Building reusable systems for faster, more consistent design execution.", media: { type: "video", src: "/Anim.mp4" } },
-            { id: "operator-lab", title: "Operator Lab", label: "OPERATOR_LAB_SYSTEMS", desc: "Exploring workflow tools, research surfaces, and operator-oriented systems.", media: { type: "image", src: "/Untitled (1).png" }, link: "/operator-lab" }
+            { id: "kyber-network", title: "Kyber Network", label: "KYBER_NETWORK_ASSETS", desc: "Design work shaped by the speed, ambiguity, and pressure of DeFi." , media: { type: "image", src: "/Untitled.png" } },
+            { id: "factor", title: "Factor", label: "FACTOR_SYSTEMS", desc: "A shift from isolated deliverables toward reusable systems and working structure.", media: { type: "video", src: "/Anim.mp4" } },
+            { id: "operator-lab", title: "Operator Lab", label: "OPERATOR_LAB_SYSTEMS", desc: "Where I’m pushing toward operator tools, research surfaces, and AI-assisted workflows.", media: { type: "image", src: "/Untitled (1).png" }, link: "/operator-lab" }
           ].map((casefile, i) => (
             <Link key={casefile.id} to={casefile.link || `/casefiles/${casefile.id}`} className="group block space-y-6">
               <div className="aspect-[4/3] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden flex items-center justify-center rounded-xl transition-all duration-500 group-hover:border-blue-500/30 group-hover:shadow-2xl group-hover:shadow-blue-500/5">
@@ -151,14 +151,14 @@ export function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              I come from a design background that includes crypto-native work, communication systems, and multidisciplinary execution. My direction is increasingly shaped by workflows, dashboards, internal tools, and environments where clarity matters under complexity.
+              I come from a graphic design background, but the last few years, especially in crypto, pushed me toward a different kind of work. I’m more interested now in how systems behave, how teams operate, and how better structure can reduce noise.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              I’m most interested in work that helps people navigate dense information, reduce friction, and operate more effectively.
+              This portfolio is less about polished surfaces for their own sake, and more about the path from designer to systems-minded operator, someone interested in workflows, research tools, internal products, and AI leverage.
             </motion.p>
           </div>
         </div>
@@ -167,7 +167,7 @@ export function Home() {
           <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-6">
             <div className="space-y-2">
               <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">Notes / Thinking</h2>
-              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-tight">Short writing on crypto UX, workflow design, and operator tools.</p>
+              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-tight">Short writing on crypto, systems, workflows, and the shift from design into operator work.</p>
             </div>
             <Link to="/notes" className="group text-[11px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors flex items-center gap-2">
               Archive <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -175,10 +175,10 @@ export function Home() {
           </div>
           <ul className="space-y-6">
             {[
-              "Designing for high-context users",
-              "Clarity in noisy systems",
-              "AI-assisted research systems",
-              "Workflows and internal tools"
+              "Why I’m moving beyond pure design",
+              "Clarity for high-context crypto teams",
+              "AI as leverage, not decoration",
+              "Building better operator workflows"
             ].map((note, i) => (
               <motion.li 
                 key={i} 
@@ -201,7 +201,7 @@ export function Home() {
       <section className="py-24 border-t border-zinc-100 dark:border-zinc-800">
         <div className="max-w-3xl">
           <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-8 leading-tight">
-            If you're building tools, workflows, or research surfaces in crypto, <span className="text-blue-600 dark:text-blue-400 underline underline-offset-8 decoration-blue-100 dark:decoration-blue-900/30">let's talk.</span>
+            If you’re building in crypto and need someone who can think through design, systems, and operator reality, <span className="text-blue-600 dark:text-blue-400 underline underline-offset-8 decoration-blue-100 dark:decoration-blue-900/30">let’s talk.</span>
           </h2>
           <Link
             to="/contact"
