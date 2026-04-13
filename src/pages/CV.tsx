@@ -337,7 +337,7 @@ export function CV() {
               </section>
             </div>
 
-            {/* Right Column: Stack & Education */}
+            {/* Right Column: Stack */}
             <div className="md:col-span-4 space-y-16">
               
               {/* Stack */}
@@ -349,7 +349,7 @@ export function CV() {
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">Design Stack</h4>
                     <div className="space-y-2">
-                      {['Figma (Advanced Systems)', 'Framer (Prototyping)', 'Adobe Creative Suite', 'Motion Design'].map(tool => (
+                      {['Figma (Advanced Systems)', 'Adobe Creative Suite', 'Motion Design'].map(tool => (
                         <div key={tool} className="flex items-center justify-between text-[13px] font-semibold text-zinc-700 dark:text-zinc-300">
                           <span>{tool}</span>
                           <div className="w-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full" />
@@ -360,30 +360,13 @@ export function CV() {
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">System Stack</h4>
                     <div className="space-y-2">
-                      {['Cursor / AI Workflows', 'n8n / Automation', 'Linear / Ops', 'Technical Research'].map(tool => (
+                      {['VSC', 'AI Agent'].map(tool => (
                         <div key={tool} className="flex items-center justify-between text-[13px] font-semibold text-zinc-700 dark:text-zinc-300">
                           <span>{tool}</span>
                           <div className="w-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full" />
                         </div>
                       ))}
                     </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Education */}
-              <section>
-                <div className="flex items-center gap-4 mb-8">
-                  <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">Education</h2>
-                </div>
-                <div className="space-y-6">
-                  <div className="space-y-1">
-                    <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Bachelor of Design</p>
-                    <p className="text-[12px] text-zinc-500 dark:text-zinc-500 font-medium">Multimedia & Visual Comm / 2016</p>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100">DeFi Deep Dive</p>
-                    <p className="text-[12px] text-zinc-500 dark:text-zinc-500 font-medium">Independent Certification / 2022</p>
                   </div>
                 </div>
               </section>
