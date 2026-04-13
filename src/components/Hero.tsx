@@ -1,6 +1,9 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+
+const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 
 const TAGS = ["Crypto", "Systems", "Operator", "AI", "Design"];
 
@@ -78,7 +81,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[15rem] w-[15rem] rounded-full border border-zinc-300/45 dark:border-zinc-700/50 md:h-[25rem] md:w-[25rem]"
+            className="absolute h-[15rem] w-[15rem] rounded-full border border-zinc-300/40 dark:border-zinc-700/45 md:h-[25rem] md:w-[25rem]"
           >
             <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-blue-500/70 md:h-5" />
             <div className="absolute bottom-0 left-1/2 h-4 w-px -translate-x-1/2 bg-violet-500/55 md:h-5" />
@@ -89,81 +92,19 @@ export function Hero() {
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[10.25rem] w-[10.25rem] rounded-full border border-dashed border-zinc-400/35 dark:border-zinc-600/40 md:h-[18rem] md:w-[18rem] md:border-2"
+            className="absolute h-[10.25rem] w-[10.25rem] rounded-full border border-dashed border-zinc-400/30 dark:border-zinc-600/35 md:h-[18rem] md:w-[18rem] md:border-2"
           />
 
-          <div className="absolute bottom-[20%] h-14 w-[8.5rem] rounded-[999px] bg-blue-500/18 blur-2xl md:bottom-[18%] md:h-20 md:w-[12rem]" />
-          <div className="absolute bottom-[16%] h-8 w-[6.5rem] rounded-[999px] bg-white/10 blur-xl md:h-12 md:w-[9rem]" />
-
-          <motion.div
-            animate={{ y: [0, -8, 0], rotate: [-1.5, 1.5, -1.5] }}
-            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-10"
+          <Suspense
+            fallback={
+              <div className="absolute inset-0 z-10">
+                <div className="absolute inset-x-[24%] bottom-[18%] h-20 rounded-full bg-blue-500/20 blur-3xl md:inset-x-[22%] md:bottom-[16%] md:h-28" />
+                <div className="absolute left-1/2 top-1/2 h-[15rem] w-[11rem] -translate-x-1/2 -translate-y-[56%] rounded-[45%] border border-white/25 bg-gradient-to-b from-white/30 via-blue-400/35 to-violet-500/25 shadow-[0_0_80px_rgba(59,130,246,0.28)] backdrop-blur-sm md:h-[24rem] md:w-[17rem]" />
+              </div>
+            }
           >
-            <div className="absolute inset-0 scale-[1.55] rounded-full bg-blue-500/20 blur-3xl dark:bg-blue-500/24" />
-            <svg viewBox="0 0 360 460" className="relative h-[15rem] w-[11.5rem] drop-shadow-[0_0_70px_rgba(59,130,246,0.28)] md:h-[25rem] md:w-[19rem]">
-              <defs>
-                <linearGradient id="crystalOuter" x1="18%" y1="0%" x2="82%" y2="100%">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.95" />
-                  <stop offset="14%" stopColor="#dbeafe" stopOpacity="0.92" />
-                  <stop offset="42%" stopColor="#60a5fa" stopOpacity="0.98" />
-                  <stop offset="72%" stopColor="#2563eb" stopOpacity="0.96" />
-                  <stop offset="100%" stopColor="#7c3aed" stopOpacity="0.88" />
-                </linearGradient>
-                <linearGradient id="crystalRight" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(255,255,255,0.26)" />
-                  <stop offset="100%" stopColor="rgba(30,41,59,0.46)" />
-                </linearGradient>
-                <linearGradient id="crystalLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(255,255,255,0.72)" />
-                  <stop offset="100%" stopColor="rgba(255,255,255,0.08)" />
-                </linearGradient>
-                <linearGradient id="crystalCore" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(255,255,255,0.55)" />
-                  <stop offset="45%" stopColor="rgba(147,197,253,0.18)" />
-                  <stop offset="100%" stopColor="rgba(124,58,237,0.18)" />
-                </linearGradient>
-                <linearGradient id="reflectionFade" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="rgba(191,219,254,0.25)" />
-                  <stop offset="100%" stopColor="rgba(191,219,254,0)" />
-                </linearGradient>
-                <filter id="softBlur">
-                  <feGaussianBlur stdDeviation="4" />
-                </filter>
-              </defs>
-
-              <path
-                d="M180 24 L254 82 L282 176 L246 338 L180 426 L114 338 L78 176 L106 82 Z"
-                fill="url(#crystalOuter)"
-                stroke="rgba(255,255,255,0.9)"
-                strokeWidth="4"
-              />
-              <path d="M180 24 L106 82 L78 176 L180 136 Z" fill="rgba(255,255,255,0.4)" />
-              <path d="M180 24 L254 82 L282 176 L180 136 Z" fill="rgba(255,255,255,0.18)" />
-              <path d="M78 176 L180 136 L180 426 L114 338 Z" fill="url(#crystalLeft)" opacity="0.7" />
-              <path d="M282 176 L180 136 L180 426 L246 338 Z" fill="url(#crystalRight)" opacity="0.95" />
-              <path d="M128 104 L180 136 L234 104" stroke="rgba(255,255,255,0.55)" strokeWidth="2.5" fill="none" />
-              <path d="M94 204 L180 136 L266 204" stroke="rgba(255,255,255,0.38)" strokeWidth="2.5" fill="none" />
-              <path d="M114 338 L180 248 L246 338" stroke="rgba(255,255,255,0.28)" strokeWidth="2.5" fill="none" />
-              <path d="M180 24 L180 426" stroke="rgba(255,255,255,0.34)" strokeWidth="2" />
-              <path d="M106 82 L180 248 L114 338" stroke="rgba(255,255,255,0.2)" strokeWidth="2" fill="none" />
-              <path d="M254 82 L180 248 L246 338" stroke="rgba(255,255,255,0.16)" strokeWidth="2" fill="none" />
-              <path d="M146 76 C156 58, 176 48, 198 52" stroke="rgba(255,255,255,0.72)" strokeWidth="7" strokeLinecap="round" fill="none" />
-              <path d="M128 116 C146 90, 180 84, 214 92" stroke="rgba(255,255,255,0.28)" strokeWidth="10" strokeLinecap="round" fill="none" filter="url(#softBlur)" />
-              <ellipse cx="150" cy="132" rx="30" ry="92" fill="rgba(255,255,255,0.16)" transform="rotate(20 150 132)" />
-              <ellipse cx="205" cy="188" rx="22" ry="72" fill="rgba(255,255,255,0.08)" transform="rotate(14 205 188)" />
-              <path d="M168 136 L180 116 L192 136 L180 200 Z" fill="url(#crystalCore)" opacity="0.8" />
-              <path d="M122 352 C142 338, 158 334, 180 334 C202 334, 218 338, 238 352" stroke="rgba(255,255,255,0.16)" strokeWidth="3" fill="none" />
-
-              <g transform="translate(0, 452) scale(1, -0.42) translate(0, -452)" opacity="0.26">
-                <path
-                  d="M180 24 L254 82 L282 176 L246 338 L180 426 L114 338 L78 176 L106 82 Z"
-                  fill="url(#reflectionFade)"
-                />
-                <path d="M180 24 L180 426" stroke="rgba(255,255,255,0.12)" strokeWidth="2" />
-              </g>
-            </svg>
-          </motion.div>
+            <HeroCrystalScene />
+          </Suspense>
 
           <motion.div
             animate={{ rotate: 360 }}
