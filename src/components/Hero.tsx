@@ -78,12 +78,13 @@ export function Hero() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
           className="relative mx-auto -mt-1 flex h-[22rem] w-full max-w-[24rem] items-center justify-center md:mt-0 md:h-[34rem] md:max-w-[40rem] lg:h-[44rem]"
         >
-          <div className="absolute inset-0 rounded-[2.5rem] bg-[radial-gradient(circle_at_50%_32%,rgba(219,234,254,0.18),transparent_18%),radial-gradient(circle_at_50%_60%,rgba(56,189,248,0.10),transparent_34%),radial-gradient(circle_at_50%_90%,rgba(124,58,237,0.12),transparent_30%)] dark:bg-[radial-gradient(circle_at_50%_32%,rgba(219,234,254,0.12),transparent_20%),radial-gradient(circle_at_50%_58%,rgba(14,165,233,0.14),transparent_34%),radial-gradient(circle_at_50%_90%,rgba(91,33,182,0.18),transparent_30%)]" />
-          <div className="absolute inset-x-[10%] bottom-[12%] h-[32%] rounded-full border border-zinc-300/40 bg-white/20 blur-3xl dark:border-zinc-700/40 dark:bg-blue-500/10" />
+          <div className="absolute inset-0 rounded-[2.75rem] bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.18),transparent_12%),radial-gradient(circle_at_50%_40%,rgba(96,165,250,0.12),transparent_24%),radial-gradient(circle_at_50%_78%,rgba(76,29,149,0.10),transparent_28%),linear-gradient(180deg,rgba(10,14,28,0.14)_0%,rgba(2,6,23,0.02)_48%,rgba(2,6,23,0)_100%)] dark:bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,0.09),transparent_14%),radial-gradient(circle_at_50%_42%,rgba(96,165,250,0.14),transparent_24%),radial-gradient(circle_at_50%_80%,rgba(109,40,217,0.18),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0.46)_0%,rgba(2,6,23,0.14)_54%,rgba(2,6,23,0)_100%)]" />
+          <div className="absolute inset-x-[14%] bottom-[13%] h-[28%] rounded-full border border-zinc-300/20 bg-blue-200/8 blur-3xl dark:border-zinc-700/20 dark:bg-blue-500/8" />
+          <div className="absolute left-1/2 top-[8%] h-[26%] w-[38%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/5" />
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[16rem] w-[16rem] rounded-full border border-zinc-300/35 dark:border-zinc-700/45 md:h-[27rem] md:w-[27rem]"
+            className="absolute h-[16rem] w-[16rem] rounded-full border border-zinc-300/22 dark:border-zinc-700/28 md:h-[27rem] md:w-[27rem]"
           >
             <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-blue-500/70 md:h-5" />
             <div className="absolute bottom-0 left-1/2 h-4 w-px -translate-x-1/2 bg-violet-500/55 md:h-5" />
@@ -94,7 +95,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-            className="absolute h-[11rem] w-[11rem] rounded-full border border-dashed border-zinc-400/28 dark:border-zinc-600/35 md:h-[20rem] md:w-[20rem] md:border-2"
+            className="absolute h-[11rem] w-[11rem] rounded-full border border-dashed border-zinc-400/18 dark:border-zinc-600/22 md:h-[20rem] md:w-[20rem] md:border-2"
           />
 
           <Suspense
@@ -111,7 +112,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            className="absolute left-[7%] top-[18%] hidden h-20 w-20 rounded-full border border-zinc-400/45 bg-white/10 dark:border-zinc-600/50 dark:bg-white/5 md:block md:h-24 md:w-24"
+            className="absolute left-[7%] top-[18%] hidden h-20 w-20 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-24 md:w-24"
           >
             <div className="absolute inset-[18%] rounded-full border border-dashed border-blue-500/45" />
             <div className="absolute left-1/2 top-0 h-3 w-px -translate-x-1/2 bg-zinc-500" />
@@ -123,7 +124,7 @@ export function Hero() {
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[17%] right-[6%] hidden h-24 w-24 rounded-full border border-zinc-400/45 bg-white/10 dark:border-zinc-600/50 dark:bg-white/5 md:block md:h-32 md:w-32"
+            className="absolute bottom-[17%] right-[6%] hidden h-24 w-24 rounded-full border border-zinc-400/28 bg-white/6 dark:border-zinc-600/28 dark:bg-white/3 md:block md:h-32 md:w-32"
           >
             <div className="absolute inset-[16%] rounded-full border-2 border-dashed border-violet-500/40" />
             <div className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-zinc-500" />
@@ -133,14 +134,14 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            animate={{ opacity: [0.3, 0.8, 0.3] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[15%] top-[56%] h-px w-16 bg-gradient-to-r from-transparent via-blue-500/70 to-transparent md:left-[20%] md:h-2 md:w-24"
+            animate={{ opacity: [0.18, 0.48, 0.18] }}
+            transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[15%] top-[56%] h-px w-16 bg-gradient-to-r from-transparent via-blue-300/70 to-transparent md:left-[20%] md:w-24"
           />
           <motion.div
-            animate={{ opacity: [0.22, 0.7, 0.22] }}
-            transition={{ duration: 4.1, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-            className="absolute right-[12%] top-[30%] hidden h-px w-24 bg-gradient-to-r from-transparent via-violet-500/70 to-transparent md:block md:w-28"
+            animate={{ opacity: [0.16, 0.42, 0.16] }}
+            transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="absolute right-[12%] top-[30%] hidden h-px w-24 bg-gradient-to-r from-transparent via-violet-300/70 to-transparent md:block md:w-28"
           />
 
           <div className="absolute left-[50%] top-[11%] -translate-x-1/2 rounded-full border border-zinc-300/70 bg-white/65 px-3 py-2 text-[9px] font-black uppercase tracking-[0.24em] text-zinc-500 backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/45 dark:text-zinc-400 md:left-[44%] md:top-[8%] md:text-[10px]">
