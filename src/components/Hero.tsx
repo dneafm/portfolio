@@ -78,12 +78,12 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto -mt-1 flex h-[28rem] w-full min-w-0 max-w-[38rem] items-center justify-center overflow-visible px-0 md:mt-0 md:h-[40rem] md:max-w-[42rem] lg:h-[48rem] lg:max-w-[46rem]"
+          className="relative mx-auto -mt-1 flex h-[24rem] w-full min-w-0 max-w-[32rem] items-center justify-center overflow-visible px-0 md:mt-0 md:h-[34rem] md:max-w-[36rem] lg:h-[40rem] lg:max-w-[40rem]"
         >
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:120px_120px] [mask-image:radial-gradient(circle_at_center,black,transparent_78%)] mix-blend-soft-light opacity-70" />
-          <div className="absolute inset-x-[5%] bottom-[8%] h-[34%] rounded-full bg-blue-300/12 blur-3xl dark:bg-blue-500/14" />
-          <div className="absolute left-1/2 top-[10%] h-[24%] w-[34%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6" />
-          <div className="absolute right-[10%] top-[16%] h-[50%] w-[40%] rounded-full bg-violet-500/14 blur-[120px] dark:bg-violet-500/18" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:112px_112px] [mask-image:radial-gradient(circle_at_center,black,transparent_80%)] mix-blend-soft-light opacity-70" />
+          <div className="absolute inset-x-[8%] bottom-[10%] h-[28%] rounded-full bg-blue-300/14 blur-3xl dark:bg-blue-500/16" />
+          <div className="absolute left-1/2 top-[12%] h-[20%] w-[30%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6" />
+          <div className="absolute right-[12%] top-[18%] h-[44%] w-[34%] rounded-full bg-violet-500/16 blur-[110px] dark:bg-violet-500/20" />
 
           <Suspense
             fallback={

@@ -26,8 +26,8 @@ type HeroGemConfig = {
 
 const HERO_GEM: HeroGemConfig = {
   id: "blue_purple_irregular_gem",
-  position: [-0.08, -0.04, 0],
-  scale: [0.86, 1.48, 0.82],
+  position: [-0.04, -0.06, 0],
+  scale: [0.72, 1.28, 0.68],
   colors: {
     top: "#2A73FF",
     bottom: "#8F52FF",
@@ -171,8 +171,8 @@ function FitCamera() {
   const { camera } = useThree();
 
   useEffect(() => {
-    camera.position.set(0, -0.02, 8.2);
-    camera.lookAt(-0.08, -0.04, 0);
+    camera.position.set(0, -0.02, 9.6);
+    camera.lookAt(-0.04, -0.06, 0);
     camera.updateProjectionMatrix();
   }, [camera]);
 
@@ -302,9 +302,9 @@ function SceneComposition() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-0 z-0 overflow-visible pointer-events-auto saturate-[1.18]">
+    <div className="absolute inset-0 z-0 origin-center scale-[0.82] overflow-visible pointer-events-auto saturate-[1.28] md:scale-[0.86] lg:scale-[0.9]">
       <Canvas
-        camera={{ position: [0, -0.02, 8.2], fov: 18, near: 0.1, far: 100 }}
+        camera={{ position: [0, -0.02, 9.6], fov: 18, near: 0.1, far: 100 }}
         dpr={[1, 1.8]}
         gl={{ alpha: true, antialias: true }}
         onCreated={({ gl, scene }) => {
