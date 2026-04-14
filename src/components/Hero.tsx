@@ -21,7 +21,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-3xl space-y-6 md:space-y-8"
+          className="max-w-3xl space-y-6 pt-6 md:space-y-8 md:pt-8 lg:pt-10"
         >
           <div className="inline-flex items-center gap-3 rounded-full border border-zinc-200/80 bg-white/70 px-4 py-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/40">
             <div className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
