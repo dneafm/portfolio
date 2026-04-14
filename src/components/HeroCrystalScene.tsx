@@ -69,6 +69,9 @@ const SHARDS: ShardConfig[] = [
   },
 ];
 
+let cachedVoronoiDepthTexture: THREE.DataTexture | null = null;
+let cachedVoronoiEdgeTexture: THREE.DataTexture | null = null;
+
 function triangulateFace(face: number[]) {
   const triangles: Array<[number, number, number]> = [];
 
@@ -77,6 +80,174 @@ function triangulateFace(face: number[]) {
   }
 
   return triangles;
+}
+
+function fract(value: number) {
+  return value - Math.floor(value);
+}
+
+function hash2(x: number, y: number) {
+  return fract(Math.sin(x * 127.1 + y * 311.7) * 43758.5453123);
+}
+
+function smoothstep(edge0: number, edge1: number, value: number) {
+  const t = THREE.MathUtils.clamp((value - edge0) / Math.max(edge1 - edge0, 0.00001), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
+function applyCrystalUvs(geometry: THREE.BufferGeometry) {
+  const position = geometry.attributes.position;
+  const uvs = new Float32Array(position.count * 2);
+  const direction = new THREE.Vector3();
+
+  for (let i = 0; i < position.count; i += 1) {
+    direction.set(position.getX(i), position.getY(i), position.getZ(i)).normalize();
+
+    const u = 0.5 + Math.atan2(direction.z, direction.x) / (Math.PI * 2);
+    const v = 0.5 - Math.asin(THREE.MathUtils.clamp(direction.y, -1, 1)) / Math.PI;
+
+    uvs[i * 2] = u;
+    uvs[i * 2 + 1] = v;
+  }
+
+  geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+  return geometry;
+}
+
+function getVoronoiDepthTexture() {
+  if (cachedVoronoiDepthTexture) return cachedVoronoiDepthTexture;
+
+  const size = 256;
+  const grid = 5;
+  const points: Array<{ x: number; y: number; tone: number }> = [];
+  const data = new Uint8Array(size * size * 4);
+
+  for (let gy = 0; gy < grid; gy += 1) {
+    for (let gx = 0; gx < grid; gx += 1) {
+      const jitterX = 0.18 + hash2(gx + 17.3, gy + 43.1) * 0.64;
+      const jitterY = 0.18 + hash2(gx + 91.7, gy + 13.9) * 0.64;
+      points.push({
+        x: (gx + jitterX) / grid,
+        y: (gy + jitterY) / grid,
+        tone: hash2(gx + 7.9, gy + 121.3),
+      });
+    }
+  }
+
+  for (let y = 0; y < size; y += 1) {
+    for (let x = 0; x < size; x += 1) {
+      const u = x / size;
+      const v = y / size;
+      let nearest = Infinity;
+      let second = Infinity;
+      let cellTone = 0.5;
+
+      for (const point of points) {
+        let dx = Math.abs(u - point.x);
+        let dy = Math.abs(v - point.y);
+
+        dx = Math.min(dx, 1 - dx);
+        dy = Math.min(dy, 1 - dy);
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < nearest) {
+          second = nearest;
+          nearest = distance;
+          cellTone = point.tone;
+        } else if (distance < second) {
+          second = distance;
+        }
+      }
+
+      const edgeDistance = second - nearest;
+      const groove = 1 - smoothstep(0.025, 0.11, edgeDistance);
+      const cellCenterLift = 1 - smoothstep(0.16, 0.42, nearest * grid);
+      const grain = Math.sin((u * 31.2 + v * 17.4) * Math.PI) * 0.02;
+      const height = THREE.MathUtils.clamp(0.7 + cellTone * 0.18 + cellCenterLift * 0.14 - groove * 0.74 + grain, 0, 1);
+      const shade = Math.round(height * 255);
+      const offset = (y * size + x) * 4;
+
+      data[offset] = shade;
+      data[offset + 1] = shade;
+      data[offset + 2] = shade;
+      data[offset + 3] = 255;
+    }
+  }
+
+  const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(0.92, 0.92);
+  texture.needsUpdate = true;
+
+  cachedVoronoiDepthTexture = texture;
+  return texture;
+}
+
+function getVoronoiEdgeTexture() {
+  if (cachedVoronoiEdgeTexture) return cachedVoronoiEdgeTexture;
+
+  const size = 256;
+  const grid = 5;
+  const points: Array<{ x: number; y: number }> = [];
+  const data = new Uint8Array(size * size * 4);
+
+  for (let gy = 0; gy < grid; gy += 1) {
+    for (let gx = 0; gx < grid; gx += 1) {
+      const jitterX = 0.18 + hash2(gx + 17.3, gy + 43.1) * 0.64;
+      const jitterY = 0.18 + hash2(gx + 91.7, gy + 13.9) * 0.64;
+      points.push({
+        x: (gx + jitterX) / grid,
+        y: (gy + jitterY) / grid,
+      });
+    }
+  }
+
+  for (let y = 0; y < size; y += 1) {
+    for (let x = 0; x < size; x += 1) {
+      const u = x / size;
+      const v = y / size;
+      let nearest = Infinity;
+      let second = Infinity;
+
+      for (const point of points) {
+        let dx = Math.abs(u - point.x);
+        let dy = Math.abs(v - point.y);
+
+        dx = Math.min(dx, 1 - dx);
+        dy = Math.min(dy, 1 - dy);
+
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < nearest) {
+          second = nearest;
+          nearest = distance;
+        } else if (distance < second) {
+          second = distance;
+        }
+      }
+
+      const edgeDistance = second - nearest;
+      const groove = 1 - smoothstep(0.05, 0.18, edgeDistance);
+      const alpha = Math.round(THREE.MathUtils.clamp(groove * 255, 0, 255));
+      const offset = (y * size + x) * 4;
+
+      data[offset] = 255;
+      data[offset + 1] = 255;
+      data[offset + 2] = 255;
+      data[offset + 3] = alpha;
+    }
+  }
+
+  const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(0.92, 0.92);
+  texture.needsUpdate = true;
+
+  cachedVoronoiEdgeTexture = texture;
+  return texture;
 }
 
 function createCrystalGeometry() {
@@ -152,6 +323,7 @@ function createCrystalGeometry() {
 
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  applyCrystalUvs(geometry);
   geometry.computeVertexNormals();
   geometry.computeBoundingSphere();
   return geometry;
@@ -231,6 +403,7 @@ function CrystalShard({ config }: { config: ShardConfig }) {
   const ref = useRef<Group>(null);
   const geometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), config.top, config.bottom), [config.bottom, config.top]);
   const edgeGeometry = useMemo(() => new THREE.EdgesGeometry(geometry, 18), [geometry]);
+  const voronoiDepthMap = useMemo(() => getVoronoiDepthTexture(), []);
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -256,6 +429,8 @@ function CrystalShard({ config }: { config: ShardConfig }) {
           clearcoat={1}
           clearcoatRoughness={0.02}
           envMapIntensity={1.6}
+          bumpMap={voronoiDepthMap}
+          bumpScale={0.12}
           transparent
           opacity={config.opacity}
           emissive={new THREE.Color(config.glow)}
@@ -291,6 +466,8 @@ function PrismGem() {
   const geometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), "#56a8ff", "#bf66ff"), []);
   const coreGeometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), "#c7e1ff", "#f3a7ff"), []);
   const edgeGeometry = useMemo(() => new THREE.EdgesGeometry(geometry, 16), [geometry]);
+  const voronoiDepthMap = useMemo(() => getVoronoiDepthTexture(), []);
+  const voronoiEdgeMap = useMemo(() => getVoronoiEdgeTexture(), []);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
@@ -363,6 +540,8 @@ function PrismGem() {
             envMapIntensity={1.3}
             emissive={new THREE.Color("#bf92ff")}
             emissiveIntensity={0.16}
+            bumpMap={voronoiDepthMap}
+            bumpScale={0.08}
             side={THREE.DoubleSide}
             depthWrite={false}
           />
@@ -404,10 +583,24 @@ function PrismGem() {
             clearcoat={1}
             clearcoatRoughness={0.02}
             envMapIntensity={1.9}
+            bumpMap={voronoiDepthMap}
+            bumpScale={0.22}
             transparent
             opacity={1}
             emissive={new THREE.Color("#374dff")}
             emissiveIntensity={0.12}
+          />
+        </mesh>
+
+        <mesh geometry={geometry} scale={1.014}>
+          <meshBasicMaterial
+            color="#d7e7ff"
+            transparent
+            opacity={0.28}
+            alphaMap={voronoiEdgeMap}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+            side={THREE.DoubleSide}
           />
         </mesh>
 
