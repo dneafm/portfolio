@@ -105,7 +105,7 @@ export function Layout() {
       <main
         className={cn(
           "flex-1 max-w-5xl mx-auto w-full px-6",
-          isHome ? "pt-0 pb-12 md:pt-0 md:pb-24" : "pt-28 pb-12 md:py-24"
+          isHome ? "pt-20 pb-12 md:pt-20 md:pb-24" : "pt-28 pb-12 md:py-24"
         )}
       >
         <Outlet />
