@@ -18,7 +18,7 @@ type ShardConfig = {
 
 const SHARDS: ShardConfig[] = [
   {
-    position: [1.42, 1.18, -0.28],
+    position: [1.58, 1.32, -0.28],
     scale: 0.24,
     rotation: [0.2, -0.5, 0.4],
     speed: -0.18,
@@ -28,7 +28,7 @@ const SHARDS: ShardConfig[] = [
     opacity: 0.76,
   },
   {
-    position: [-1.36, 0.62, 0.18],
+    position: [-1.58, 0.76, 0.18],
     scale: 0.22,
     rotation: [-0.3, 0.2, -0.4],
     speed: 0.16,
@@ -38,7 +38,7 @@ const SHARDS: ShardConfig[] = [
     opacity: 0.74,
   },
   {
-    position: [-1.56, -0.72, 0.1],
+    position: [-1.74, -0.94, 0.1],
     scale: 0.2,
     rotation: [0.18, 0.4, 0.26],
     speed: -0.14,
@@ -48,7 +48,7 @@ const SHARDS: ShardConfig[] = [
     opacity: 0.72,
   },
   {
-    position: [1.12, -1.5, 0.2],
+    position: [1.3, -1.72, 0.2],
     scale: 0.18,
     rotation: [-0.16, -0.28, -0.22],
     speed: 0.15,
@@ -58,7 +58,7 @@ const SHARDS: ShardConfig[] = [
     opacity: 0.72,
   },
   {
-    position: [-1.38, -1.36, -0.12],
+    position: [-1.62, -1.56, -0.12],
     scale: 0.1,
     rotation: [0.22, -0.36, 0.4],
     speed: 0.22,
@@ -208,7 +208,7 @@ function OrbitBand({
   opacity: number;
 }) {
   const ref = useRef<Group>(null);
-  const orbitGeometry = useMemo(() => new THREE.TorusGeometry(2.08, 0.01, 10, 260), []);
+  const orbitGeometry = useMemo(() => new THREE.TorusGeometry(1.84, 0.01, 10, 260), []);
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -324,28 +324,29 @@ function PrismGem() {
 
   return (
     <group ref={groupRef} position={[0.02, 0.22, 0]}>
-      <OrbitBand color="#6f96ff" scale={1.02} rotation={[0.94, 0.22, 0.56]} speed={[0.018, 0.07, 0.04]} opacity={0.14} />
-      <OrbitBand color="#9b78ff" scale={0.9} rotation={[0.18, 1.18, 1.28]} speed={[-0.026, -0.08, 0.03]} opacity={0.12} />
+      <OrbitBand color="#6f96ff" scale={1} rotation={[0.94, 0.22, 0.56]} speed={[0.018, 0.07, 0.04]} opacity={0.14} />
+      <OrbitBand color="#9b78ff" scale={0.88} rotation={[0.18, 1.18, 1.28]} speed={[-0.026, -0.08, 0.03]} opacity={0.12} />
 
       {SHARDS.map((config, index) => (
         <CrystalShard key={`${config.position.join("-")}-${index}`} config={config} />
       ))}
 
       <group scale={[1.34, 0.96, 1.08]}>
-        <mesh ref={coreRef} geometry={geometry} scale={0.56}>
+        <mesh ref={coreRef} geometry={geometry} position={[0.04, -0.06, 0.12]} rotation={[0.08, 0.24, 0.06]} scale={[0.72, 0.76, 0.64]}>
           <meshPhysicalMaterial
-            color="#4b1fb9"
-            roughness={0.18}
-            metalness={0}
+            vertexColors
+            flatShading
+            roughness={0.2}
+            metalness={0.02}
             transmission={0.02}
-            thickness={0.8}
-            ior={1.34}
+            thickness={0.82}
+            ior={1.38}
             transparent
-            opacity={0.12}
-            clearcoat={0.8}
-            clearcoatRoughness={0.1}
-            emissive={new THREE.Color("#4621ba")}
-            emissiveIntensity={0.04}
+            opacity={0.34}
+            clearcoat={0.46}
+            clearcoatRoughness={0.18}
+            emissive={new THREE.Color("#8a68ff")}
+            emissiveIntensity={0.08}
           />
         </mesh>
 
@@ -353,14 +354,14 @@ function PrismGem() {
           <meshPhysicalMaterial
             vertexColors
             flatShading
-            roughness={0.11}
+            roughness={0.12}
             metalness={0.04}
-            transmission={0.08}
-            thickness={1.05}
+            transmission={0.035}
+            thickness={1.12}
             ior={1.48}
-            reflectivity={0.88}
-            clearcoat={0.9}
-            clearcoatRoughness={0.05}
+            reflectivity={0.92}
+            clearcoat={0.94}
+            clearcoatRoughness={0.04}
             transparent
             opacity={1}
             emissive={new THREE.Color("#374dff")}
@@ -368,14 +369,24 @@ function PrismGem() {
           />
         </mesh>
 
-        <mesh position={[0.04, -0.04, 0.68]} rotation={[0.06, -0.18, 0.14]} scale={[0.56, 0.82, 1]}>
+        <mesh position={[0.04, -0.02, 0.74]} rotation={[0.04, -0.16, 0.14]} scale={[0.94, 1.14, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#6a30ff" transparent opacity={0.22} depthWrite={false} />
+          <meshBasicMaterial color="#6a30ff" transparent opacity={0.35} depthWrite={false} depthTest={false} />
         </mesh>
 
-        <mesh position={[-0.04, -0.34, 0.62]} rotation={[-0.08, -0.14, -0.12]} scale={[0.32, 0.42, 1]}>
+        <mesh position={[-0.08, -0.18, 0.7]} rotation={[-0.08, -0.14, -0.12]} scale={[0.64, 0.72, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#c86cff" transparent opacity={0.14} depthWrite={false} />
+          <meshBasicMaterial color="#c86cff" transparent opacity={0.24} depthWrite={false} depthTest={false} />
+        </mesh>
+
+        <mesh position={[0.18, 0.08, 0.72]} rotation={[0.1, -0.22, 0.2]} scale={[0.5, 0.76, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color="#4b7dff" transparent opacity={0.18} depthWrite={false} depthTest={false} />
+        </mesh>
+
+        <mesh position={[-0.02, 0.02, 0.68]} rotation={[0.12, 0.08, -0.06]} scale={[0.48, 0.86, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial color="#f0c7ff" transparent opacity={0.12} depthWrite={false} depthTest={false} />
         </mesh>
 
         <mesh ref={shellRef} geometry={geometry} scale={1.045}>
@@ -408,7 +419,7 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-0 z-10 origin-center scale-[0.62] saturate-[1.42] md:scale-[0.68] lg:scale-[0.72]">
+    <div className="absolute -inset-x-[8%] -inset-y-[8%] z-10 origin-center scale-[0.58] saturate-[1.42] md:scale-[0.64] lg:scale-[0.68]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
@@ -420,7 +431,7 @@ export function HeroCrystalScene() {
         className="pointer-events-none absolute right-[16%] top-[20%] h-28 w-28 rounded-full bg-violet-400/12 blur-3xl md:h-40 md:w-40"
       />
 
-      <Canvas camera={{ position: [0.16, 0.18, 9.2], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
+      <Canvas camera={{ position: [0.16, 0.18, 9.85], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
         <ambientLight intensity={0.18} color="#bfcaff" />
         <directionalLight position={[4.8, 6.2, 5.8]} intensity={1.5} color="#dfe6ff" />
