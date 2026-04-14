@@ -281,11 +281,13 @@ function PrismGem() {
   const groupRef = useRef<Group>(null);
   const gemRef = useRef<Mesh>(null);
   const coreRef = useRef<Mesh>(null);
+  const coreGlowRef = useRef<Mesh>(null);
   const shellRef = useRef<Mesh>(null);
   const highlightARef = useRef<Mesh>(null);
   const highlightBRef = useRef<Mesh>(null);
 
   const geometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), "#56a8ff", "#bf66ff"), []);
+  const coreGeometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), "#9fc8ff", "#e48dff"), []);
   const edgeGeometry = useMemo(() => new THREE.EdgesGeometry(geometry, 16), [geometry]);
 
   useFrame((state) => {
@@ -308,6 +310,11 @@ function PrismGem() {
       coreRef.current.rotation.z = Math.sin(t * 0.22) * 0.03;
     }
 
+    if (coreGlowRef.current) {
+      coreGlowRef.current.rotation.y = t * 0.16;
+      coreGlowRef.current.rotation.x = Math.cos(t * 0.34) * 0.02;
+    }
+
     if (shellRef.current) {
       const scale = 1.045 + Math.sin(t * 1.2) * 0.008;
       shellRef.current.scale.set(scale, scale, scale);
@@ -323,7 +330,7 @@ function PrismGem() {
   });
 
   return (
-    <group ref={groupRef} position={[0.02, 0.22, 0]}>
+    <group ref={groupRef} position={[-0.06, 0.14, 0]}>
       <OrbitBand color="#6f96ff" scale={1} rotation={[0.94, 0.22, 0.56]} speed={[0.018, 0.07, 0.04]} opacity={0.14} />
       <OrbitBand color="#9b78ff" scale={0.88} rotation={[0.18, 1.18, 1.28]} speed={[-0.026, -0.08, 0.03]} opacity={0.12} />
 
@@ -332,21 +339,31 @@ function PrismGem() {
       ))}
 
       <group scale={[1.34, 0.96, 1.08]}>
-        <mesh ref={coreRef} geometry={geometry} position={[0.04, -0.06, 0.12]} rotation={[0.08, 0.24, 0.06]} scale={[0.72, 0.76, 0.64]}>
+        <mesh ref={coreRef} geometry={coreGeometry} position={[0.04, -0.04, 0.2]} rotation={[0.08, 0.24, 0.06]} scale={[0.8, 0.84, 0.7]}>
           <meshPhysicalMaterial
             vertexColors
             flatShading
-            roughness={0.2}
-            metalness={0.02}
-            transmission={0.02}
-            thickness={0.82}
-            ior={1.38}
+            roughness={0.24}
+            metalness={0}
+            transmission={0.14}
+            thickness={1.06}
+            ior={1.34}
             transparent
-            opacity={0.34}
-            clearcoat={0.46}
-            clearcoatRoughness={0.18}
-            emissive={new THREE.Color("#8a68ff")}
-            emissiveIntensity={0.08}
+            opacity={0.56}
+            clearcoat={0.3}
+            clearcoatRoughness={0.22}
+            emissive={new THREE.Color("#9c7bff")}
+            emissiveIntensity={0.18}
+          />
+        </mesh>
+
+        <mesh ref={coreGlowRef} geometry={coreGeometry} position={[0.02, -0.02, 0.28]} rotation={[0.14, -0.18, 0.1]} scale={[0.56, 0.62, 0.54]}>
+          <meshBasicMaterial
+            color="#f1b5ff"
+            transparent
+            opacity={0.16}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
           />
         </mesh>
 
@@ -369,24 +386,36 @@ function PrismGem() {
           />
         </mesh>
 
-        <mesh position={[0.04, -0.02, 0.74]} rotation={[0.04, -0.16, 0.14]} scale={[0.94, 1.14, 1]}>
+        <mesh position={[0.04, -0.02, 0.76]} rotation={[0.04, -0.16, 0.14]} scale={[1.02, 1.18, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#6a30ff" transparent opacity={0.35} depthWrite={false} depthTest={false} />
+          <meshBasicMaterial color="#6a30ff" transparent opacity={0.4} depthWrite={false} depthTest={false} />
         </mesh>
 
-        <mesh position={[-0.08, -0.18, 0.7]} rotation={[-0.08, -0.14, -0.12]} scale={[0.64, 0.72, 1]}>
+        <mesh position={[-0.08, -0.18, 0.72]} rotation={[-0.08, -0.14, -0.12]} scale={[0.7, 0.78, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#c86cff" transparent opacity={0.24} depthWrite={false} depthTest={false} />
+          <meshBasicMaterial color="#c86cff" transparent opacity={0.28} depthWrite={false} depthTest={false} />
         </mesh>
 
-        <mesh position={[0.18, 0.08, 0.72]} rotation={[0.1, -0.22, 0.2]} scale={[0.5, 0.76, 1]}>
+        <mesh position={[0.18, 0.08, 0.74]} rotation={[0.1, -0.22, 0.2]} scale={[0.58, 0.82, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#4b7dff" transparent opacity={0.18} depthWrite={false} depthTest={false} />
+          <meshBasicMaterial color="#4b7dff" transparent opacity={0.24} depthWrite={false} depthTest={false} />
         </mesh>
 
-        <mesh position={[-0.02, 0.02, 0.68]} rotation={[0.12, 0.08, -0.06]} scale={[0.48, 0.86, 1]}>
+        <mesh position={[-0.02, 0.02, 0.72]} rotation={[0.12, 0.08, -0.06]} scale={[0.58, 0.94, 1]}>
           <planeGeometry args={[1, 1]} />
-          <meshBasicMaterial color="#f0c7ff" transparent opacity={0.12} depthWrite={false} depthTest={false} />
+          <meshBasicMaterial color="#f0c7ff" transparent opacity={0.18} depthWrite={false} depthTest={false} />
+        </mesh>
+
+        <mesh position={[0.02, -0.02, 0.86]} rotation={[0.02, -0.1, 0.02]} scale={[0.56, 0.64, 1]}>
+          <planeGeometry args={[1, 1]} />
+          <meshBasicMaterial
+            color="#f4d8ff"
+            transparent
+            opacity={0.16}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+            depthTest={false}
+          />
         </mesh>
 
         <mesh ref={shellRef} geometry={geometry} scale={1.045}>
@@ -419,7 +448,7 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute -inset-x-[8%] -inset-y-[8%] z-10 origin-center scale-[0.58] saturate-[1.42] md:scale-[0.64] lg:scale-[0.68]">
+    <div className="absolute -inset-x-[18%] -inset-y-[18%] z-10 origin-center scale-[0.56] saturate-[1.42] md:scale-[0.62] lg:scale-[0.66]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
@@ -431,7 +460,7 @@ export function HeroCrystalScene() {
         className="pointer-events-none absolute right-[16%] top-[20%] h-28 w-28 rounded-full bg-violet-400/12 blur-3xl md:h-40 md:w-40"
       />
 
-      <Canvas camera={{ position: [0.16, 0.18, 9.85], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
+      <Canvas camera={{ position: [0.12, 0.12, 10.35], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
         <ambientLight intensity={0.18} color="#bfcaff" />
         <directionalLight position={[4.8, 6.2, 5.8]} intensity={1.5} color="#dfe6ff" />
@@ -441,7 +470,7 @@ export function HeroCrystalScene() {
         <pointLight position={[1.8, -1.8, 2.6]} intensity={0.72} color="#a45fff" />
         <spotLight position={[0.6, 4.6, 3.8]} angle={0.32} penumbra={1} intensity={1.4} color="#c6d9ff" />
 
-        <Float speed={0.82} rotationIntensity={0.02} floatIntensity={0.14}>
+        <Float speed={0.78} rotationIntensity={0.02} floatIntensity={0.1}>
           <PrismGem />
         </Float>
       </Canvas>
