@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float } from "@react-three/drei";
+import { Environment, Float, Lightformer } from "@react-three/drei";
 import { motion } from "motion/react";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
@@ -25,7 +25,7 @@ const SHARDS: ShardConfig[] = [
     top: "#8a5cff",
     bottom: "#d54cff",
     glow: "#bf63ff",
-    opacity: 0.76,
+    opacity: 0.86,
   },
   {
     position: [-1.58, 0.76, 0.18],
@@ -35,7 +35,7 @@ const SHARDS: ShardConfig[] = [
     top: "#41a5ff",
     bottom: "#2f63ff",
     glow: "#4ea4ff",
-    opacity: 0.74,
+    opacity: 0.84,
   },
   {
     position: [-1.74, -0.94, 0.1],
@@ -45,7 +45,7 @@ const SHARDS: ShardConfig[] = [
     top: "#3b96ff",
     bottom: "#3f69ff",
     glow: "#54a8ff",
-    opacity: 0.72,
+    opacity: 0.82,
   },
   {
     position: [1.3, -1.72, 0.2],
@@ -55,7 +55,7 @@ const SHARDS: ShardConfig[] = [
     top: "#9b63ff",
     bottom: "#db64ff",
     glow: "#c66cff",
-    opacity: 0.72,
+    opacity: 0.82,
   },
   {
     position: [-1.62, -1.56, -0.12],
@@ -65,7 +65,7 @@ const SHARDS: ShardConfig[] = [
     top: "#934dff",
     bottom: "#cb58ff",
     glow: "#b25cff",
-    opacity: 0.7,
+    opacity: 0.8,
   },
 ];
 
@@ -247,18 +247,19 @@ function CrystalShard({ config }: { config: ShardConfig }) {
         <meshPhysicalMaterial
           vertexColors
           flatShading
-          roughness={0.08}
-          metalness={0.05}
-          transmission={0.34}
-          thickness={0.9}
-          ior={1.38}
-          reflectivity={0.9}
+          roughness={0.04}
+          metalness={0.08}
+          transmission={0.12}
+          thickness={1.18}
+          ior={1.44}
+          reflectivity={1}
           clearcoat={1}
-          clearcoatRoughness={0.03}
+          clearcoatRoughness={0.02}
+          envMapIntensity={1.6}
           transparent
           opacity={config.opacity}
           emissive={new THREE.Color(config.glow)}
-          emissiveIntensity={0.12}
+          emissiveIntensity={0.08}
         />
       </mesh>
       <mesh geometry={geometry} scale={1.05}>
@@ -349,17 +350,19 @@ function PrismGem() {
           <meshPhysicalMaterial
             vertexColors
             flatShading
-            roughness={0.18}
+            roughness={0.1}
             metalness={0}
-            transmission={0.08}
-            thickness={1.22}
+            transmission={0.03}
+            thickness={1.34}
             ior={1.36}
             transparent
-            opacity={0.78}
-            clearcoat={0.24}
-            clearcoatRoughness={0.16}
+            opacity={0.92}
+            clearcoat={0.58}
+            clearcoatRoughness={0.08}
+            reflectivity={1}
+            envMapIntensity={1.3}
             emissive={new THREE.Color("#bf92ff")}
-            emissiveIntensity={0.28}
+            emissiveIntensity={0.16}
             side={THREE.DoubleSide}
             depthWrite={false}
           />
@@ -392,18 +395,19 @@ function PrismGem() {
           <meshPhysicalMaterial
             vertexColors
             flatShading
-            roughness={0.12}
-            metalness={0.04}
-            transmission={0.035}
-            thickness={1.12}
+            roughness={0.045}
+            metalness={0.08}
+            transmission={0.012}
+            thickness={1.28}
             ior={1.48}
-            reflectivity={0.92}
-            clearcoat={0.94}
-            clearcoatRoughness={0.04}
+            reflectivity={1}
+            clearcoat={1}
+            clearcoatRoughness={0.02}
+            envMapIntensity={1.9}
             transparent
             opacity={1}
             emissive={new THREE.Color("#374dff")}
-            emissiveIntensity={0.16}
+            emissiveIntensity={0.12}
           />
         </mesh>
 
@@ -483,6 +487,12 @@ export function HeroCrystalScene() {
 
       <Canvas camera={{ position: [0.06, 0.08, 10.95], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
+        <Environment resolution={128}>
+          <Lightformer form="ring" color="#dfe8ff" intensity={1.6} scale={5.2} position={[0, 0, 4.8]} />
+          <Lightformer form="rect" color="#5f93ff" intensity={1.1} scale={[5.8, 1.4]} position={[-3.8, 1.4, 2.8]} rotation={[0, 0.5, 0.18]} />
+          <Lightformer form="rect" color="#d26dff" intensity={0.9} scale={[4.8, 1.2]} position={[3.6, -0.6, 2.4]} rotation={[0, -0.58, -0.12]} />
+          <Lightformer form="ring" color="#8ca9ff" intensity={0.7} scale={3.2} position={[0.3, 2.4, 1.6]} rotation={[-0.3, 0, 0]} />
+        </Environment>
         <ambientLight intensity={0.18} color="#bfcaff" />
         <directionalLight position={[4.8, 6.2, 5.8]} intensity={1.5} color="#dfe6ff" />
         <directionalLight position={[-4.2, 2.4, 5.2]} intensity={1.2} color="#6d9bff" />
