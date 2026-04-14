@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Sun, Moon, Menu, X } from "lucide-react";
@@ -17,6 +17,8 @@ const navItems = [
 export function Layout() {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   return (
     <div className="min-h-screen flex flex-col relative bg-zinc-50 dark:bg-zinc-950 dossier-grid text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
@@ -100,7 +102,12 @@ export function Layout() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 max-w-5xl mx-auto w-full px-6 pt-28 pb-12 md:py-24">
+      <main
+        className={cn(
+          "flex-1 max-w-5xl mx-auto w-full px-6",
+          isHome ? "pt-0 pb-12 md:pt-0 md:pb-24" : "pt-28 pb-12 md:py-24"
+        )}
+      >
         <Outlet />
       </main>
 

@@ -604,7 +604,7 @@ function PrismGem() {
   });
 
   return (
-    <group ref={groupRef} position={[0.14, -0.18, 0]}>
+    <group ref={groupRef} position={[0.14, -0.34, 0]}>
       {ORBIT_CONFIGS.map((config) => (
         <OrbitBand key={`${config.color}-${config.scale}`} {...config} />
       ))}
@@ -761,16 +761,16 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute -inset-x-[42%] -top-[42%] -bottom-[26%] z-10 origin-center scale-[0.46] saturate-[1.42] md:-top-[40%] md:-bottom-[24%] md:scale-[0.52] lg:-top-[38%] lg:-bottom-[22%] lg:scale-[0.56]">
+    <div className="absolute -inset-x-[42%] -top-[20%] -bottom-[48%] z-10 origin-center scale-[0.46] saturate-[1.42] md:-top-[18%] md:-bottom-[46%] md:scale-[0.52] lg:-top-[16%] lg:-bottom-[44%] lg:scale-[0.56]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute inset-x-[24%] top-[22%] h-24 rounded-full bg-blue-400/12 blur-3xl md:h-30"
+        className="pointer-events-none absolute inset-x-[24%] top-[32%] h-24 rounded-full bg-blue-400/12 blur-3xl md:h-30"
       />
       <motion.div
         animate={{ opacity: [0.08, 0.18, 0.08] }}
         transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-        className="pointer-events-none absolute right-[16%] top-[26%] h-28 w-28 rounded-full bg-violet-400/12 blur-3xl md:h-40 md:w-40"
+        className="pointer-events-none absolute right-[16%] top-[36%] h-28 w-28 rounded-full bg-violet-400/12 blur-3xl md:h-40 md:w-40"
       />
 
       <Canvas camera={{ position: [0.04, 0.08, 11.4], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
