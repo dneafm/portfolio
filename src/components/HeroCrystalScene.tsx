@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, Lightformer } from "@react-three/drei";
+import { Environment, Float, Html, Lightformer } from "@react-three/drei";
 import { motion } from "motion/react";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
@@ -15,6 +15,49 @@ type ShardConfig = {
   glow: string;
   opacity: number;
 };
+
+type OrbitConfig = {
+  color: string;
+  scale: number;
+  rotation: [number, number, number];
+  speed: [number, number, number];
+  opacity: number;
+};
+
+type OrbitCardConfig = {
+  label: string;
+  orbit: 0 | 1;
+  angle: number;
+  radius: number;
+  scale: number;
+  accent: string;
+  glow: string;
+};
+
+const ORBIT_CONFIGS: OrbitConfig[] = [
+  {
+    color: "#6f96ff",
+    scale: 1,
+    rotation: [0.94, 0.22, 0.56],
+    speed: [0.018, 0.07, 0.04],
+    opacity: 0.14,
+  },
+  {
+    color: "#9b78ff",
+    scale: 0.88,
+    rotation: [0.18, 1.18, 1.28],
+    speed: [-0.026, -0.08, 0.03],
+    opacity: 0.12,
+  },
+];
+
+const ORBIT_CARDS: OrbitCardConfig[] = [
+  { label: "Crypto", orbit: 0, angle: 0.1, radius: 2.36, scale: 0.92, accent: "#7eb4ff", glow: "#2f63ff" },
+  { label: "Systems", orbit: 1, angle: 1.24, radius: 2.42, scale: 0.98, accent: "#e8d3ff", glow: "#8a5cff" },
+  { label: "Operator", orbit: 0, angle: 2.42, radius: 2.3, scale: 0.96, accent: "#f8d4ff", glow: "#b25cff" },
+  { label: "AI", orbit: 1, angle: 3.56, radius: 2.28, scale: 0.88, accent: "#dce8ff", glow: "#5f93ff" },
+  { label: "Design", orbit: 0, angle: 4.62, radius: 2.4, scale: 0.98, accent: "#cfe0ff", glow: "#7b74ff" },
+];
 
 const SHARDS: ShardConfig[] = [
   {
@@ -399,6 +442,49 @@ function OrbitBand({
   );
 }
 
+function OrbitCard({
+  orbitConfig,
+  label,
+  angle,
+  radius,
+  scale,
+  accent,
+  glow,
+}: OrbitCardConfig & { orbitConfig: OrbitConfig }) {
+  const orbitRef = useRef<Group>(null);
+
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+
+    if (orbitRef.current) {
+      orbitRef.current.rotation.x = orbitConfig.rotation[0] + t * orbitConfig.speed[0];
+      orbitRef.current.rotation.y = orbitConfig.rotation[1] + t * orbitConfig.speed[1];
+      orbitRef.current.rotation.z = orbitConfig.rotation[2] + t * orbitConfig.speed[2];
+    }
+  });
+
+  return (
+    <group ref={orbitRef} scale={orbitConfig.scale} rotation={orbitConfig.rotation}>
+      <group rotation={[0, 0, angle]}>
+        <group position={[radius, 0, 0]} scale={scale}>
+          <Html center zIndexRange={[18, 0]} style={{ pointerEvents: "none" }}>
+            <div
+              className="pointer-events-none relative w-[6rem] rounded-[1rem] border border-white/32 bg-white/78 px-3 py-1.5 text-center shadow-[0_10px_35px_rgba(55,90,200,0.2)] backdrop-blur-md dark:border-white/14 dark:bg-slate-950/74"
+              style={{ boxShadow: `0 0 0 1px rgba(255,255,255,0.04), 0 0 24px ${glow}22` }}
+            >
+              <div className="text-[0.56rem] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-100">{label}</div>
+              <div
+                className="absolute inset-x-3 bottom-1 h-px rounded-full opacity-70"
+                style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+              />
+            </div>
+          </Html>
+        </group>
+      </group>
+    </group>
+  );
+}
+
 function CrystalShard({ config }: { config: ShardConfig }) {
   const ref = useRef<Group>(null);
   const geometry = useMemo(() => tintCrystalGeometry(createCrystalGeometry(), config.top, config.bottom), [config.bottom, config.top]);
@@ -515,8 +601,13 @@ function PrismGem() {
 
   return (
     <group ref={groupRef} position={[-0.06, 0.14, 0]}>
-      <OrbitBand color="#6f96ff" scale={1} rotation={[0.94, 0.22, 0.56]} speed={[0.018, 0.07, 0.04]} opacity={0.14} />
-      <OrbitBand color="#9b78ff" scale={0.88} rotation={[0.18, 1.18, 1.28]} speed={[-0.026, -0.08, 0.03]} opacity={0.12} />
+      {ORBIT_CONFIGS.map((config) => (
+        <OrbitBand key={`${config.color}-${config.scale}`} {...config} />
+      ))}
+
+      {ORBIT_CARDS.map((card) => (
+        <OrbitCard key={card.label} {...card} orbitConfig={ORBIT_CONFIGS[card.orbit]} />
+      ))}
 
       {SHARDS.map((config, index) => (
         <CrystalShard key={`${config.position.join("-")}-${index}`} config={config} />

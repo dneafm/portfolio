@@ -5,8 +5,6 @@ import { motion } from "motion/react";
 
 const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 
-const TAGS = ["Crypto", "Systems", "Operator", "AI", "Design"];
-
 export function Hero() {
   return (
     <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-visible py-16 md:min-h-[100svh] md:py-28">
@@ -62,16 +60,6 @@ export function Hero() {
             </Link>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 pt-1 md:gap-3 md:pt-3">
-            {TAGS.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-zinc-200 bg-white/60 px-3 py-2 text-[9px] font-black uppercase tracking-[0.24em] text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900/30 dark:text-zinc-500 md:px-4 md:text-[10px]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
