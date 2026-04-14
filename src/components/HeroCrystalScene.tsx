@@ -52,11 +52,11 @@ const ORBIT_CONFIGS: OrbitConfig[] = [
 ];
 
 const ORBIT_CARDS: OrbitCardConfig[] = [
-  { label: "Crypto", orbit: 0, angle: 0.1, radius: 2.36, scale: 0.92, accent: "#7eb4ff", glow: "#2f63ff" },
-  { label: "Systems", orbit: 1, angle: 1.24, radius: 2.42, scale: 0.98, accent: "#e8d3ff", glow: "#8a5cff" },
-  { label: "Operator", orbit: 0, angle: 2.42, radius: 2.3, scale: 0.96, accent: "#f8d4ff", glow: "#b25cff" },
-  { label: "AI", orbit: 1, angle: 3.56, radius: 2.28, scale: 0.88, accent: "#dce8ff", glow: "#5f93ff" },
-  { label: "Design", orbit: 0, angle: 4.62, radius: 2.4, scale: 0.98, accent: "#cfe0ff", glow: "#7b74ff" },
+  { label: "Crypto", orbit: 0, angle: 0.18, radius: 2.12, scale: 1.08, accent: "#7eb4ff", glow: "#2f63ff" },
+  { label: "Systems", orbit: 1, angle: 1.18, radius: 2.18, scale: 1.14, accent: "#e8d3ff", glow: "#8a5cff" },
+  { label: "Operator", orbit: 0, angle: 2.36, radius: 2.08, scale: 1.12, accent: "#f8d4ff", glow: "#b25cff" },
+  { label: "AI", orbit: 1, angle: 3.5, radius: 2.02, scale: 1.04, accent: "#dce8ff", glow: "#5f93ff" },
+  { label: "Design", orbit: 0, angle: 4.54, radius: 2.16, scale: 1.14, accent: "#cfe0ff", glow: "#7b74ff" },
 ];
 
 const SHARDS: ShardConfig[] = [
@@ -466,15 +466,19 @@ function OrbitCard({
   return (
     <group ref={orbitRef} scale={orbitConfig.scale} rotation={orbitConfig.rotation}>
       <group rotation={[0, 0, angle]}>
-        <group position={[radius, 0, 0]} scale={scale}>
+        <group position={[radius, 0, 0]}>
           <Html center zIndexRange={[18, 0]} style={{ pointerEvents: "none" }}>
             <div
-              className="pointer-events-none relative w-[6rem] rounded-[1rem] border border-white/32 bg-white/78 px-3 py-1.5 text-center shadow-[0_10px_35px_rgba(55,90,200,0.2)] backdrop-blur-md dark:border-white/14 dark:bg-slate-950/74"
-              style={{ boxShadow: `0 0 0 1px rgba(255,255,255,0.04), 0 0 24px ${glow}22` }}
+              className="pointer-events-none relative w-[6.6rem] rounded-[1.05rem] border border-white/32 bg-white/80 px-3.5 py-1.5 text-center shadow-[0_10px_35px_rgba(55,90,200,0.2)] backdrop-blur-md dark:border-white/14 dark:bg-slate-950/76"
+              style={{
+                boxShadow: `0 0 0 1px rgba(255,255,255,0.04), 0 0 24px ${glow}22`,
+                transform: `scale(${scale})`,
+                transformOrigin: "center center",
+              }}
             >
-              <div className="text-[0.56rem] font-black uppercase tracking-[0.2em] text-slate-700 dark:text-slate-100">{label}</div>
+              <div className="text-[0.62rem] font-black uppercase tracking-[0.18em] text-slate-700 dark:text-slate-100">{label}</div>
               <div
-                className="absolute inset-x-3 bottom-1 h-px rounded-full opacity-70"
+                className="absolute inset-x-3.5 bottom-1 h-px rounded-full opacity-70"
                 style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
               />
             </div>
@@ -600,7 +604,7 @@ function PrismGem() {
   });
 
   return (
-    <group ref={groupRef} position={[-0.06, 0.14, 0]}>
+    <group ref={groupRef} position={[0.14, 0.12, 0]}>
       {ORBIT_CONFIGS.map((config) => (
         <OrbitBand key={`${config.color}-${config.scale}`} {...config} />
       ))}
@@ -757,7 +761,7 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute -inset-x-[30%] -inset-y-[28%] z-10 origin-center scale-[0.5] saturate-[1.42] md:scale-[0.56] lg:scale-[0.6]">
+    <div className="absolute -inset-x-[42%] -inset-y-[34%] z-10 origin-center scale-[0.46] saturate-[1.42] md:scale-[0.52] lg:scale-[0.56]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
@@ -769,7 +773,7 @@ export function HeroCrystalScene() {
         className="pointer-events-none absolute right-[16%] top-[20%] h-28 w-28 rounded-full bg-violet-400/12 blur-3xl md:h-40 md:w-40"
       />
 
-      <Canvas camera={{ position: [0.06, 0.08, 10.95], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
+      <Canvas camera={{ position: [0.04, 0.08, 11.4], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
         <Environment resolution={128}>
           <Lightformer form="ring" color="#dfe8ff" intensity={1.6} scale={5.2} position={[0, 0, 4.8]} />
