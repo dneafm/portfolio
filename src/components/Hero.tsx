@@ -7,7 +7,7 @@ const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 
 export function Hero() {
   return (
-    <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-visible pt-1 pb-10 md:min-h-[100svh] md:pt-2 md:pb-14">
+    <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-visible pt-1 pb-6 md:min-h-[100svh] md:pt-2 md:pb-14">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.14),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.15),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,244,245,0.92))] dark:bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.2),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.16),transparent_32%),linear-gradient(180deg,rgba(9,9,11,0.95),rgba(3,7,18,0.98))]" />
         <div className="absolute inset-0 w-screen opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
@@ -16,14 +16,14 @@ export function Hero() {
       <div className="absolute left-1/2 top-[1%] -z-[1] h-[74vh] w-[74vh] min-h-[420px] min-w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,102,255,0.14),transparent_58%)] blur-3xl" />
       <div className="absolute left-1/2 top-[0%] -z-[1] h-[72vh] w-[72vh] min-h-[420px] min-w-[420px] -translate-x-1/2 opacity-30 blur-[52px] [clip-path:polygon(50%_0%,88%_18%,95%_46%,71%_80%,50%_100%,27%_82%,7%_58%,12%_18%)] bg-[linear-gradient(180deg,rgba(33,97,235,0.9),rgba(153,102,204,0.8))]" />
 
-      <div className="relative z-10 mx-auto grid min-h-[100svh] w-full max-w-[1440px] items-start gap-8 px-6 pt-4 md:gap-14 md:pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:px-10 lg:pt-8">
+      <div className="relative z-10 mx-auto grid min-h-0 w-full max-w-[1440px] items-start gap-4 px-5 pt-3 md:min-h-[100svh] md:gap-14 md:px-6 md:pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:px-10 lg:pt-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-3xl space-y-6 pt-6 md:space-y-8 md:pt-8 lg:pt-10"
+          className="max-w-3xl space-y-4 pt-2 md:space-y-8 md:pt-8 lg:pt-10"
         >
-          <div className="inline-flex items-center gap-3 rounded-full border border-zinc-200/80 bg-white/70 px-4 py-2 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/40">
+          <div className="inline-flex items-center gap-3 rounded-full border border-zinc-200/80 bg-white/70 px-3.5 py-1.5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/40 md:px-4 md:py-2">
             <div className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
             <span className="text-[10px] font-black uppercase tracking-[0.32em] text-zinc-500 dark:text-zinc-400">
               Hoang Pham_Portfolio
@@ -31,7 +31,7 @@ export function Hero() {
           </div>
 
           <div className="space-y-4 md:space-y-5">
-            <h1 className="text-[3.2rem] font-black leading-[0.88] tracking-tighter text-zinc-950 dark:text-zinc-50 sm:text-6xl md:text-7xl xl:text-[6.2rem]">
+            <h1 className="text-[2.72rem] font-black leading-[0.84] tracking-tighter text-zinc-950 dark:text-zinc-50 sm:text-6xl md:text-7xl xl:text-[6.2rem]">
               Design,
               <br />
               <span className="text-blue-600 dark:text-blue-400">systems,</span>
@@ -39,22 +39,22 @@ export function Hero() {
               and a little mythology.
             </h1>
 
-            <p className="max-w-xl text-base font-medium leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-xl">
+            <p className="max-w-[18.5rem] text-[0.92rem] font-medium leading-[1.6] text-zinc-600 dark:text-zinc-400 md:max-w-xl md:text-xl md:leading-relaxed">
               Crypto-born visual thinking, now turning into workflows, operator tools, and sharper systems.
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center md:gap-4 md:pt-2">
+          <div className="flex flex-col gap-2.5 pt-1 sm:flex-row sm:items-center md:gap-4 md:pt-2">
             <Link
               to="/casefiles"
-              className="group inline-flex items-center justify-center gap-3 bg-zinc-950 px-7 py-4 text-[11px] font-black uppercase tracking-[0.28em] text-white transition-all hover:bg-blue-600 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-blue-500 md:px-8 md:text-xs"
+              className="group inline-flex w-full items-center justify-center gap-3 bg-zinc-950 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-white transition-all hover:bg-blue-600 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-blue-500 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
             >
               View Casefiles
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to="/operator-lab"
-              className="inline-flex items-center justify-center gap-3 border border-zinc-300 px-7 py-4 text-[11px] font-black uppercase tracking-[0.28em] text-zinc-700 transition-all hover:border-blue-600 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 md:px-8 md:text-xs"
+              className="inline-flex w-full items-center justify-center gap-3 border border-zinc-300 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-zinc-700 transition-all hover:border-blue-600 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
             >
               Open Operator Lab
             </Link>
@@ -66,11 +66,11 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto mt-8 flex h-[27rem] w-full min-w-0 max-w-[36rem] items-center justify-center overflow-visible px-0 md:mt-12 md:h-[38rem] md:max-w-[40rem] lg:mt-24 lg:h-[46rem] lg:max-w-[44rem]"
+          className="relative mx-auto -mt-16 flex h-[20rem] w-full min-w-0 max-w-[22rem] items-center justify-center overflow-visible px-0 md:mt-12 md:h-[38rem] md:max-w-[40rem] lg:mt-24 lg:h-[46rem] lg:max-w-[44rem]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:118px_118px] [mask-image:radial-gradient(circle_at_center,black,transparent_80%)] mix-blend-soft-light opacity-70" />
-          <div className="absolute left-1/2 top-[28%] h-[20%] w-[30%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6" />
-          <div className="absolute right-[12%] top-[28%] h-[44%] w-[34%] rounded-full bg-violet-500/16 blur-[110px] dark:bg-violet-500/20" />
+          <div className="absolute left-1/2 top-[22%] h-[20%] w-[36%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6 md:top-[28%] md:w-[30%]" />
+          <div className="absolute right-[8%] top-[20%] h-[48%] w-[38%] rounded-full bg-violet-500/16 blur-[96px] dark:bg-violet-500/20 md:right-[12%] md:top-[28%] md:h-[44%] md:w-[34%] md:blur-[110px]" />
 
           <Suspense
             fallback={
@@ -85,7 +85,7 @@ export function Hero() {
           <motion.div
             animate={{ opacity: [0.18, 0.44, 0.18] }}
             transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[8%] top-[58%] h-px w-24 bg-gradient-to-r from-transparent via-blue-300/70 to-transparent md:w-36"
+            className="absolute left-[14%] top-[66%] hidden h-px w-20 bg-gradient-to-r from-transparent via-blue-300/70 to-transparent sm:block md:left-[8%] md:top-[58%] md:w-36"
           />
           <motion.div
             animate={{ opacity: [0.16, 0.36, 0.16] }}
