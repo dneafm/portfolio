@@ -77,8 +77,8 @@ export function NoteDetail() {
       <footer className="pt-12 border-t border-zinc-100 dark:border-zinc-800">
         <div className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-2">
-            <h3 className="text-xl font-bold tracking-tight">Interested in these systems?</h3>
-            <p className="text-zinc-400 dark:text-zinc-500 font-medium">Let's discuss how we can build clearer workflows for your protocol.</p>
+            <h3 className="text-xl font-bold tracking-tight">If this resonates</h3>
+            <p className="text-zinc-400 dark:text-zinc-500 font-medium">I’m open to conversations about clearer workflows, better tooling, and calmer execution.</p>
           </div>
           <Link 
             to="/contact"

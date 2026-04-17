@@ -8,7 +8,7 @@ const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 export function Hero() {
   return (
     <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-visible pt-0 pb-6 md:min-h-[100svh] md:pt-0 md:pb-14">
-      <div className="absolute inset-x-0 -top-6 bottom-0 pointer-events-none md:-top-8">
+      <div className="absolute inset-x-0 -top-12 bottom-0 pointer-events-none md:-top-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.14),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.15),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,244,245,0.92))] dark:bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.2),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.16),transparent_32%),linear-gradient(180deg,rgba(9,9,11,0.95),rgba(3,7,18,0.98))]" />
         <div className="absolute inset-0 w-screen opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
       </div>
@@ -32,15 +32,15 @@ export function Hero() {
 
           <div className="space-y-4 md:space-y-5">
             <h1 className="text-[2.72rem] font-black leading-[0.84] tracking-tighter text-zinc-950 dark:text-zinc-50 sm:text-6xl md:text-7xl xl:text-[6.2rem]">
-              Design,
+              Design systems,
               <br />
-              <span className="text-blue-600 dark:text-blue-400">systems,</span>
+              <span className="text-blue-600 dark:text-blue-400">creative ops,</span>
               <br />
-              and a little mythology.
+              and internal tools.
             </h1>
 
             <p className="max-w-[18.5rem] text-[0.92rem] font-medium leading-[1.6] text-zinc-600 dark:text-zinc-400 md:max-w-xl md:text-xl md:leading-relaxed">
-              Crypto-born visual thinking, now turning into workflows, operator tools, and sharper systems.
+              Built in crypto design, now shifting toward workflows, internal tools, and clearer ways for teams to move faster with less noise.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ export function Hero() {
               to="/operator-lab"
               className="inline-flex w-full items-center justify-center gap-3 border border-zinc-300 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-zinc-700 transition-all hover:border-blue-600 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
             >
-              Open Operator Lab
+View Operator Lab
             </Link>
           </div>
 

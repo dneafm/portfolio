@@ -23,7 +23,7 @@ export function CV() {
               <div>
                 <h1 className="text-6xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 mb-3">Hoang Pham</h1>
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 max-w-xl leading-tight tracking-tight">
-                  Crypto-native designer focused on DeFi workflows, systems, and operator-facing tools
+                  Crypto-native operator-designer focused on workflows, creative ops, and internal tools for high-context teams
                 </p>
               </div>
               
@@ -45,7 +45,7 @@ export function CV() {
 
             <div className="flex flex-col items-end gap-4">
               <button className="group inline-flex items-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-3 text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-xl shadow-zinc-900/10 dark:shadow-white/5 hover:shadow-blue-600/20">
-                <Download className="w-4 h-4" /> Export Dossier
+                <Download className="w-4 h-4" /> Download CV
               </button>
               <div className="flex gap-2">
                 <a href="#" className="p-3 bg-zinc-50 dark:bg-zinc-950 text-zinc-400 dark:text-zinc-600 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all rounded-xl border border-zinc-100 dark:border-zinc-800">
@@ -71,7 +71,7 @@ export function CV() {
                   <div className="h-px flex-1 bg-zinc-100 dark:bg-zinc-800" />
                 </div>
                 <p className="text-[19px] leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium italic">
-                  "9 years of multidisciplinary design experience across <span className="text-zinc-900 dark:text-zinc-100 font-bold not-italic">visual communication</span>, <span className="text-zinc-900 dark:text-zinc-100 font-bold not-italic">crypto-native environments</span>, and cross-functional creative execution. Strongest at turning dense information into clearer outputs, repeatable workflows, and <span className="text-zinc-900 dark:text-zinc-100 font-bold not-italic">practical systems</span> for high-context teams."
+                  "9 years across visual systems, crypto-native environments, and fast-moving execution. Strongest at turning dense context into clearer outputs, repeatable workflows, and practical internal systems that help teams move with less friction."
                 </p>
               </section>
 
@@ -93,7 +93,7 @@ export function CV() {
                   >
                     <div className="flex flex-col mb-4">
                       <div className="flex justify-between items-start mb-1">
-                        <h3 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight">Independent Designer / Builder</h3>
+                        <h3 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-tight">Independent Operator / Designer / Builder</h3>
                         <span className="text-[11px] font-black text-zinc-400 dark:text-zinc-600 uppercase tracking-widest pt-2">2025 — PRES</span>
                       </div>
                       <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-tight">Self-directed / High-Context Freelance</p>
@@ -101,11 +101,11 @@ export function CV() {
                     <ul className="space-y-4 text-[16px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       <li className="flex gap-4">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                        <span>Strategic design partner for <span className="text-zinc-900 dark:text-zinc-100 font-bold">Drift Protocol</span>, focusing on interface clarity and operator-facing workflow optimization.</span>
+                        <span>Worked as a strategic design partner for <span className="text-zinc-900 dark:text-zinc-100 font-bold">Drift Protocol</span>, focusing on interface clarity and operator-facing workflow support.</span>
                       </li>
                       <li className="flex gap-4">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                        <span>Developing <span className="text-zinc-900 dark:text-zinc-100 font-bold">AI-assisted design systems</span> and automated research surfaces to reduce friction in dense information environments.</span>
+                        <span>Developing <span className="text-zinc-900 dark:text-zinc-100 font-bold">AI-assisted workflows</span>, internal tooling directions, and structured research surfaces to reduce friction in dense information environments.</span>
                       </li>
                     </ul>
                     <div className="flex flex-wrap gap-2">
@@ -133,7 +133,7 @@ export function CV() {
                     <ul className="space-y-4 text-[16px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       <li className="flex gap-4">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
-                        <span>Engineered <span className="text-zinc-900 dark:text-zinc-100 font-bold">modular visual frameworks</span> that scaled across brand, campaign, and product surfaces with 100% consistency.</span>
+                        <span>Built <span className="text-zinc-900 dark:text-zinc-100 font-bold">modular visual frameworks</span> that scaled across brand, campaign, and product surfaces with consistent execution.</span>
                       </li>
                       <li className="flex gap-4">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400 mt-2 shrink-0" />
@@ -188,9 +188,9 @@ export function CV() {
                 </div>
                 <div className="space-y-6">
                   {[
-                    { title: "Crypto Context", desc: "Deep understanding of DeFi mechanics, liquidity flows, and the visual language of on-chain systems.", variant: "primary" },
-                    { title: "Systems Thinking", desc: "Building modular, repeatable, and scalable design logic that improves execution speed and consistency.", variant: "secondary" },
-                    { title: "Operator Lens", desc: "Designing for power users and operators who require clarity and speed in dense information environments.", variant: "secondary" }
+                    { title: "Crypto Context", desc: "Comfortable inside DeFi and crypto-native environments where context is dense, fast-moving, and operationally messy.", variant: "primary" },
+                    { title: "Systems Thinking", desc: "Building modular, repeatable structures that improve speed, consistency, and team execution.", variant: "secondary" },
+                    { title: "Operator Lens", desc: "Working backward from what teams actually need to see, decide, and ship under pressure.", variant: "secondary" }
                   ].map((strength, i) => (
                     <motion.div 
                       key={strength.title}
@@ -250,10 +250,10 @@ export function CV() {
 
           {/* Page 1 Footer */}
           <footer className="mt-32 pt-8 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
-            <p className="text-[10px] font-black text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">Hoang Pham // Dossier_2026 // Page 01</p>
+            <p className="text-[10px] font-black text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">Hoang Pham // CV // Page 01</p>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
-              <p className="text-[10px] text-zinc-300 dark:text-zinc-700 font-mono">SIGNAL_STRENGTH: HIGH</p>
+              <p className="text-[10px] text-zinc-300 dark:text-zinc-700 font-mono">Updated 2026</p>
             </div>
           </footer>
 
@@ -273,9 +273,9 @@ export function CV() {
             <div className="flex items-center gap-6">
               <h1 className="text-2xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100">Hoang Pham</h1>
               <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-800" />
-              <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">Dossier // Supporting Proof</p>
+              <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">CV // Selected Work Context</p>
             </div>
-            <p className="text-[10px] text-zinc-300 dark:text-zinc-700 font-mono">REF: 0x71C...4D2</p>
+            <p className="text-[10px] text-zinc-300 dark:text-zinc-700 font-mono">Selected background and work highlights</p>
           </header>
 
           {/* Page 2 Content Grid */}
@@ -300,7 +300,7 @@ export function CV() {
                     </div>
                     <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-tight mb-4">Creative Agency Context</p>
                     <p className="text-[15px] text-zinc-500 dark:text-zinc-500 leading-relaxed">
-                      Led visual identity projects for tech-focused clients, establishing brand systems and multi-channel creative strategies. Focused on precision and system-led design execution.
+                      Led visual identity work for tech-focused clients while building the discipline around systems, repeatability, and cross-channel execution.
                     </p>
                   </div>
 
@@ -312,7 +312,7 @@ export function CV() {
                     </div>
                     <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-tight mb-4">In-house Creative Team</p>
                     <p className="text-[15px] text-zinc-500 dark:text-zinc-500 leading-relaxed">
-                      Executed high-volume creative assets while maintaining strict brand guidelines. Developed internal workflows to streamline asset production for marketing teams.
+                      Executed high-volume creative assets under brand constraints and improved internal workflows to make production more reliable for marketing teams.
                     </p>
                   </div>
                 </div>
@@ -326,12 +326,12 @@ export function CV() {
                 </div>
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Protocol Brand Systems</h4>
-                    <p className="text-[13px] text-zinc-500 dark:text-zinc-500 leading-relaxed">Developed modular brand architectures for three DeFi protocols, ensuring visual consistency across all touchpoints.</p>
+                    <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Protocol Systems Work</h4>
+                    <p className="text-[13px] text-zinc-500 dark:text-zinc-500 leading-relaxed">Built modular visual systems for DeFi teams so campaign, brand, and product surfaces could stay coherent under speed.</p>
                   </div>
                   <div className="space-y-3">
-                    <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Workflow Automation</h4>
-                    <p className="text-[13px] text-zinc-500 dark:text-zinc-500 leading-relaxed">Built custom Figma plugins and automation scripts that reduced manual asset generation by 60%.</p>
+                    <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Workflow Leverage</h4>
+                    <p className="text-[13px] text-zinc-500 dark:text-zinc-500 leading-relaxed">Explored automation, templates, and tooling that cut repetitive production work and made execution easier to scale.</p>
                   </div>
                 </div>
               </section>
@@ -349,7 +349,7 @@ export function CV() {
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">Design Stack</h4>
                     <div className="space-y-2">
-                      {['Figma (Advanced Systems)', 'Adobe Creative Suite', 'Motion Design'].map(tool => (
+                      {['Figma (Systems)', 'Adobe Creative Suite', 'Motion / Asset Production'].map(tool => (
                         <div key={tool} className="flex items-center justify-between text-[13px] font-semibold text-zinc-700 dark:text-zinc-300">
                           <span>{tool}</span>
                           <div className="w-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full" />
@@ -360,7 +360,7 @@ export function CV() {
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-[0.2em]">System Stack</h4>
                     <div className="space-y-2">
-                      {['VSC', 'AI Agent'].map(tool => (
+                      {['VS Code', 'Automation Workflows', 'AI-Assisted Tooling'].map(tool => (
                         <div key={tool} className="flex items-center justify-between text-[13px] font-semibold text-zinc-700 dark:text-zinc-300">
                           <span>{tool}</span>
                           <div className="w-1 h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full" />
@@ -384,8 +384,8 @@ export function CV() {
 
           {/* Page 2 Footer */}
           <footer className="mt-32 pt-8 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
-            <p className="text-[10px] font-black text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">Hoang Pham // Dossier_2026 // Page 02</p>
-            <p className="text-[10px] text-zinc-200 dark:text-zinc-800 font-mono">END_OF_DOSSIER</p>
+            <p className="text-[10px] font-black text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">Hoang Pham // CV // Page 02</p>
+            <p className="text-[10px] text-zinc-200 dark:text-zinc-800 font-mono">End of CV</p>
           </footer>
 
         </div>

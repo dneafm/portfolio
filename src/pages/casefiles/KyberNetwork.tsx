@@ -113,7 +113,7 @@ export function KyberNetwork() {
       }
       outcome="Made high-context information easier to process across campaigns, educational content, and ecosystem-facing communication."
       lessons="Turning complexity into something clearer without flattening the nuance."
-      nextSteps="Move even closer to communication systems, reusable frameworks, and operator-facing product surfaces."
+      nextSteps="Move even closer to communication frameworks, reusable structures, and product surfaces built for high-context work."
     />
   );
 }

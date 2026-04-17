@@ -18,31 +18,31 @@ const CONTACT_NODES: ContactNode[] = [
   {
     id: "email",
     title: "Direct Channel",
-    subtitle: "Primary direct channel",
-    value: "hello@example.com",
-    meta: ["preferred route", "async response: 24–48h"],
+    subtitle: "Best for serious work inquiries",
+    value: "dneafm@gmail.com",
+    meta: ["best for scoped inquiries", "async response: 24–48h"],
     icon: Mail,
-    href: "mailto:hello@example.com",
+    href: "mailto:dneafm@gmail.com",
     type: "primary",
   },
   {
     id: "linkedin",
     title: "LinkedIn / Profile",
-    subtitle: "Professional context",
-    value: "linkedin.com/in/username",
-    meta: ["public node", "professional network"],
+    subtitle: "Background and professional context",
+    value: "linkedin.com/in/hoangpham74",
+    meta: ["career context", "professional network"],
     icon: Linkedin,
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/hoangpham74",
     type: "secondary",
   },
   {
     id: "x",
     title: "X / Notes + Signals",
-    subtitle: "Public thoughts, experiments, live ideas",
-    value: "@username",
-    meta: ["notes / signals", "public stream"],
+    subtitle: "Public notes, observations, and directional thinking",
+    value: "@deandea74",
+    meta: ["notes / signals", "public layer only"],
     icon: Twitter,
-    href: "https://x.com",
+    href: "https://x.com/deandea74",
     type: "secondary",
   },
 ];
@@ -178,14 +178,14 @@ export function Contact() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">System Status: Ready</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Available for the right projects</span>
           </motion.div>
           <div className="space-y-4">
             <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100">
-              Contact / <span className="text-blue-600 dark:text-blue-400">Open Channel</span>
+Contact
             </h1>
             <p className="text-xl text-zinc-500 dark:text-zinc-400 font-medium max-w-2xl mx-auto">
-              Available for selected freelance, product, and systems work.
+              Open to thoughtful conversations about workflow design, creative operations, and useful internal tools.
             </p>
           </div>
         </header>
@@ -333,7 +333,7 @@ function ContactCard({
             exit={{ opacity: 0, x: -10 }}
             className="absolute bottom-4 right-12 text-[8px] font-mono text-blue-500/60 uppercase tracking-[0.2em]"
           >
-            Route Active // Pulse Sent
+Open for inquiries
           </motion.div>
         )}
       </AnimatePresence>

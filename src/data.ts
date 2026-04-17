@@ -3,19 +3,19 @@ export const notes = [
     id: "note-01",
     title: "Designing for high-context users",
     date: "2024-03-15",
-    excerpt: "Why standard UX advice often fails when building for power users in complex domains like DeFi.",
+    excerpt: "Why standard UX advice often falls short when building for experienced users in complex domains like DeFi.",
     content: `
-      Standard UX advice often prioritizes simplicity and "reducing cognitive load" above all else. While this is great for consumer apps, it can be a hindrance for high-context users—operators who need to see the full state of a system to make informed decisions.
+      Standard UX advice often prioritizes simplicity and "reducing cognitive load" above all else. That works well for many consumer apps, but it can become limiting when the audience needs more context to make good decisions.
 
-      In DeFi, an operator isn't just "sending money." They are managing liquidity, monitoring slippage, and balancing risk across multiple protocols. Hiding this complexity behind a "simple" interface actually increases risk by obscuring critical information.
+      In DeFi, someone is rarely just "sending money." They may be managing liquidity, monitoring slippage, and balancing risk across multiple protocols. Hiding too much of that complexity behind a "simple" interface can actually increase risk.
 
-      ### The Operator Mental Model
-      An operator doesn't want a "wizard" that guides them through a process. They want a "dashboard" that gives them the tools to execute their own strategy.
+      ### A Different Mental Model
+      In these environments, people often need visibility and control more than hand-holding. The interface should help them understand what is happening and act with confidence.
 
       ### Key Principles:
-      1. **Information Density over White Space**: Use space to show more data, not less.
-      2. **Direct Manipulation**: Allow users to interact with the data directly, rather than through abstract forms.
-      3. **System Transparency**: Show the "why" behind the numbers.
+      1. **Useful density**: Use space to surface what matters.
+      2. **Direct interaction**: Let people work with the information itself, not only through abstract forms.
+      3. **Clear reasoning**: Show the "why" behind the numbers.
     `
   },
   {
@@ -35,16 +35,16 @@ export const notes = [
   },
   {
     id: "note-03",
-    title: "Operator workflows",
+    title: "Designing for active workflows",
     date: "2024-01-12",
-    excerpt: "The difference between designing for a passive consumer and an active operator.",
+    excerpt: "The difference between designing for passive consumption and task-heavy work.",
     content: `
-      A passive consumer wants to be entertained or to complete a simple task. An active operator wants to control a system.
+      Some users want to be entertained or complete one simple task. Others need to stay in control of a messy process and move through it quickly.
 
       ### Design for Control
-      - **Keyboard First**: Power users rely on shortcuts.
-      - **Customizable Layouts**: Let the user decide what information is most important.
-      - **Batch Operations**: Allow for high-velocity execution.
+      - **Keyboard-first support**: Experienced users rely on shortcuts.
+      - **Flexible layouts**: Let people decide what information matters most.
+      - **Batch actions**: Support faster execution when the work repeats.
     `
   },
   {
@@ -64,13 +64,13 @@ export const notes = [
     id: "note-05",
     title: "AI-assisted work",
     date: "2023-09-20",
-    excerpt: "Moving beyond the chat interface to integrate AI into actual workflows.",
+    excerpt: "Moving beyond the chat interface to integrate AI into actual work.",
     content: `
-      Chatbots are just the beginning. The real power of AI in design is in "ambient intelligence"—systems that anticipate user needs and provide contextual assistance without being asked.
+      Chatbots are only the starting point. The more interesting use of AI is inside real work, where it can help people move faster, notice patterns, and reduce repetitive effort.
 
       ### Beyond the Chatbox
-      - **Auto-complete for Workflows**: Predicting the next step in a complex process.
-      - **Synthesis of Raw Data**: Turning logs into insights automatically.
+      - **Workflow assistance**: Predicting the next step in a complex process.
+      - **Synthesis of raw input**: Turning scattered logs and notes into clearer takeaways.
     `
   }
 ];
@@ -95,18 +95,18 @@ export type Experiment = {
 export const experiments: Experiment[] = [
   {
     id: "exp-01",
-    title: "Crypto Signal Triage Surface",
+    title: "Crypto research triage",
     status: "Concept",
-    description: "A concept for reviewing market signals, research fragments, and watchlist movement in one focused environment designed for faster scanning and prioritization.",
-    details: "This experiment explores a high-density triage interface for crypto analysts. It uses a signal-first layout where raw data is automatically categorized, weighted, and surfaced for faster operator review.",
+    description: "A concept for reviewing market signals, research fragments, and watchlist movement in one focused view for faster scanning and prioritization.",
+    details: "This experiment explores a high-density review interface for crypto analysts. It groups and surfaces raw inputs in a way that makes scanning and prioritization faster.",
     visual: "signal-triage"
   },
   {
     id: "exp-02",
-    title: "Bot Control Panel Concept",
+    title: "Bot supervision panel",
     status: "Concept / Early prototype",
-    description: "An operator-facing dashboard idea for supervising automated trading flows while keeping manual intervention clear, fast, and deliberate.",
-    details: "A supervision interface for algorithmic trading. The focus is on intervention latency, how quickly an operator can understand a bot's state, inspect its alerts, and take manual control if needed.",
+    description: "A dashboard concept for supervising automated trading flows while keeping manual intervention clear, fast, and deliberate.",
+    details: "A supervision interface for algorithmic trading. The focus is how quickly someone can understand a bot's state, inspect alerts, and take manual control if needed.",
     visual: "bot-control"
   },
   {
@@ -119,26 +119,26 @@ export const experiments: Experiment[] = [
   },
   {
     id: "exp-04",
-    title: "Internal Ops Workflow Tool",
+    title: "Team workflow tracker",
     status: "Concept",
-    description: "A lightweight internal-tool concept aimed at reducing friction in recurring coordination, structured input, and operational follow-through.",
+    description: "A lightweight concept aimed at reducing friction in recurring coordination, structured input, and operational follow-through.",
     details: "A tool for managing operational debt in small teams. It focuses on recurring tasks, structured updates, and closing the loop on things that usually slip between handoffs.",
     visual: "ops-workflow"
   },
   {
     id: "exp-05",
-    title: "Community Signal & Sentiment Router",
+    title: "Community inbox triage",
     status: "Concept",
-    description: "An AI-assisted triage interface that ingests Discord/Telegram feeds and categorizes them by urgency, relevance, and follow-up intent.",
-    details: "This explores a routing layer for community operations. The goal is to turn noisy incoming chat streams into sorted queues for support, product feedback, reputation risk, and growth opportunities.",
+    description: "An AI-assisted triage interface that sorts Discord and Telegram feeds by urgency, relevance, and follow-up intent.",
+    details: "This explores a routing layer for community operations. The goal is to turn noisy incoming chat streams into clearer queues for support, product feedback, reputation risk, and growth opportunities.",
     visual: "community-router"
   },
   {
     id: "exp-06",
-    title: "On-Chain Retention & Sybil Triage",
+    title: "Retention and sybil review",
     status: "Concept",
-    description: "A visual matrix dashboard that plots users based on their on-chain behavior versus their social and product engagement signals.",
-    details: "This experiment maps retention quality and sybil suspicion into one operator surface. It is meant to help teams separate real user value from incentive-only activity faster.",
+    description: "A visual matrix that plots users based on on-chain behavior versus social and product engagement signals.",
+    details: "This experiment maps retention quality and sybil suspicion into one review surface. It is meant to help teams separate real user value from incentive-only activity faster.",
     visual: "sybil-triage"
   }
 ];

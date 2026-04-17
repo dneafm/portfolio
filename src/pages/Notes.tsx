@@ -9,7 +9,7 @@ export function Notes() {
       <header className="space-y-6 max-w-3xl">
         <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Notes</h1>
         <p className="text-zinc-500 dark:text-zinc-400 text-xl font-medium leading-relaxed">
-          A lightweight archive of thoughts on designing for high-context users, operator workflows, and clarity in noisy systems.
+          A lightweight archive of thoughts on high-context work, team workflows, and finding clarity in noisy environments.
         </p>
       </header>
 

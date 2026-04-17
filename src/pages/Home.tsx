@@ -1,215 +1,243 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Terminal, Network, Workflow } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { Hero } from "../components/Hero";
 
+const journeyChapters = [
+  {
+    eyebrow: "Chapter 01 · Origin",
+    title: "I started from visuals, inside fast messy crypto environments.",
+    body:
+      "That meant shipping for teams that were half-building, half-firefighting. The useful skill was never just taste. It was learning how to create clarity when context was moving too fast for polished process.",
+    aside: "High-context work, compressed timelines, constant ambiguity.",
+  },
+  {
+    eyebrow: "Chapter 02 · Shift",
+    title: "Over time, I became more interested in the machinery behind the screen.",
+    body:
+      "I kept drifting toward workflows, reporting loops, research structure, internal dashboards, and the operator layer that actually changes how a team moves. That shift matters more to me now than pure surface work.",
+    aside: "Less one-off assets, more repeatable systems.",
+  },
+  {
+    eyebrow: "Chapter 03 · Direction",
+    title: "Now I care more about useful systems than public artifacts.",
+    body:
+      "I’m interested in workflow design, decision support, internal tooling, and structured systems that reduce noise and improve execution. Some of that work stays private by design, but it shapes how I think, design, and build.",
+    aside: "Utility first, overexposure never required.",
+  },
+];
+
+const proofCards = [
+  {
+    label: "Casefile",
+    title: "Kyber Network",
+    description: "Designing for DeFi pressure taught me how to communicate clearly in unstable environments.",
+    to: "/casefiles/kyber-network",
+  },
+  {
+    label: "Casefile",
+    title: "Factor",
+    description: "A move from isolated execution toward reusable systems, structure, and operating rhythm.",
+    to: "/casefiles/factor",
+  },
+  {
+    label: "Operator Lab",
+    title: "Operator tools in progress",
+    description: "Private-facing workflow experiments, research surfaces, and internal-product thinking aimed at real operator pain.",
+    to: "/operator-lab",
+  },
+];
+
+const notesPreview = [
+  "Why I’m moving beyond pure design",
+  "Clarity for high-context crypto teams",
+  "AI as leverage, not decoration",
+  "What stays private, and why",
+];
+
 export function Home() {
   return (
-    <div className="space-y-32">
-      {/* Hero Section */}
+    <div className="space-y-24 md:space-y-32">
       <Hero />
 
-      {/* Proof Blocks */}
-      <motion.section 
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={{
-          hidden: { opacity: 0 },
-          show: {
-            opacity: 1,
-            transition: { staggerChildren: 0.1 }
-          }
-        }}
-        className="grid md:grid-cols-3 gap-8"
-      >
-        {[
-          { icon: Network, title: "Crypto-Native", desc: "I spent years designing inside DeFi, where things move fast, context is messy, and clarity matters more than decoration." },
-          { icon: Workflow, title: "Systems Over Screens", desc: "I care less about one-off visuals and more about structures, workflows, and reusable logic that make a team move better." },
-          { icon: Terminal, title: "Operator Shift", desc: "I’m moving toward tools, dashboards, research flows, and AI-assisted systems that help people operate with less friction." }
-        ].map((item, i) => (
-          <motion.div 
-            key={i}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.23, 1, 0.32, 1] } }
-            }}
-            className="p-8 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm space-y-6 group hover:border-blue-500/30 dark:hover:border-blue-400/20 transition-all duration-500 relative overflow-hidden"
-          >
-            {/* Subtle background pulse on hover */}
-            <div className="absolute inset-0 bg-blue-500/0 group-hover:bg-blue-500/[0.02] transition-colors duration-500" />
-            
-            <div className="relative z-10 w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center rounded-lg group-hover:bg-blue-600 transition-all duration-500 group-hover:scale-110">
-              <item.icon className="w-5 h-5 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-500" />
-            </div>
-            <div className="relative z-10 space-y-3">
-              <h3 className="font-bold text-[11px] uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 flex items-center gap-2">
-                {item.title}
-                <motion.span 
-                  animate={{ opacity: [0, 1, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                  className="w-1 h-1 rounded-full bg-blue-500"
-                />
-              </h3>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
-                {item.desc}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </motion.section>
-
-      {/* Selected Casefiles */}
-      <motion.section 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
-        className="space-y-12"
-      >
-        <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-6">
-          <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">Selected Casefiles</h2>
-          <Link to="/casefiles" className="group text-[11px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors flex items-center gap-2">
-            View All <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+      <section className="relative overflow-hidden rounded-[2rem] border border-zinc-200/80 bg-white/80 px-6 py-8 shadow-[0_24px_90px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/55 md:px-10 md:py-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_32%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.12),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.1),transparent_32%)]" />
+        <div className="relative grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:gap-10">
+          <div className="space-y-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.32em] text-blue-600 dark:text-blue-400">Overview</p>
+            <h2 className="max-w-md text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
+              This portfolio shows a shift from visual design toward workflow, tooling, and execution support.
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              ["Then", "Design for crypto teams"],
+              ["Shift", "Workflows, research structure, and repeatable process"],
+              ["Now", "Internal tools, decision support, and calmer execution"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-2xl border border-zinc-200/80 bg-white/85 p-4 dark:border-zinc-800 dark:bg-zinc-950/70">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-zinc-400 dark:text-zinc-500">{k}</p>
+                <p className="mt-3 text-sm font-semibold leading-relaxed text-zinc-700 dark:text-zinc-300">{v}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { id: "kyber-network", title: "Kyber Network", label: "KYBER_NETWORK_ASSETS", desc: "Design work shaped by the speed, ambiguity, and pressure of DeFi." , media: { type: "image", src: "/Untitled.png" } },
-            { id: "factor", title: "Factor", label: "FACTOR_SYSTEMS", desc: "A shift from isolated deliverables toward reusable systems and working structure.", media: { type: "video", src: "/Anim.mp4" } },
-            { id: "operator-lab", title: "Operator Lab", label: "OPERATOR_LAB_SYSTEMS", desc: "Where I’m pushing toward operator tools, research surfaces, and AI-assisted workflows.", media: { type: "image", src: "/Untitled (1).png" }, link: "/operator-lab" }
-          ].map((casefile, i) => (
-            <Link key={casefile.id} to={casefile.link || `/casefiles/${casefile.id}`} className="group block space-y-6">
-              <div className="aspect-[4/3] bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 relative overflow-hidden flex items-center justify-center rounded-xl transition-all duration-500 group-hover:border-blue-500/30 group-hover:shadow-2xl group-hover:shadow-blue-500/5">
-                {casefile.media ? (
-                  casefile.media.type === "video" ? (
-                    <video 
-                      poster={(casefile.media as any).poster}
-                      autoPlay 
-                      loop 
-                      muted 
-                      playsInline 
-                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                    >
-                      <source src={casefile.media.src} type="video/mp4" />
-                    </video>
-                  ) : (
-                    <img 
-                      src={casefile.media.src} 
-                      alt={casefile.title} 
-                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                    />
-                  )
-                ) : (
-                  <div className="font-mono text-[10px] font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-widest relative z-10 group-hover:text-blue-500/50 transition-colors duration-500">
-                    {casefile.label}
-                  </div>
-                )}
-                
-                {/* Scanning line effect */}
-                <motion.div 
-                  initial={{ top: "-100%" }}
-                  whileHover={{ top: "100%" }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                  className="absolute left-0 right-0 h-[2px] bg-blue-500/20 z-20 pointer-events-none"
-                />
-                
-                <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/[0.02] transition-colors duration-500" />
-                
-                {/* Corner Accents */}
-                <div className="absolute top-2 left-2 w-1 h-1 bg-zinc-200 dark:bg-zinc-800 group-hover:bg-blue-500/40 transition-colors z-20" />
-                <div className="absolute top-2 right-2 w-1 h-1 bg-zinc-200 dark:bg-zinc-800 group-hover:bg-blue-500/40 transition-colors z-20" />
-                <div className="absolute bottom-2 left-2 w-1 h-1 bg-zinc-200 dark:bg-zinc-800 group-hover:bg-blue-500/40 transition-colors z-20" />
-                <div className="absolute bottom-2 right-2 w-1 h-1 bg-zinc-200 dark:bg-zinc-800 group-hover:bg-blue-500/40 transition-colors z-20" />
+      </section>
+
+      <section className="space-y-10 md:space-y-14">
+        <div className="max-w-2xl space-y-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Journey</p>
+          <h2 className="text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-5xl">
+            Read it as a change in how I work, not just a gallery of finished outputs.
+          </h2>
+        </div>
+
+        <div className="space-y-6 md:space-y-8">
+          {journeyChapters.map((chapter, index) => (
+            <motion.article
+              key={chapter.eyebrow}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="grid gap-6 rounded-[2rem] border border-zinc-200/70 bg-zinc-50/90 p-6 dark:border-zinc-800 dark:bg-zinc-900/45 md:grid-cols-[140px_1fr_220px] md:gap-8 md:p-8"
+            >
+              <div className="flex items-start">
+                <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-sm font-black text-blue-600 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-400">
+                  0{index + 1}
+                </div>
               </div>
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 flex items-center gap-2">
-                  {casefile.title}
-                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+              <div className="space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-zinc-400 dark:text-zinc-500">{chapter.eyebrow}</p>
+                <h3 className="text-2xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-[2rem]">
+                  {chapter.title}
                 </h3>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium leading-relaxed">{casefile.desc}</p>
+                <p className="max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-lg">
+                  {chapter.body}
+                </p>
               </div>
-            </Link>
+              <div className="flex items-end md:justify-end">
+                <div className="rounded-2xl border border-zinc-200/80 bg-white/90 p-4 dark:border-zinc-800 dark:bg-zinc-950/70">
+                  <p className="text-[10px] font-black uppercase tracking-[0.26em] text-zinc-400 dark:text-zinc-500">Read</p>
+                  <p className="mt-3 text-sm font-semibold leading-relaxed text-zinc-700 dark:text-zinc-300">{chapter.aside}</p>
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      {/* About & Notes Preview */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-        className="grid md:grid-cols-2 gap-24"
-      >
-        <div className="space-y-8">
-          <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600 border-b border-zinc-100 dark:border-zinc-800 pb-6">About</h2>
-          <div className="text-zinc-500 dark:text-zinc-400 text-[15px] leading-relaxed space-y-6 font-medium">
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              I come from a graphic design background, but the last few years, especially in crypto, pushed me toward a different kind of work. I’m more interested now in how systems behave, how teams operate, and how better structure can reduce noise.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              This portfolio is less about polished surfaces for their own sake, and more about the path from designer to systems-minded operator, someone interested in workflows, research tools, internal products, and AI leverage.
-            </motion.p>
+      <section className="space-y-10 md:space-y-14">
+        <div className="flex items-end justify-between gap-6 border-b border-zinc-200 pb-5 dark:border-zinc-800">
+          <div className="space-y-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Proof</p>
+            <h2 className="text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">Then show where that story becomes work.</h2>
           </div>
+          <Link to="/casefiles" className="hidden items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 md:inline-flex">
+            View all
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="space-y-8">
-          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-6">
-            <div className="space-y-2">
-              <h2 className="text-[11px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-600">Notes / Thinking</h2>
-              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-tight">Short writing on crypto, systems, workflows, and the shift from design into operator work.</p>
-            </div>
-            <Link to="/notes" className="group text-[11px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors flex items-center gap-2">
-              Archive <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        <div className="grid gap-6 md:grid-cols-3">
+          {proofCards.map((card, index) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Link
+                to={card.to}
+                className="group flex h-full flex-col justify-between rounded-[1.75rem] border border-zinc-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_24px_90px_rgba(59,130,246,0.08)] dark:border-zinc-800 dark:bg-zinc-900"
+              >
+                <div className="space-y-5">
+                  <p className="text-[10px] font-black uppercase tracking-[0.28em] text-blue-600 dark:text-blue-400">{card.label}</p>
+                  <h3 className="text-2xl font-black tracking-tight text-zinc-950 dark:text-zinc-50">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{card.description}</p>
+                </div>
+                <div className="mt-8 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-500 transition-colors group-hover:text-blue-600 dark:text-zinc-400 dark:group-hover:text-blue-400">
+                  Open
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-10">
+        <motion.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-[2rem] border border-zinc-200/80 bg-white p-7 dark:border-zinc-800 dark:bg-zinc-900/70 md:p-8"
+        >
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Thinking</p>
+          <h2 className="mt-4 max-w-xl text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
+            The writing should make the shift clear, without pretending every useful thing can be shown publicly.
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Notes are where that transition becomes explicit: crypto lessons, workflow instincts, AI leverage, and the move from making artifacts to building tools that help teams think and act more clearly.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+          className="rounded-[2rem] border border-zinc-200/80 bg-zinc-50/80 p-7 dark:border-zinc-800 dark:bg-zinc-900/45 md:p-8"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Notes preview</p>
+            <Link to="/notes" className="text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
+              Archive
             </Link>
           </div>
-          <ul className="space-y-6">
-            {[
-              "Why I’m moving beyond pure design",
-              "Clarity for high-context crypto teams",
-              "AI as leverage, not decoration",
-              "Building better operator workflows"
-            ].map((note, i) => (
-              <motion.li 
-                key={i} 
-                className="group"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <Link to="/notes" className="flex items-center gap-4 text-[15px] font-bold text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 group-hover:translate-x-2">
-                  <span className="font-mono text-[10px] text-zinc-300 dark:text-zinc-700 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">0{i + 1}</span>
-                  {note}
+          <ul className="mt-6 space-y-4">
+            {notesPreview.map((note, index) => (
+              <li key={note}>
+                <Link to="/notes" className="group flex items-start gap-4 text-zinc-700 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400">
+                  <span className="pt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.26em] text-zinc-300 dark:text-zinc-600">0{index + 1}</span>
+                  <span className="text-sm font-semibold leading-relaxed">{note}</span>
                 </Link>
-              </motion.li>
+              </li>
             ))}
           </ul>
-        </div>
-      </motion.section>
+        </motion.div>
+      </section>
 
-      {/* Final CTA */}
-      <section className="py-24 border-t border-zinc-100 dark:border-zinc-800">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-8 leading-tight">
-            If you’re building in crypto and need someone who can think through design, systems, and operator reality, <span className="text-blue-600 dark:text-blue-400 underline underline-offset-8 decoration-blue-100 dark:decoration-blue-900/30">let’s talk.</span>
-          </h2>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-3 text-sm font-bold uppercase tracking-widest hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-lg shadow-zinc-900/10 dark:shadow-white/5 hover:shadow-blue-600/20"
-          >
-            Contact
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+      <section className="rounded-[2rem] border border-zinc-200 bg-zinc-950 px-6 py-10 text-white dark:border-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 md:px-10 md:py-14">
+        <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-end">
+          <div className="space-y-4">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-300 dark:text-blue-600">Next chapter</p>
+            <h2 className="max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
+              I’m interested in work where design, workflow thinking, and execution support meet, even when the most useful tools stay private.
+            </h2>
+          </div>
+          <div className="space-y-5 md:pl-8">
+            <p className="text-base leading-relaxed text-zinc-300 dark:text-zinc-700">
+              If you’re dealing with messy workflows, repeatable creative production, or high-context execution problems, I’m open to the right conversations.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/operator-lab"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-950 transition-colors hover:bg-blue-200 dark:bg-zinc-950 dark:text-white dark:hover:bg-blue-600"
+              >
+                View Operator Lab
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-white transition-colors hover:border-blue-300 hover:text-blue-200 dark:border-zinc-800 dark:text-zinc-950 dark:hover:border-blue-500 dark:hover:text-blue-600"
+              >
+                Contact
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

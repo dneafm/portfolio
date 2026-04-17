@@ -175,9 +175,9 @@ export function Experiments() {
   return (
     <div className="space-y-12 md:space-y-16">
       <header className="max-w-3xl space-y-5 md:space-y-6">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Operator Lab</h1>
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Experiments</h1>
         <p className="text-lg font-medium leading-relaxed text-zinc-500 dark:text-zinc-400 md:text-xl">
-          A self-initiated exploration bridging past roles and future directions. This lab focuses on reducing cognitive load in repeated workflows and making dense information easier to scan, prioritize, and act on through focused experiments.
+          A self-initiated set of experiments bridging past roles and future direction. The focus is repeated workflows, clearer interfaces, and ways to make dense information easier to scan, prioritize, and act on.
         </p>
       </header>
 

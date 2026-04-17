@@ -15,7 +15,7 @@ const casefiles = [
   {
     id: "factor",
     title: "Factor",
-    subtitle: "Building reusable systems for faster design execution",
+    subtitle: "Building reusable structures for faster design execution",
     environment: "DeFi protocol",
     problem: "Recurring design needs created inconsistency and repeated effort across campaigns, internal materials, and product-adjacent communication.",
     role: "Multimedia Marketing Designer",
@@ -38,7 +38,7 @@ export function Casefiles() {
       <header className="space-y-6 max-w-3xl">
         <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Casefiles</h1>
         <p className="text-zinc-500 dark:text-zinc-400 text-xl font-medium leading-relaxed">
-          Selected work at the intersection of crypto context, system thinking, and practical workflow design.
+          Selected work shaped by crypto context, practical workflow design, and clearer execution under pressure.
         </p>
       </header>
 
@@ -70,7 +70,7 @@ export function Casefiles() {
                 <div className="md:col-span-4 space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">
-                      FILE_{String(i + 1).padStart(2, '0')}
+                      Case {String(i + 1).padStart(2, '0')}
                     </div>
                     <motion.div 
                       animate={{ opacity: [0.3, 1, 0.3] }}
@@ -85,7 +85,7 @@ export function Casefiles() {
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium leading-relaxed">{cf.subtitle}</p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 group-hover:gap-4 transition-all pt-4">
-                    Open Casefile <ArrowRight className="w-4 h-4" />
+                    View casefile <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
                 

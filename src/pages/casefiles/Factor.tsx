@@ -12,7 +12,7 @@ export function Factor() {
       approach={
         <>
           <p>
-            The goal was to move beyond isolated visuals and think more about reusable formats and recurring structure. Design needed to become more useful as a system, not just a final artifact.
+            The goal was to move beyond isolated visuals and think more about reusable formats and recurring structure. Design needed to become more useful as a working framework, not just a final artifact.
           </p>
           <p>
             I created lower-friction output patterns and built reusable design logic. This improved consistency across ongoing design work and helped the team move faster without sacrificing clarity through reusable structures, modular layouts, and more repeatable workflows.
@@ -58,7 +58,7 @@ export function Factor() {
       }
       outcome="Improved speed and consistency through reusable structures, modular layouts, and more repeatable workflows."
       lessons="Good design is not only expression, it is also structure."
-      nextSteps="Push further into workflows, components, internal tooling, dashboards, and systems that reduce friction."
+      nextSteps="Keep moving toward workflows, components, internal tooling, dashboards, and structures that reduce friction."
     />
   );
 }
