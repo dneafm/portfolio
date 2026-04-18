@@ -33,18 +33,24 @@ const proofCards = [
     title: "Kyber Network",
     description: "Designing for DeFi pressure taught me how to communicate clearly in unstable environments.",
     to: "/casefiles/kyber-network",
+    thumbnail: "/Untitled (3).png",
+    thumbPosition: "bg-[center_top_-1rem]",
   },
   {
     label: "Casefile",
     title: "Factor",
     description: "A move from isolated execution toward reusable systems, structure, and operating rhythm.",
     to: "/casefiles/factor",
+    thumbnail: "/Untitled (5).png",
+    thumbPosition: "bg-center",
   },
   {
     label: "Operator Lab",
     title: "Operator tools in progress",
     description: "Private-facing workflow experiments, research surfaces, and internal-product thinking aimed at real operator pain.",
     to: "/operator-lab",
+    thumbnail: "/vng/vng-3.png",
+    thumbPosition: "bg-center",
   },
 ];
 
@@ -128,14 +134,19 @@ export function Home() {
             >
               <Link
                 to={card.to}
-                className="group flex h-full flex-col justify-between rounded-[1.75rem] border border-zinc-200/70 bg-zinc-50/70 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_24px_90px_rgba(59,130,246,0.08)] dark:border-zinc-800 dark:bg-zinc-900/50"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-zinc-200/60 bg-zinc-100/75 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/20 hover:shadow-[0_24px_90px_rgba(59,130,246,0.06)] dark:border-zinc-800 dark:bg-zinc-900/45"
               >
-                <div className="space-y-5">
+                <div
+                  className={`absolute inset-0 ${card.thumbPosition} bg-cover bg-no-repeat opacity-[0.12] grayscale transition-opacity duration-500 group-hover:opacity-[0.18] dark:opacity-[0.14] dark:group-hover:opacity-[0.22]`}
+                  style={{ backgroundImage: `url("${card.thumbnail}")` }}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(244,244,245,0.82),rgba(244,244,245,0.94))] dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.72),rgba(24,24,27,0.9))]" />
+                <div className="relative space-y-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-blue-600 dark:text-blue-400">{card.label}</p>
                   <h3 className="text-2xl font-black tracking-tight text-zinc-950 dark:text-zinc-50">{card.title}</h3>
                   <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{card.description}</p>
                 </div>
-                <div className="mt-8 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-500 transition-colors group-hover:text-blue-600 dark:text-zinc-400 dark:group-hover:text-blue-400">
+                <div className="relative mt-8 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-500 transition-colors group-hover:text-blue-600 dark:text-zinc-400 dark:group-hover:text-blue-400">
                   Open
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
@@ -164,29 +175,29 @@ export function Home() {
         </ul>
       </section>
 
-      <section className="rounded-[2rem] border border-zinc-200 bg-zinc-950 px-6 py-10 text-white dark:border-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 md:px-10 md:py-14">
+      <section className="rounded-[2rem] border border-zinc-200/70 bg-zinc-100/80 px-6 py-10 text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900/45 dark:text-zinc-50 md:px-10 md:py-14">
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-end">
           <div className="space-y-4">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-300 dark:text-blue-600">Next chapter</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">Next chapter</p>
             <h2 className="max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
               I’m interested in work where design, workflow thinking, and execution support meet.
             </h2>
           </div>
           <div className="space-y-5 md:pl-8">
-            <p className="text-base leading-relaxed text-zinc-300 dark:text-zinc-700">
+            <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
               If you’re dealing with messy workflows, repeatable creative production, or high-context execution problems, I’m open to talking.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/operator-lab"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-950 transition-colors hover:bg-blue-200 dark:bg-zinc-950 dark:text-white dark:hover:bg-blue-600"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-white transition-colors hover:bg-blue-600 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-blue-400"
               >
                 View Operator Lab
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-white transition-colors hover:border-blue-300 hover:text-blue-200 dark:border-zinc-800 dark:text-zinc-950 dark:hover:border-blue-500 dark:hover:text-blue-600"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300/80 px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-700 transition-colors hover:border-blue-400 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
               >
                 Contact
               </Link>
