@@ -54,13 +54,6 @@ const proofCards = [
   },
 ];
 
-const notesPreview = [
-  "Why I’m moving beyond pure design",
-  "Clarity for high-context crypto teams",
-  "AI as leverage, not decoration",
-  "What stays private, and why",
-];
-
 export function Home() {
   return (
     <div className="space-y-24 md:space-y-32">
@@ -156,24 +149,6 @@ export function Home() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-zinc-200/70 bg-zinc-50/70 p-7 dark:border-zinc-800 dark:bg-zinc-900/40 md:p-8">
-        <div className="flex items-center justify-between gap-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Notes preview</p>
-          <Link to="/notes" className="text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
-            Archive
-          </Link>
-        </div>
-        <ul className="mt-6 grid gap-4 md:grid-cols-2">
-          {notesPreview.map((note, index) => (
-            <li key={note}>
-              <Link to="/notes" className="group flex items-start gap-4 rounded-2xl border border-zinc-200/70 bg-zinc-100/75 p-4 text-zinc-700 transition-colors hover:text-blue-600 dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300 dark:hover:text-blue-400">
-                <span className="pt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.26em] text-zinc-300 dark:text-zinc-600">0{index + 1}</span>
-                <span className="text-sm font-semibold leading-relaxed">{note}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <section className="rounded-[2rem] border border-zinc-200/70 bg-zinc-100/80 px-6 py-10 text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900/45 dark:text-zinc-50 md:px-10 md:py-14">
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-end">
