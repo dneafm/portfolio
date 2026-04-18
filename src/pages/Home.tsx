@@ -5,25 +5,19 @@ import { Hero } from "../components/Hero";
 
 const journeyChapters = [
   {
-    eyebrow: "Chapter 01 · Origin",
-    title: "I started from visuals, inside fast messy crypto environments.",
-    body:
-      "That meant shipping for teams that were half-building, half-firefighting. The useful skill was never just taste. It was learning how to create clarity when context was moving too fast for polished process.",
-    aside: "High-context work, compressed timelines, constant ambiguity.",
+    eyebrow: "Background",
+    title: "Started in crypto design.",
+    aside: "Design under pressure.",
   },
   {
-    eyebrow: "Chapter 02 · Shift",
-    title: "Over time, I became more interested in the machinery behind the screen.",
-    body:
-      "I kept drifting toward workflows, reporting loops, research structure, internal dashboards, and the operator layer that actually changes how a team moves. That shift matters more to me now than pure surface work.",
-    aside: "Less one-off assets, more repeatable systems.",
+    eyebrow: "Shift",
+    title: "Moved toward workflow and ops.",
+    aside: "Systems over assets.",
   },
   {
-    eyebrow: "Chapter 03 · Direction",
-    title: "Now I care more about useful systems than public artifacts.",
-    body:
-      "I’m interested in workflow design, decision support, internal tooling, and structured systems that reduce noise and improve execution. Some of that work stays private by design, but it shapes how I think, design, and build.",
-    aside: "Utility first, overexposure never required.",
+    eyebrow: "Focus",
+    title: "Now building internal tools.",
+    aside: "Less noise. Better flow.",
   },
 ];
 
@@ -66,7 +60,7 @@ export function Home() {
           <div className="space-y-4">
             <p className="text-[10px] font-black uppercase tracking-[0.32em] text-blue-600 dark:text-blue-400">Overview</p>
             <h2 className="max-w-md text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
-              This portfolio shows a shift from visual design toward workflow, tooling, and execution support.
+              A designer moving toward workflow, tooling, and execution support.
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -88,7 +82,7 @@ export function Home() {
         <div className="max-w-2xl space-y-4">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Journey</p>
           <h2 className="text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-5xl">
-            Read it as a change in how I work, not just a gallery of finished outputs.
+            Straight to the point.
           </h2>
         </div>
 
@@ -112,9 +106,6 @@ export function Home() {
                 <h3 className="text-2xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-[2rem]">
                   {chapter.title}
                 </h3>
-                <p className="max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-lg">
-                  {chapter.body}
-                </p>
               </div>
               <div className="flex items-end md:justify-end">
                 <div className="rounded-2xl border border-zinc-200/80 bg-white/90 p-4 dark:border-zinc-800 dark:bg-zinc-950/70">
@@ -131,7 +122,7 @@ export function Home() {
         <div className="flex items-end justify-between gap-6 border-b border-zinc-200 pb-5 dark:border-zinc-800">
           <div className="space-y-3">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Proof</p>
-            <h2 className="text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">Then show where that story becomes work.</h2>
+            <h2 className="text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">Then show the work.</h2>
           </div>
           <Link to="/casefiles" className="hidden items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 md:inline-flex">
             View all
@@ -167,47 +158,23 @@ export function Home() {
         </div>
       </section>
 
-      <section className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-10">
-        <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-[2rem] border border-zinc-200/80 bg-white p-7 dark:border-zinc-800 dark:bg-zinc-900/70 md:p-8"
-        >
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Thinking</p>
-          <h2 className="mt-4 max-w-xl text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
-            The writing should make the shift clear, without pretending every useful thing can be shown publicly.
-          </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Notes are where that transition becomes explicit: crypto lessons, workflow instincts, AI leverage, and the move from making artifacts to building tools that help teams think and act more clearly.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-          className="rounded-[2rem] border border-zinc-200/80 bg-zinc-50/80 p-7 dark:border-zinc-800 dark:bg-zinc-900/45 md:p-8"
-        >
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Notes preview</p>
-            <Link to="/notes" className="text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
-              Archive
-            </Link>
-          </div>
-          <ul className="mt-6 space-y-4">
-            {notesPreview.map((note, index) => (
-              <li key={note}>
-                <Link to="/notes" className="group flex items-start gap-4 text-zinc-700 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400">
-                  <span className="pt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.26em] text-zinc-300 dark:text-zinc-600">0{index + 1}</span>
-                  <span className="text-sm font-semibold leading-relaxed">{note}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
+      <section className="rounded-[2rem] border border-zinc-200/80 bg-zinc-50/80 p-7 dark:border-zinc-800 dark:bg-zinc-900/45 md:p-8">
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Notes preview</p>
+          <Link to="/notes" className="text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
+            Archive
+          </Link>
+        </div>
+        <ul className="mt-6 grid gap-4 md:grid-cols-2">
+          {notesPreview.map((note, index) => (
+            <li key={note}>
+              <Link to="/notes" className="group flex items-start gap-4 rounded-2xl border border-zinc-200/80 bg-white/80 p-4 text-zinc-700 transition-colors hover:text-blue-600 dark:border-zinc-800 dark:bg-zinc-950/40 dark:text-zinc-300 dark:hover:text-blue-400">
+                <span className="pt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.26em] text-zinc-300 dark:text-zinc-600">0{index + 1}</span>
+                <span className="text-sm font-semibold leading-relaxed">{note}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="rounded-[2rem] border border-zinc-200 bg-zinc-950 px-6 py-10 text-white dark:border-zinc-800 dark:bg-zinc-100 dark:text-zinc-950 md:px-10 md:py-14">
@@ -215,12 +182,12 @@ export function Home() {
           <div className="space-y-4">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-300 dark:text-blue-600">Next chapter</p>
             <h2 className="max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
-              I’m interested in work where design, workflow thinking, and execution support meet, even when the most useful tools stay private.
+              I’m interested in work where design, workflow thinking, and execution support meet.
             </h2>
           </div>
           <div className="space-y-5 md:pl-8">
             <p className="text-base leading-relaxed text-zinc-300 dark:text-zinc-700">
-              If you’re dealing with messy workflows, repeatable creative production, or high-context execution problems, I’m open to the right conversations.
+              If you’re dealing with messy workflows, repeatable creative production, or high-context execution problems, I’m open to talking.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link

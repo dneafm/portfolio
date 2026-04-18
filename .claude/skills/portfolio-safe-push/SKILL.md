@@ -40,13 +40,23 @@ Use this when working in `F:\backtest\portfolio` and the goal is to publish the 
 
 6. Commit with a concrete message only for intentional tracked changes.
 
-7. Push the branch.
+7. Prefer the repo's SSH path for push.
+   - This repo may have working SSH auth even when HTTPS + Git Credential Manager fails.
+   - Current known-good setup for this machine:
+     - `origin` -> `git@github.com:dneafm/portfolio.git`
+     - `core.sshCommand` -> `ssh -i ~/.ssh/id_ed25519_github_openclaw -o IdentitiesOnly=yes`
+   - Before assuming push is blocked, verify:
+     - `git -C portfolio remote -v`
+     - `git -C portfolio config --get core.sshCommand`
+     - `git -C portfolio ls-remote origin`
+
+8. Push the branch.
    - `git -C portfolio push origin main`
 
-8. Refresh the local index after the push.
+9. Refresh the local index after the push when GitNexus is available.
    - `npx gitnexus analyze`
 
-9. Report back clearly.
+10. Report back clearly.
    - Which commits were pushed
    - Whether `main` is now in sync with `origin/main`
    - Which local untracked files were intentionally left alone
@@ -58,6 +68,8 @@ Use this when working in `F:\backtest\portfolio` and the goal is to publish the 
 - If multiple tracked changes exist and intent is unclear, pause and confirm before committing.
 - Leave unrelated local edits untouched.
 - Prefer a tiny cleanup commit over accidentally pushing scratch files.
+- Do not assume VS Code auth and raw CLI auth are equivalent. A VS Code push may succeed while HTTPS CLI push fails.
+- If HTTPS push fails with credential-manager or wincredman errors, do not stop there. Check whether the repo is already configured for SSH and try that path first.
 
 ## Good Outcome
 
@@ -66,3 +78,4 @@ The repo ends the task with:
 - intentional tracked changes committed
 - `main` synced to GitHub
 - local scratch files still local
+- push path works from CLI, not only from VS Code UI
