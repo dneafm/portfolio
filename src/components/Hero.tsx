@@ -10,7 +10,7 @@ export function Hero() {
     <section className="relative w-full overflow-x-hidden overflow-y-visible pt-0 pb-6 md:left-1/2 md:right-1/2 md:ml-[-50vw] md:mr-[-50vw] md:min-h-[100svh] md:w-screen md:overflow-visible md:pt-0 md:pb-14">
       <div className="absolute inset-x-0 -top-12 bottom-0 pointer-events-none md:-top-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.14),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.15),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,244,245,0.92))] dark:bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.2),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.16),transparent_32%),linear-gradient(180deg,rgba(9,9,11,0.95),rgba(3,7,18,0.98))]" />
-        <div className="absolute inset-0 w-screen opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
+        <div className="absolute inset-0 w-full opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] md:w-screen bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
       </div>
 
       <div className="absolute left-1/2 top-[1%] -z-[1] h-[58vh] w-[58vh] min-h-[320px] min-w-[320px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,102,255,0.14),transparent_58%)] blur-3xl md:h-[74vh] md:w-[74vh] md:min-h-[420px] md:min-w-[420px]" />
@@ -66,11 +66,11 @@ View Operator Lab
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto mt-0 flex h-[23rem] w-full min-w-0 max-w-[23.5rem] items-center justify-center overflow-hidden px-0 md:mt-0 md:h-[38rem] md:max-w-[40rem] md:overflow-visible lg:mt-0 lg:h-[46rem] lg:max-w-[44rem]"
+          className="relative mx-auto mt-0 flex h-[23rem] w-full min-w-0 max-w-[23.5rem] items-center justify-center overflow-x-hidden overflow-y-visible px-0 md:mt-0 md:h-[38rem] md:max-w-[40rem] md:overflow-visible lg:mt-0 lg:h-[46rem] lg:max-w-[44rem]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:118px_118px] [mask-image:radial-gradient(circle_at_center,black,transparent_80%)] mix-blend-soft-light opacity-70" />
           <div className="absolute left-1/2 top-[22%] h-[20%] w-[36%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6 md:top-[28%] md:w-[30%]" />
-          <div className="absolute right-[12%] top-[20%] h-[44%] w-[30%] rounded-full bg-violet-500/14 blur-[72px] dark:bg-violet-500/18 md:right-[12%] md:top-[28%] md:h-[44%] md:w-[34%] md:blur-[110px]" />
+          <div className="absolute right-[8%] top-[20%] h-[40%] w-[24%] rounded-full bg-violet-500/10 blur-[56px] dark:bg-violet-500/14 md:right-[10%] md:top-[26%] md:h-[40%] md:w-[26%] md:blur-[84px] lg:right-[12%] lg:top-[28%] lg:h-[44%] lg:w-[34%] lg:blur-[110px]" />
 
           <Suspense
             fallback={
