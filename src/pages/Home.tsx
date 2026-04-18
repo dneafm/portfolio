@@ -134,13 +134,13 @@ export function Home() {
             >
               <Link
                 to={card.to}
-                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-zinc-200/60 bg-zinc-100/75 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/20 hover:shadow-[0_24px_90px_rgba(59,130,246,0.06)] dark:border-zinc-800 dark:bg-zinc-900/45"
+                className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-zinc-200/60 bg-zinc-100/70 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/20 hover:shadow-[0_24px_90px_rgba(59,130,246,0.06)] dark:border-zinc-800 dark:bg-zinc-900/40"
               >
                 <div
-                  className={`absolute inset-0 ${card.thumbPosition} bg-cover bg-no-repeat opacity-[0.12] grayscale transition-opacity duration-500 group-hover:opacity-[0.18] dark:opacity-[0.14] dark:group-hover:opacity-[0.22]`}
-                  style={{ backgroundImage: `url("${card.thumbnail}")` }}
+                  className={`absolute inset-0 ${card.thumbPosition} bg-cover bg-no-repeat opacity-[0.24] grayscale-[0.2] blur-[1px] saturate-75 transition-opacity duration-500 group-hover:opacity-[0.34] dark:opacity-[0.28] dark:group-hover:opacity-[0.4]`}
+                  style={{ backgroundImage: `url("${card.thumbnail}")`, backgroundSize: "130%" }}
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(244,244,245,0.82),rgba(244,244,245,0.94))] dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.72),rgba(24,24,27,0.9))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(244,244,245,0.62),rgba(244,244,245,0.82))] dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.56),rgba(24,24,27,0.78))]" />
                 <div className="relative space-y-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-blue-600 dark:text-blue-400">{card.label}</p>
                   <h3 className="text-2xl font-black tracking-tight text-zinc-950 dark:text-zinc-50">{card.title}</h3>
