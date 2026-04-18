@@ -66,7 +66,7 @@ View Operator Lab
           initial={{ opacity: 0, scale: 0.94, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto mt-0 flex h-[20rem] w-full min-w-0 max-w-[22rem] items-center justify-center overflow-hidden px-0 md:mt-0 md:h-[38rem] md:max-w-[40rem] md:overflow-visible lg:mt-0 lg:h-[46rem] lg:max-w-[44rem]"
+          className="relative mx-auto mt-0 flex h-[23rem] w-full min-w-0 max-w-[23.5rem] items-center justify-center overflow-hidden px-0 md:mt-0 md:h-[38rem] md:max-w-[40rem] md:overflow-visible lg:mt-0 lg:h-[46rem] lg:max-w-[44rem]"
         >
           <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:118px_118px] [mask-image:radial-gradient(circle_at_center,black,transparent_80%)] mix-blend-soft-light opacity-70" />
           <div className="absolute left-1/2 top-[22%] h-[20%] w-[36%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6 md:top-[28%] md:w-[30%]" />
@@ -75,7 +75,7 @@ View Operator Lab
           <Suspense
             fallback={
               <div className="absolute inset-0 z-10">
-                <div className="absolute left-1/2 top-[46%] h-[17rem] w-[12rem] -translate-x-1/2 -translate-y-1/2 rounded-[45%] border border-white/20 bg-gradient-to-b from-white/30 via-blue-400/35 to-violet-500/25 shadow-[0_0_90px_rgba(59,130,246,0.3)] backdrop-blur-sm md:h-[26rem] md:w-[18rem]" />
+                <div className="absolute left-1/2 top-[48%] h-[19rem] w-[13.5rem] -translate-x-1/2 -translate-y-1/2 rounded-[45%] border border-white/20 bg-gradient-to-b from-white/30 via-blue-400/35 to-violet-500/25 shadow-[0_0_90px_rgba(59,130,246,0.3)] backdrop-blur-sm md:h-[26rem] md:w-[18rem]" />
               </div>
             }
           >
