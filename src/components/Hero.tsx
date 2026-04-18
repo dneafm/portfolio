@@ -1,98 +1,15 @@
-import { lazy, Suspense } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
-
-const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
+import { HeroBackground } from "./HeroBackground";
+import { HeroCopy } from "./HeroCopy";
+import { HeroVisual } from "./HeroVisual";
 
 export function Hero() {
   return (
-    <section className="relative w-full overflow-x-hidden overflow-y-visible pt-0 pb-6 md:left-1/2 md:right-1/2 md:ml-[-50vw] md:mr-[-50vw] md:min-h-[100svh] md:w-screen md:overflow-visible md:pt-0 md:pb-14">
-      <div className="absolute inset-x-0 -top-12 bottom-0 pointer-events-none md:-top-12">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.14),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.15),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,244,245,0.92))] dark:bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.2),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.16),transparent_32%),linear-gradient(180deg,rgba(9,9,11,0.95),rgba(3,7,18,0.98))]" />
-        <div className="absolute inset-0 w-full opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] md:w-screen bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
-      </div>
+    <section className="relative w-full overflow-x-hidden overflow-y-visible pt-0 pb-3 md:min-h-[100svh] md:pt-0 md:pb-14 lg:left-1/2 lg:right-1/2 lg:ml-[-50vw] lg:mr-[-50vw] lg:w-screen lg:overflow-visible">
+      <HeroBackground />
 
-      <div className="absolute left-1/2 top-[1%] -z-[1] h-[58vh] w-[58vh] min-h-[320px] min-w-[320px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,102,255,0.14),transparent_58%)] blur-3xl md:h-[74vh] md:w-[74vh] md:min-h-[420px] md:min-w-[420px]" />
-      <div className="absolute left-1/2 top-[0%] -z-[1] h-[56vh] w-[56vh] min-h-[320px] min-w-[320px] -translate-x-1/2 opacity-25 blur-[42px] [clip-path:polygon(50%_0%,88%_18%,95%_46%,71%_80%,50%_100%,27%_82%,7%_58%,12%_18%)] bg-[linear-gradient(180deg,rgba(33,97,235,0.9),rgba(153,102,204,0.8))] md:h-[72vh] md:w-[72vh] md:min-h-[420px] md:min-w-[420px] md:opacity-30 md:blur-[52px]" />
-
-      <div className="relative z-10 mx-auto grid min-h-0 w-full max-w-[1440px] items-start gap-4 px-5 pt-3 md:min-h-[100svh] md:gap-14 md:px-6 md:pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:px-10 lg:pt-8">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-3xl space-y-4 pt-2 md:space-y-8 md:pt-8 lg:pt-10"
-        >
-          <div className="inline-flex items-center gap-3 rounded-full border border-zinc-200/80 bg-white/70 px-3.5 py-1.5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/40 md:px-4 md:py-2">
-            <div className="h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
-            <span className="text-[10px] font-black uppercase tracking-[0.32em] text-zinc-500 dark:text-zinc-400">
-              Hoang Pham_Portfolio
-            </span>
-          </div>
-
-          <div className="space-y-4 md:space-y-5">
-            <h1 className="text-[2.72rem] font-black leading-[0.84] tracking-tighter text-zinc-950 dark:text-zinc-50 sm:text-6xl md:text-7xl xl:text-[6.2rem]">
-              Design systems,
-              <br />
-              <span className="text-blue-600 dark:text-blue-400">creative ops,</span>
-              <br />
-              and internal tools.
-            </h1>
-
-            <p className="max-w-[18.5rem] text-[0.92rem] font-medium leading-[1.6] text-zinc-600 dark:text-zinc-400 md:max-w-xl md:text-xl md:leading-relaxed">
-              Built in crypto design, now shifting toward workflows, internal tools, and clearer ways for teams to move faster with less noise.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-2.5 pt-1 sm:flex-row sm:items-center md:gap-4 md:pt-2">
-            <Link
-              to="/casefiles"
-              className="group inline-flex w-full items-center justify-center gap-3 bg-zinc-950 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-white transition-all hover:bg-blue-600 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-blue-500 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
-            >
-              View Casefiles
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              to="/operator-lab"
-              className="inline-flex w-full items-center justify-center gap-3 border border-zinc-300 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-zinc-700 transition-all hover:border-blue-600 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
-            >
-View Operator Lab
-            </Link>
-          </div>
-
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 28 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-          className="relative mx-auto mt-0 flex h-[23rem] w-full min-w-0 max-w-[23.5rem] items-center justify-center overflow-x-hidden overflow-y-visible px-0 md:mt-0 md:h-[38rem] md:max-w-[40rem] md:overflow-visible lg:mt-0 lg:h-[46rem] lg:max-w-[44rem]"
-        >
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:118px_118px] [mask-image:radial-gradient(circle_at_center,black,transparent_80%)] mix-blend-soft-light opacity-70" />
-          <div className="absolute left-1/2 top-[22%] h-[20%] w-[36%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6 md:top-[28%] md:w-[30%]" />
-          <div className="absolute right-[8%] top-[20%] h-[40%] w-[24%] rounded-full bg-violet-500/10 blur-[56px] dark:bg-violet-500/14 md:right-[10%] md:top-[26%] md:h-[40%] md:w-[26%] md:blur-[84px] lg:right-[12%] lg:top-[28%] lg:h-[44%] lg:w-[34%] lg:blur-[110px]" />
-
-          <Suspense
-            fallback={
-              <div className="absolute inset-0 z-10">
-                <div className="absolute left-1/2 top-[48%] h-[19rem] w-[13.5rem] -translate-x-1/2 -translate-y-1/2 rounded-[45%] border border-white/20 bg-gradient-to-b from-white/30 via-blue-400/35 to-violet-500/25 shadow-[0_0_90px_rgba(59,130,246,0.3)] backdrop-blur-sm md:h-[26rem] md:w-[18rem]" />
-              </div>
-            }
-          >
-            <HeroCrystalScene />
-          </Suspense>
-
-          <motion.div
-            animate={{ opacity: [0.18, 0.44, 0.18] }}
-            transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[14%] top-[66%] hidden h-px w-20 bg-gradient-to-r from-transparent via-blue-300/70 to-transparent sm:block md:left-[8%] md:top-[58%] md:w-36"
-          />
-          <motion.div
-            animate={{ opacity: [0.16, 0.36, 0.16] }}
-            transition={{ duration: 5.1, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-            className="absolute right-[8%] top-[26%] hidden h-px w-28 bg-gradient-to-r from-transparent via-violet-300/70 to-transparent md:block md:w-40"
-          />
-        </motion.div>
+      <div className="relative z-10 mx-auto grid min-h-0 w-full max-w-[1440px] items-start gap-2 px-5 pt-3 md:min-h-[100svh] md:gap-14 md:px-6 md:pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:px-10 lg:pt-8">
+        <HeroCopy />
+        <HeroVisual />
       </div>
     </section>
   );
