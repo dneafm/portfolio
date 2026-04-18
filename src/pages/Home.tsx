@@ -33,24 +33,18 @@ const proofCards = [
     title: "Kyber Network",
     description: "Designing for DeFi pressure taught me how to communicate clearly in unstable environments.",
     to: "/casefiles/kyber-network",
-    thumbnail: "/Untitled (3).png",
-    thumbPosition: "bg-[center_top_-1rem]",
   },
   {
     label: "Casefile",
     title: "Factor",
     description: "A move from isolated execution toward reusable systems, structure, and operating rhythm.",
     to: "/casefiles/factor",
-    thumbnail: "/Untitled (5).png",
-    thumbPosition: "bg-center",
   },
   {
     label: "Operator Lab",
     title: "Operator tools in progress",
     description: "Private-facing workflow experiments, research surfaces, and internal-product thinking aimed at real operator pain.",
     to: "/operator-lab",
-    thumbnail: "/vng/vng-3.png",
-    thumbPosition: "bg-center",
   },
 ];
 
@@ -129,11 +123,7 @@ export function Home() {
                 to={card.to}
                 className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-zinc-200/60 bg-zinc-100/70 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/20 hover:shadow-[0_24px_90px_rgba(59,130,246,0.06)] dark:border-zinc-800 dark:bg-zinc-900/40"
               >
-                <div
-                  className={`absolute inset-0 ${card.thumbPosition} bg-cover bg-no-repeat opacity-[0.24] grayscale-[0.2] blur-[1px] saturate-75 transition-opacity duration-500 group-hover:opacity-[0.34] dark:opacity-[0.28] dark:group-hover:opacity-[0.4]`}
-                  style={{ backgroundImage: `url("${card.thumbnail}")`, backgroundSize: "130%" }}
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(244,244,245,0.62),rgba(244,244,245,0.82))] dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.56),rgba(24,24,27,0.78))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(244,244,245,0.72),rgba(244,244,245,0.9))] dark:bg-[linear-gradient(180deg,rgba(24,24,27,0.66),rgba(24,24,27,0.86))]" />
                 <div className="relative space-y-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-blue-600 dark:text-blue-400">{card.label}</p>
                   <h3 className="text-2xl font-black tracking-tight text-zinc-950 dark:text-zinc-50">{card.title}</h3>
