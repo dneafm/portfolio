@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles, Workflow, Wrench } from "lucide-react";
 import { motion } from "motion/react";
 import { Hero } from "../components/Hero";
 
@@ -8,16 +8,22 @@ const journeyChapters = [
     eyebrow: "Background",
     title: "Started in crypto design.",
     aside: "Design under pressure.",
+    icon: Sparkles,
+    accent: "from-blue-500/20 to-cyan-400/10",
   },
   {
     eyebrow: "Shift",
     title: "Moved toward workflow and ops.",
     aside: "Systems over assets.",
+    icon: Workflow,
+    accent: "from-violet-500/20 to-fuchsia-400/10",
   },
   {
     eyebrow: "Focus",
     title: "Now building internal tools.",
     aside: "Less noise. Better flow.",
+    icon: Wrench,
+    accent: "from-emerald-500/20 to-teal-400/10",
   },
 ];
 
@@ -54,67 +60,48 @@ export function Home() {
     <div className="space-y-24 md:space-y-32">
       <Hero />
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-zinc-200/80 bg-white/80 px-6 py-8 shadow-[0_24px_90px_rgba(15,23,42,0.06)] backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/55 md:px-10 md:py-10">
+      <section className="relative overflow-hidden rounded-[2rem] border border-zinc-200/70 bg-zinc-50/80 px-6 py-8 shadow-[0_24px_90px_rgba(15,23,42,0.05)] backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-900/45 md:px-10 md:py-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.08),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.08),transparent_32%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.12),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.1),transparent_32%)]" />
-        <div className="relative grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:gap-10">
-          <div className="space-y-4">
+        <div className="relative space-y-8 md:space-y-10">
+          <div className="max-w-3xl space-y-4">
             <p className="text-[10px] font-black uppercase tracking-[0.32em] text-blue-600 dark:text-blue-400">Overview</p>
-            <h2 className="max-w-md text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
-              A designer moving toward workflow, tooling, and execution support.
+            <h2 className="text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
+              From crypto design to workflow, tooling, and execution support.
             </h2>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              ["Then", "Design for crypto teams"],
-              ["Shift", "Workflows, research structure, and repeatable process"],
-              ["Now", "Internal tools, decision support, and calmer execution"],
-            ].map(([k, v]) => (
-              <div key={k} className="rounded-2xl border border-zinc-200/80 bg-white/85 p-4 dark:border-zinc-800 dark:bg-zinc-950/70">
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-zinc-400 dark:text-zinc-500">{k}</p>
-                <p className="mt-3 text-sm font-semibold leading-relaxed text-zinc-700 dark:text-zinc-300">{v}</p>
-              </div>
-            ))}
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {journeyChapters.map((chapter, index) => {
+              const Icon = chapter.icon;
+              return (
+                <motion.article
+                  key={chapter.eyebrow}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative overflow-hidden rounded-[1.75rem] border border-zinc-200/70 bg-zinc-100/70 p-5 dark:border-zinc-800 dark:bg-zinc-950/35 md:p-6"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${chapter.accent} opacity-70 dark:opacity-80`} />
+                  <div className="absolute right-4 top-4 text-zinc-950/8 dark:text-white/10">
+                    <Icon className="h-14 w-14" strokeWidth={1.2} />
+                  </div>
+                  <div className="relative space-y-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-[10px] font-black uppercase tracking-[0.28em] text-zinc-500 dark:text-zinc-400">{chapter.eyebrow}</p>
+                      <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-300/80 bg-zinc-100/80 text-[11px] font-black text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/70 dark:text-zinc-200">
+                        0{index + 1}
+                      </div>
+                    </div>
+                    <h3 className="max-w-[14rem] text-2xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50">
+                      {chapter.title}
+                    </h3>
+                    <p className="text-sm font-semibold leading-relaxed text-zinc-700 dark:text-zinc-300">{chapter.aside}</p>
+                  </div>
+                </motion.article>
+              );
+            })}
           </div>
-        </div>
-      </section>
-
-      <section className="space-y-10 md:space-y-14">
-        <div className="max-w-2xl space-y-4">
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Journey</p>
-          <h2 className="text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-5xl">
-            Straight to the point.
-          </h2>
-        </div>
-
-        <div className="space-y-6 md:space-y-8">
-          {journeyChapters.map((chapter, index) => (
-            <motion.article
-              key={chapter.eyebrow}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15%" }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="grid gap-6 rounded-[2rem] border border-zinc-200/70 bg-zinc-50/90 p-6 dark:border-zinc-800 dark:bg-zinc-900/45 md:grid-cols-[140px_1fr_220px] md:gap-8 md:p-8"
-            >
-              <div className="flex items-start">
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-blue-200 bg-blue-50 text-sm font-black text-blue-600 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-400">
-                  0{index + 1}
-                </div>
-              </div>
-              <div className="space-y-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.28em] text-zinc-400 dark:text-zinc-500">{chapter.eyebrow}</p>
-                <h3 className="text-2xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-[2rem]">
-                  {chapter.title}
-                </h3>
-              </div>
-              <div className="flex items-end md:justify-end">
-                <div className="rounded-2xl border border-zinc-200/80 bg-white/90 p-4 dark:border-zinc-800 dark:bg-zinc-950/70">
-                  <p className="text-[10px] font-black uppercase tracking-[0.26em] text-zinc-400 dark:text-zinc-500">Read</p>
-                  <p className="mt-3 text-sm font-semibold leading-relaxed text-zinc-700 dark:text-zinc-300">{chapter.aside}</p>
-                </div>
-              </div>
-            </motion.article>
-          ))}
         </div>
       </section>
 
@@ -141,7 +128,7 @@ export function Home() {
             >
               <Link
                 to={card.to}
-                className="group flex h-full flex-col justify-between rounded-[1.75rem] border border-zinc-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_24px_90px_rgba(59,130,246,0.08)] dark:border-zinc-800 dark:bg-zinc-900"
+                className="group flex h-full flex-col justify-between rounded-[1.75rem] border border-zinc-200/70 bg-zinc-50/70 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_24px_90px_rgba(59,130,246,0.08)] dark:border-zinc-800 dark:bg-zinc-900/50"
               >
                 <div className="space-y-5">
                   <p className="text-[10px] font-black uppercase tracking-[0.28em] text-blue-600 dark:text-blue-400">{card.label}</p>
@@ -158,7 +145,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-zinc-200/80 bg-zinc-50/80 p-7 dark:border-zinc-800 dark:bg-zinc-900/45 md:p-8">
+      <section className="rounded-[2rem] border border-zinc-200/70 bg-zinc-50/70 p-7 dark:border-zinc-800 dark:bg-zinc-900/40 md:p-8">
         <div className="flex items-center justify-between gap-4">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Notes preview</p>
           <Link to="/notes" className="text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">
@@ -168,7 +155,7 @@ export function Home() {
         <ul className="mt-6 grid gap-4 md:grid-cols-2">
           {notesPreview.map((note, index) => (
             <li key={note}>
-              <Link to="/notes" className="group flex items-start gap-4 rounded-2xl border border-zinc-200/80 bg-white/80 p-4 text-zinc-700 transition-colors hover:text-blue-600 dark:border-zinc-800 dark:bg-zinc-950/40 dark:text-zinc-300 dark:hover:text-blue-400">
+              <Link to="/notes" className="group flex items-start gap-4 rounded-2xl border border-zinc-200/70 bg-zinc-100/75 p-4 text-zinc-700 transition-colors hover:text-blue-600 dark:border-zinc-800 dark:bg-zinc-950/35 dark:text-zinc-300 dark:hover:text-blue-400">
                 <span className="pt-0.5 font-mono text-[10px] font-black uppercase tracking-[0.26em] text-zinc-300 dark:text-zinc-600">0{index + 1}</span>
                 <span className="text-sm font-semibold leading-relaxed">{note}</span>
               </Link>
