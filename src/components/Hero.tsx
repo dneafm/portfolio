@@ -7,14 +7,14 @@ const HeroCrystalScene = lazy(() => import("./HeroCrystalScene"));
 
 export function Hero() {
   return (
-    <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-x-hidden overflow-y-visible pt-0 pb-6 md:min-h-[100svh] md:overflow-visible md:pt-0 md:pb-14">
+    <section className="relative w-full overflow-x-hidden overflow-y-visible pt-0 pb-6 md:left-1/2 md:right-1/2 md:ml-[-50vw] md:mr-[-50vw] md:min-h-[100svh] md:w-screen md:overflow-visible md:pt-0 md:pb-14">
       <div className="absolute inset-x-0 -top-12 bottom-0 pointer-events-none md:-top-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.14),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.15),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.97),rgba(244,244,245,0.92))] dark:bg-[radial-gradient(circle_at_top,rgba(46,107,255,0.2),transparent_34%),radial-gradient(circle_at_78%_34%,rgba(153,102,204,0.16),transparent_32%),linear-gradient(180deg,rgba(9,9,11,0.95),rgba(3,7,18,0.98))]" />
         <div className="absolute inset-0 w-screen opacity-[0.08] mix-blend-soft-light dark:opacity-[0.12] bg-[linear-gradient(to_right,rgba(24,24,27,0.45)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.45)_1px,transparent_1px)] bg-[size:84px_84px]" />
       </div>
 
-      <div className="absolute left-1/2 top-[1%] -z-[1] h-[74vh] w-[74vh] min-h-[420px] min-w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,102,255,0.14),transparent_58%)] blur-3xl" />
-      <div className="absolute left-1/2 top-[0%] -z-[1] h-[72vh] w-[72vh] min-h-[420px] min-w-[420px] -translate-x-1/2 opacity-30 blur-[52px] [clip-path:polygon(50%_0%,88%_18%,95%_46%,71%_80%,50%_100%,27%_82%,7%_58%,12%_18%)] bg-[linear-gradient(180deg,rgba(33,97,235,0.9),rgba(153,102,204,0.8))]" />
+      <div className="absolute left-1/2 top-[1%] -z-[1] h-[58vh] w-[58vh] min-h-[320px] min-w-[320px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,102,255,0.14),transparent_58%)] blur-3xl md:h-[74vh] md:w-[74vh] md:min-h-[420px] md:min-w-[420px]" />
+      <div className="absolute left-1/2 top-[0%] -z-[1] h-[56vh] w-[56vh] min-h-[320px] min-w-[320px] -translate-x-1/2 opacity-25 blur-[42px] [clip-path:polygon(50%_0%,88%_18%,95%_46%,71%_80%,50%_100%,27%_82%,7%_58%,12%_18%)] bg-[linear-gradient(180deg,rgba(33,97,235,0.9),rgba(153,102,204,0.8))] md:h-[72vh] md:w-[72vh] md:min-h-[420px] md:min-w-[420px] md:opacity-30 md:blur-[52px]" />
 
       <div className="relative z-10 mx-auto grid min-h-0 w-full max-w-[1440px] items-start gap-4 px-5 pt-3 md:min-h-[100svh] md:gap-14 md:px-6 md:pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:px-10 lg:pt-8">
         <motion.div
