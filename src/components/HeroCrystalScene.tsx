@@ -423,7 +423,8 @@ function OrbitBand({
   opacity: number;
 }) {
   const ref = useRef<Group>(null);
-  const orbitGeometry = useMemo(() => new THREE.TorusGeometry(1.84, 0.01, 10, 260), []);
+  // OPTIMIZATION: Drastically reduced tubular segments from 260 -> 64 and radial from 10 -> 4
+  const orbitGeometry = useMemo(() => new THREE.TorusGeometry(1.84, 0.01, 4, 64), []);
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -761,7 +762,8 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute -inset-x-[15%] -top-[20%] -bottom-[45%] z-10 origin-center scale-[0.48] overflow-visible saturate-[1.34] md:-inset-x-[20%] md:-top-[20%] md:-bottom-[45%] md:scale-[0.56] md:overflow-visible md:saturate-[1.38] lg:-inset-x-[30%] lg:-top-[24%] lg:-bottom-[50%] lg:scale-[0.78] lg:saturate-[1.42]">
+    // OPTIMIZATION & DESIGN: Reduced whole 3D scene scaling to ~80% of original capacity per viewport
+    <div className="absolute -inset-x-[15%] -top-[20%] -bottom-[45%] z-10 origin-center scale-[0.38] overflow-visible saturate-[1.34] md:-inset-x-[20%] md:-top-[20%] md:-bottom-[45%] md:scale-[0.45] md:overflow-visible md:saturate-[1.38] lg:-inset-x-[30%] lg:-top-[24%] lg:-bottom-[50%] lg:scale-[0.62] lg:saturate-[1.42]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
@@ -773,9 +775,9 @@ export function HeroCrystalScene() {
         className="pointer-events-none absolute right-[12%] top-[34%] h-32 w-32 rounded-full bg-violet-400/12 blur-3xl md:right-[16%] md:h-40 md:w-40"
       />
 
-      <Canvas className="h-full w-full" camera={{ position: [0.04, 0.08, 11.4], fov: 20.5 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
+      <Canvas className="h-full w-full" camera={{ position: [0.04, 0.08, 11.4], fov: 20.5 }} dpr={[1, 1.25]} gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
-        <Environment resolution={128}>
+        <Environment resolution={64}>
           <Lightformer form="ring" color="#dfe8ff" intensity={1.6} scale={5.2} position={[0, 0, 4.8]} />
           <Lightformer form="rect" color="#5f93ff" intensity={1.1} scale={[5.8, 1.4]} position={[-3.8, 1.4, 2.8]} rotation={[0, 0.5, 0.18]} />
           <Lightformer form="rect" color="#d26dff" intensity={0.9} scale={[4.8, 1.2]} position={[3.6, -0.6, 2.4]} rotation={[0, -0.58, -0.12]} />
