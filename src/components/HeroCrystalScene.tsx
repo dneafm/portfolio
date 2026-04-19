@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, Html, Lightformer } from "@react-three/drei";
+import { Environment, Float, Html, Lightformer, PresentationControls } from "@react-three/drei";
 import { motion } from "motion/react";
 import { useMemo, useRef } from "react";
 import type { Group, Mesh } from "three";
@@ -790,7 +790,19 @@ export function HeroCrystalScene() {
         <spotLight position={[0.6, 4.6, 3.8]} angle={0.32} penumbra={1} intensity={1.4} color="#c6d9ff" />
 
         <Float speed={0.78} rotationIntensity={0.02} floatIntensity={0.1}>
-          <PrismGem />
+          <PresentationControls
+            global={false}
+            cursor={true}
+            snap={true}
+            speed={1.4}
+            zoom={1}
+            rotation={[0, 0, 0]}
+            polar={[-Math.PI / 5, Math.PI / 5]}
+            azimuth={[-Math.PI / 3, Math.PI / 3]}
+            config={{ mass: 1, tension: 170, friction: 22 }}
+          >
+            <PrismGem />
+          </PresentationControls>
         </Float>
       </Canvas>
     </div>
