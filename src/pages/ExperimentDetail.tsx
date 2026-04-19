@@ -93,40 +93,6 @@ export function ExperimentDetail() {
             </div>
           </section>
           
-          {cs.aiIntegration && (
-            <section className="py-16 border-y border-zinc-100 dark:border-zinc-800 space-y-12">
-               <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <h2 className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tighter leading-tight">
-                      {cs.aiIntegration.title}
-                    </h2>
-                    <p className="text-lg text-zinc-500 dark:text-zinc-400 font-medium leading-relaxed">
-                      {cs.aiIntegration.description}
-                    </p>
-                  </div>
-                  <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800 shadow-2xl space-y-6 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                      <Zap className="w-32 h-32 text-blue-500" />
-                    </div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 mb-4 flex items-center gap-2">
-                       <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" /> Natural Language Queries
-                    </div>
-                    <div className="space-y-3">
-                      {cs.aiIntegration.examples.map((example: string, i: number) => (
-                        <div key={i} className="flex items-center gap-3 bg-zinc-800/50 p-3 rounded-xl border border-zinc-700/50 hover:border-blue-500/30 transition-colors">
-                           <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
-                           <span className="text-xs font-mono text-zinc-300">{example}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-               </div>
-               <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono italic text-center max-w-2xl mx-auto">
-                 {cs.aiIntegration.closing}
-               </p>
-            </section>
-          )}
-
           {cs.theIdea && (
             <section className="space-y-6 max-w-3xl ml-auto text-right">
               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">The Idea</h2>
@@ -213,6 +179,40 @@ export function ExperimentDetail() {
                </p>
              </div>
              <DJTradeFlowchart />
+          </section>
+        )}
+
+        {cs.aiIntegration && (
+          <section className="py-16 border-y border-zinc-100 dark:border-zinc-800 space-y-12">
+             <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="space-y-6">
+                  <h2 className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tighter leading-tight">
+                    {cs.aiIntegration.title}
+                  </h2>
+                  <p className="text-lg text-zinc-500 dark:text-zinc-400 font-medium leading-relaxed">
+                    {cs.aiIntegration.description}
+                  </p>
+                </div>
+                <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800 shadow-2xl space-y-6 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <Zap className="w-32 h-32 text-blue-500" />
+                  </div>
+                  <div className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 mb-4 flex items-center gap-2">
+                     <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" /> Natural Language Queries
+                  </div>
+                  <div className="space-y-3">
+                    {cs.aiIntegration.examples.map((example: string, i: number) => (
+                      <div key={i} className="flex items-center gap-3 bg-zinc-800/50 p-3 rounded-xl border border-zinc-700/50 hover:border-blue-500/30 transition-colors">
+                         <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+                         <span className="text-xs font-mono text-zinc-300">{example}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+             </div>
+             <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono italic text-center max-w-2xl mx-auto">
+               {cs.aiIntegration.closing}
+             </p>
           </section>
         )}
 
