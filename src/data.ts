@@ -90,9 +90,20 @@ export const experiments: any[] = [
         { label: "Focus", value: "Manual trading standardization" },
         { label: "Outcome", value: "Clearer execution, review, and discipline" }
       ],
-      problem: "Manual trading breaks down in predictable ways. The issue is rarely just market direction. It is the workflow around the trade: entries influenced by emotion, inconsistent setup judgment, scattered context, skipped risk checks, and weak post-trade review. A trader may have a method in theory, but not a system that helps apply it consistently in practice.",
+      problem: [
+        "Manual trading breaks down in predictable ways.",
+        "The issue is rarely just market direction.",
+        "It is the workflow around the trade: entries influenced by emotion, inconsistent setup judgment, scattered context, skipped risk checks, and weak post-trade review.",
+        "A trader may have a method in theory...",
+        "But not a system that helps apply it consistently in practice."
+      ],
       theIdea: {
-        text: "DJ Trade was designed as a tool to standardize how trades are prepared, monitored, and reviewed. Instead of treating trading like a sequence of isolated clicks, it treats it like an operational workflow. It helps keep these parts connected:",
+        text: [
+          "DJ Trade was designed as a tool to standardize how trades are prepared, monitored, and reviewed.",
+          "Instead of treating trading like a sequence of isolated clicks...",
+          "It treats it like an operational workflow.",
+          "It helps keep these parts connected:"
+        ],
         bullets: ["Market context", "Setup quality", "Readiness checks", "Execution state", "Risk controls", "Degraded conditions", "Post-trade review"]
       },
       aiIntegration: {
@@ -146,9 +157,20 @@ export const experiments: any[] = [
         { label: "Focus", value: "Human + agent collaboration" },
         { label: "Outcome", value: "Clearer execution, review, and handoff" }
       ],
-      problem: "Working with agents gets messy fast. The issue is usually not raw agent capability. It is everything around the agent: context scattered across chats, unclear task state, invisible blockers, weak handoffs, 'done' without proof, and expensive retries because history is hard to reconstruct. Most agent workflows generate activity. Fewer generate reliable progress.",
+      problem: [
+        "Working with agents gets messy fast.",
+        "The issue is usually not raw agent capability.",
+        "It is everything around the agent: context scattered across chats, unclear task state, invisible blockers, weak handoffs, 'done' without proof, and expensive retries...",
+        "Most agent workflows generate activity.",
+        "Fewer generate reliable progress."
+      ],
       theIdea: {
-        text: "AgentBoard was designed as the coordination layer between human intent and agent execution. Instead of treating agents like isolated chat threads, it treats them like collaborators inside a visible work system. It keeps these parts connected:",
+        text: [
+          "AgentBoard was designed as the coordination layer between human intent and agent execution.",
+          "Instead of treating agents like isolated chat threads...",
+          "It treats them like collaborators inside a visible work system.",
+          "It keeps these parts connected:"
+        ],
         bullets: ["Task context", "Project state", "Blockers", "Proof notes", "Artifacts", "Handoffs", "Next actions"]
       },
       howItWorks: [

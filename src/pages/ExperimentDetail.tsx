@@ -86,9 +86,11 @@ export function ExperimentDetail() {
         <div className="space-y-24">
           <section className="space-y-4 max-w-3xl">
             <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">The Problem</h2>
-            <p className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight">
-              {cs.problem}
-            </p>
+            <div className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight space-y-6">
+              {Array.isArray(cs.problem) 
+                ? cs.problem.map((p: any, i: number) => <p key={i}>{p}</p>)
+                : <p>{cs.problem}</p>}
+            </div>
           </section>
           
           {cs.aiIntegration && (
@@ -129,9 +131,11 @@ export function ExperimentDetail() {
             <section className="space-y-6 max-w-3xl ml-auto text-right">
               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">The Idea</h2>
               <div className="space-y-6">
-                <p className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight">
-                  {cs.theIdea.text}
-                </p>
+                <div className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight space-y-6">
+                  {Array.isArray(cs.theIdea.text)
+                    ? cs.theIdea.text.map((p: any, i: number) => <p key={i}>{p}</p>)
+                    : <p>{cs.theIdea.text}</p>}
+                </div>
                 <div className="flex flex-wrap justify-end gap-3">
                   {cs.theIdea.bullets.map((bullet: string, i: number) => (
                     <div key={i} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/5 px-3 py-1.5 rounded-full border border-blue-500/10">
