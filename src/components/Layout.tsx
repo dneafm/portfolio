@@ -20,7 +20,7 @@ export function Layout() {
   const isHome = location.pathname === "/";
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-zinc-50 dark:bg-zinc-950 dossier-grid text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+    <div className="min-h-screen flex flex-col relative bg-zinc-50 dark:bg-zinc-950 dossier-grid text-zinc-900 dark:text-zinc-100 transition-colors duration-300 overflow-x-hidden">
       {/* Global Noise Overlay */}
       <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] dark:opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
       

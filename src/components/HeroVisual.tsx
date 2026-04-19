@@ -9,7 +9,7 @@ export function HeroVisual() {
       initial={{ opacity: 0, scale: 0.94, y: 28 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut", delay: 0.08 }}
-      className="relative mx-auto -mt-2 flex h-[23rem] w-[130%] min-w-0 max-w-none -translate-x-[7%] items-center justify-center overflow-x-hidden overflow-y-visible px-0 md:mt-0 md:h-[52rem] md:w-full md:max-w-[52rem] md:translate-x-0 lg:h-[92rem] lg:max-w-[88rem] lg:overflow-visible"
+      className="relative mx-auto -mt-2 flex h-[28rem] w-[130%] min-w-0 max-w-none -translate-x-[7%] items-center justify-center overflow-visible px-0 md:mt-0 md:h-[52rem] md:w-full md:max-w-[52rem] md:translate-x-0 lg:h-[92rem] lg:max-w-[88rem] lg:overflow-visible"
     >
       <div className="absolute inset-0 bg-[linear-gradient(rgba(82,94,152,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(82,94,152,0.08)_1px,transparent_1px)] bg-[size:92px_92px] opacity-60 mix-blend-soft-light [mask-image:radial-gradient(circle_at_center,black,transparent_80%)] md:bg-[size:118px_118px] md:opacity-70" />
       <div className="absolute left-1/2 top-[28%] h-[18%] w-[34%] -translate-x-1/2 rounded-full bg-white/10 blur-3xl dark:bg-white/6 md:top-[28%] md:h-[20%] md:w-[30%]" />
