@@ -793,13 +793,13 @@ export function HeroCrystalScene() {
           <PresentationControls
             global={false}
             cursor={true}
-            snap={true}
-            speed={1.4}
+            snap={false}
+            speed={2}
             zoom={1}
             rotation={[0, 0, 0]}
-            polar={[-Math.PI / 5, Math.PI / 5]}
-            azimuth={[-Math.PI / 3, Math.PI / 3]}
-            config={{ mass: 1, tension: 170, friction: 22 }}
+            polar={[-Infinity, Infinity]}
+            azimuth={[-Infinity, Infinity]}
+            config={{ mass: 2.5, tension: 120, friction: 20 }}
           >
             <PrismGem />
           </PresentationControls>
