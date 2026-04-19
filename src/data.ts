@@ -75,70 +75,105 @@ export const notes = [
   }
 ];
 
-export type ExperimentVisualType =
-  | "signal-triage"
-  | "bot-control"
-  | "note-compiler"
-  | "ops-workflow"
-  | "community-router"
-  | "sybil-triage";
-
-export type Experiment = {
-  id: string;
-  title: string;
-  status: string;
-  description: string;
-  details: string;
-  visual: ExperimentVisualType;
-};
-
-export const experiments: Experiment[] = [
+export const experiments: any[] = [
   {
-    id: "exp-01",
-    title: "Crypto research triage",
-    status: "Concept",
-    description: "A concept for reviewing market signals, research fragments, and watchlist movement in one focused view for faster scanning and prioritization.",
-    details: "This experiment explores a high-density review interface for crypto analysts. It groups and surfaces raw inputs in a way that makes scanning and prioritization faster.",
-    visual: "signal-triage"
+    id: "dj-trade",
+    title: "DJ Trade: Standardizing Trading Workflow",
+    status: "Case Study",
+    description: "Built a tool to standardize trading workflow and reduce decision chaos during live execution.",
+    details: "DJ Trade turns manual trading from a messy, memory-heavy process into a more structured operating workflow, with clearer readiness checks, review surfaces, and execution context.",
+    caseStudy: {
+      headline: "Built a tool to standardize trading workflow and reduce decision chaos during live execution",
+      summary: "DJ Trade turns manual trading from a messy, memory-heavy process into a more structured operating workflow, with clearer readiness checks, review surfaces, and execution context.",
+      metaStrip: [
+        { label: "Role", value: "Product design, workflow design, trading operations UX" },
+        { label: "Focus", value: "Manual trading standardization" },
+        { label: "Outcome", value: "Clearer execution, review, and discipline" }
+      ],
+      problem: "Manual trading breaks down in predictable ways. The issue is rarely just market direction. It is the workflow around the trade: entries influenced by emotion, inconsistent setup judgment, scattered context, skipped risk checks, and weak post-trade review. A trader may have a method in theory, but not a system that helps apply it consistently in practice.",
+      theIdea: {
+        text: "DJ Trade was designed as a tool to standardize how trades are prepared, monitored, and reviewed. Instead of treating trading like a sequence of isolated clicks, it treats it like an operational workflow. It helps keep these parts connected:",
+        bullets: ["Market context", "Setup quality", "Readiness checks", "Execution state", "Risk controls", "Degraded conditions", "Post-trade review"]
+      },
+      aiIntegration: {
+        title: "DJ Trade brings AI directly into the trading workflow.",
+        description: "Instead of switching between charts, notes, and separate AI chats, traders can describe setups in plain language and get immediate decision support inside the product itself.",
+        examples: [
+          "“I’d buy on a chart like this”",
+          "“I’d sell when structure starts looking like that”",
+          "“Does this setup match my method?”",
+          "“What changed since the last review?”"
+        ],
+        closing: "By keeping AI inside the workflow, DJ Trade makes discretionary trading faster, clearer, and more consistent, without turning it into a black-box automation tool."
+      },
+      howItWorks: [
+        { title: "Structured setup review", desc: "A trade starts with clearer context, not just a feeling from the chart." },
+        { title: "Readiness before execution", desc: "The tool checks whether the setup is actually ready, instead of letting execution happen on impulse." },
+        { title: "Risk visible in the workflow", desc: "Position logic, degraded conditions, and trade readiness become part of the process, not an afterthought." },
+        { title: "Live context during the trade", desc: "The trader can monitor what changed, what matters, and whether conditions still support the position." },
+        { title: "Better exit and settlement visibility", desc: "Execution outcome and settlement details are easier to review after the trade closes." },
+        { title: "Post-trade learning loop", desc: "The trade becomes something that can be reviewed and improved, not just remembered vaguely." }
+      ],
+      usefulBullets: [
+        "Reduces emotional and inconsistent execution",
+        "Makes trade preparation more repeatable",
+        "Brings risk and readiness checks forward",
+        "Helps traders act with more structure under pressure",
+        "Improves visibility during degraded or uncertain conditions",
+        "Supports post-trade review and method refinement"
+      ],
+      outcome: "DJ Trade moves manual trading away from reactive chart-watching and toward a more standardized operational method. The value is not only better interface clarity. It is the ability to apply a trading method with more consistency, better checks, and stronger review.",
+      closingLine: "DJ Trade helps standardize manual trading so decisions rely less on memory and impulse, and more on structured workflow.",
+      images: [
+        { src: "/dj-trade-hero-reports-queue.png", role: "hero", story: "Reports queue / main review surface." },
+        { src: "/dj-trade-snapshot-drawer.png", role: "support-1", story: "Snapshot drawer showing drill-down depth and evidence inspection." },
+        { src: "/dj-trade-readiness-preflight.png", role: "support-2", story: "Readiness preflight screen ensuring execution hygiene before live action." },
+        { src: "/dj-trade-degraded-connection.png", role: "support-3", story: "Degraded connection screen showing resilience under imperfect live conditions." }
+      ]
+    }
   },
   {
-    id: "exp-02",
-    title: "Bot supervision panel",
-    status: "Concept / Early prototype",
-    description: "A dashboard concept for supervising automated trading flows while keeping manual intervention clear, fast, and deliberate.",
-    details: "A supervision interface for algorithmic trading. The focus is how quickly someone can understand a bot's state, inspect alerts, and take manual control if needed.",
-    visual: "bot-control"
-  },
-  {
-    id: "exp-03",
-    title: "AI Note Compiler",
-    status: "In progress",
-    description: "A workflow experiment for converting raw notes, scattered observations, and incomplete research into more structured summaries, insights, and reusable knowledge.",
-    details: "Using LLMs to synthesize fragmented research. The tool takes voice notes, screenshots, references, and text snippets, then restructures them into clearer insight objects and reusable knowledge blocks.",
-    visual: "note-compiler"
-  },
-  {
-    id: "exp-04",
-    title: "Team workflow tracker",
-    status: "Concept",
-    description: "A lightweight concept aimed at reducing friction in recurring coordination, structured input, and operational follow-through.",
-    details: "A tool for managing operational debt in small teams. It focuses on recurring tasks, structured updates, and closing the loop on things that usually slip between handoffs.",
-    visual: "ops-workflow"
-  },
-  {
-    id: "exp-05",
-    title: "Community inbox triage",
-    status: "Concept",
-    description: "An AI-assisted triage interface that sorts Discord and Telegram feeds by urgency, relevance, and follow-up intent.",
-    details: "This explores a routing layer for community operations. The goal is to turn noisy incoming chat streams into clearer queues for support, product feedback, reputation risk, and growth opportunities.",
-    visual: "community-router"
-  },
-  {
-    id: "exp-06",
-    title: "Retention and sybil review",
-    status: "Concept",
-    description: "A visual matrix that plots users based on on-chain behavior versus social and product engagement signals.",
-    details: "This experiment maps retention quality and sybil suspicion into one review surface. It is meant to help teams separate real user value from incentive-only activity faster.",
-    visual: "sybil-triage"
+    id: "agent-board",
+    title: "AgentBoard: Command Center for Human + AI Execution",
+    status: "Case Study / In Progress",
+    description: "A work-management layer for operators building with AI. It makes priorities, blockers, proofs, and next actions legible.",
+    details: "AgentBoard is built for real execution, not fake productivity. It gives you a live workspace where projects, blockers, proof of work, and agent activity stay connected, so you can move from idea to verified outcome without losing context.",
+    caseStudy: {
+      headline: "Built a coordination layer for working with AI agents without losing context, proof, or control",
+      summary: "AgentBoard helps humans and AI agents work inside a shared operational system, where tasks, blockers, verification, artifacts, and handoffs stay connected from start to finish.",
+      metaStrip: [
+        { label: "Role", value: "Product design, workflow design, system thinking" },
+        { label: "Focus", value: "Human + agent collaboration" },
+        { label: "Outcome", value: "Clearer execution, review, and handoff" }
+      ],
+      problem: "Working with agents gets messy fast. The issue is usually not raw agent capability. It is everything around the agent: context scattered across chats, unclear task state, invisible blockers, weak handoffs, 'done' without proof, and expensive retries because history is hard to reconstruct. Most agent workflows generate activity. Fewer generate reliable progress.",
+      theIdea: {
+        text: "AgentBoard was designed as the coordination layer between human intent and agent execution. Instead of treating agents like isolated chat threads, it treats them like collaborators inside a visible work system. It keeps these parts connected:",
+        bullets: ["Task context", "Project state", "Blockers", "Proof notes", "Artifacts", "Handoffs", "Next actions"]
+      },
+      howItWorks: [
+        { title: "Structured task intake", desc: "Each task starts with a goal, context, constraints, and priority." },
+        { title: "Shared project visibility", desc: "AgentBoard makes active, blocked, next, and completed work legible." },
+        { title: "Agent execution with continuity", desc: "Agents work from structured history instead of restarting from blank context." },
+        { title: "Proof tied to the task", desc: "Artifacts, notes, screenshots, and verification stay attached to the work." },
+        { title: "Human-in-the-loop review", desc: "Humans can approve, redirect, or refine without breaking continuity." },
+        { title: "Reusable workflow learning", desc: "Repeated patterns can become templates, runbooks, or stable systems." }
+      ],
+      usefulBullets: [
+        "Reduces context loss",
+        "Makes blockers visible earlier",
+        "Improves handoff quality",
+        "Makes agent work easier to review",
+        "Turns outputs into verifiable progress",
+        "Creates a foundation for repeatable human + agent workflows"
+      ],
+      outcome: "AgentBoard moves agent collaboration away from scattered conversations and toward a real operating system for work. The value is not just faster execution. It is better continuity, better review, and better trust in what got done.",
+      closingLine: "AgentBoard solves the coordination problem around AI agents, not just the execution problem.",
+      images: [
+        { src: "/agentboard-review-center.png", role: "hero", story: "Work Management or Review Center view." },
+        { src: "/agentboard-roadmap-view.png", role: "support-1", story: "Project overview showing multiple work lanes." },
+        { src: "/agentboard-detail-drawer.jpg", role: "support-2", story: "Proof screenshot showing blocker, proof note, or handoff flow." }
+      ]
+    }
   }
 ];

@@ -1,22 +1,282 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { ArrowLeft, Play, Info, Layers, Terminal, Cpu } from "lucide-react";
+import { ArrowLeft, Play, Info, CheckCircle2, ChevronRight, Zap } from "lucide-react";
 import { experiments } from "../data";
-import { cn } from "@/lib/utils";
+import { ExperimentVisualizer } from "../components/ExperimentVisualizer";
+import { DJTradeFlowchart } from "../components/DJTradeFlowchart";
+import { AgentBoardFlowchart } from "../components/AgentBoardFlowchart";
 
 export function ExperimentDetail() {
   const { id } = useParams();
-  const exp = experiments.find((e) => e.id === id);
+  const exp = experiments.find((e) => e.id === id) as any;
 
   if (!exp) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-6">
         <h1 className="text-2xl font-bold">Experiment not found</h1>
-        <Link to="/operator-lab" className="text-blue-600 hover:underline">Back to Experiments</Link>
+        <Link to="/experiments" className="text-blue-600 hover:underline">Back to Experiments</Link>
       </div>
     );
   }
 
+  // Case Study Layout
+  if (exp.caseStudy) {
+    const cs = exp.caseStudy;
+    return (
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="max-w-5xl mx-auto space-y-12 pb-20"
+      >
+        <header className="space-y-8">
+          <Link 
+            to="/experiments" 
+            className="inline-flex items-center gap-2 text-zinc-400 hover:text-blue-600 transition-colors group"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Back to Lab</span>
+          </Link>
+
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
+                STATUS: {exp.status}
+              </div>
+              <motion.div 
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-1.5 h-1.5 rounded-full bg-blue-500"
+              />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 leading-tight">
+              {cs.headline}
+            </h1>
+            <p className="text-xl text-zinc-500 dark:text-zinc-400 font-medium max-w-3xl leading-relaxed">
+              {cs.summary}
+            </p>
+
+            {cs.metaStrip && (
+              <div className="flex flex-wrap gap-8 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                {cs.metaStrip.map((meta: any, i: number) => (
+                  <div key={i} className="space-y-1">
+                    <div className="text-[10px] font-black uppercase tracking-widest text-zinc-400">{meta.label}</div>
+                    <div className="text-xs font-bold text-zinc-600 dark:text-zinc-300">{meta.value}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </header>
+
+        {cs.images && cs.images[0] && (
+          <section className="relative bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl group">
+            <img 
+              src={cs.images[0].src} 
+              alt={cs.images[0].story} 
+              className="w-full object-cover" 
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md p-4 text-xs font-mono text-zinc-300 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+              [HERO] {cs.images[0].story}
+            </div>
+          </section>
+        )}
+
+        {/* Problem + Idea Section */}
+        <div className="space-y-24">
+          <section className="space-y-4 max-w-3xl">
+            <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">The Problem</h2>
+            <p className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight">
+              {cs.problem}
+            </p>
+          </section>
+          
+          {cs.aiIntegration && (
+            <section className="py-16 border-y border-zinc-100 dark:border-zinc-800 space-y-12">
+               <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <h2 className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tighter leading-tight">
+                      {cs.aiIntegration.title}
+                    </h2>
+                    <p className="text-lg text-zinc-500 dark:text-zinc-400 font-medium leading-relaxed">
+                      {cs.aiIntegration.description}
+                    </p>
+                  </div>
+                  <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800 shadow-2xl space-y-6 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                      <Zap className="w-32 h-32 text-blue-500" />
+                    </div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 mb-4 flex items-center gap-2">
+                       <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" /> Natural Language Queries
+                    </div>
+                    <div className="space-y-3">
+                      {cs.aiIntegration.examples.map((example: string, i: number) => (
+                        <div key={i} className="flex items-center gap-3 bg-zinc-800/50 p-3 rounded-xl border border-zinc-700/50 hover:border-blue-500/30 transition-colors">
+                           <div className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+                           <span className="text-xs font-mono text-zinc-300">{example}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+               </div>
+               <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono italic text-center max-w-2xl mx-auto">
+                 {cs.aiIntegration.closing}
+               </p>
+            </section>
+          )}
+
+          {cs.theIdea && (
+            <section className="space-y-6 max-w-3xl ml-auto text-right">
+              <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">The Idea</h2>
+              <div className="space-y-6">
+                <p className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight">
+                  {cs.theIdea.text}
+                </p>
+                <div className="flex flex-wrap justify-end gap-3">
+                  {cs.theIdea.bullets.map((bullet: string, i: number) => (
+                    <div key={i} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/5 px-3 py-1.5 rounded-full border border-blue-500/10">
+                      <ChevronRight className="w-3 h-3" />
+                      {bullet}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {cs.outcome && !cs.theIdea && (
+            <section className="space-y-4 text-center py-12">
+               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">Outcome</h2>
+               <p className="text-2xl font-black text-emerald-600 dark:text-emerald-400 leading-relaxed tracking-tight max-w-3xl mx-auto">
+                 {cs.outcome}
+               </p>
+            </section>
+          )}
+        </div>
+
+        {cs.howItWorks && (
+          <section className="space-y-12">
+             <div className="flex flex-col gap-2">
+               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">How It Works</h2>
+               <p className="text-sm text-zinc-500">A structured breakdown of the system's operational logic and user workflow.</p>
+             </div>
+             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {cs.howItWorks.map((item: any, i: number) => (
+                  <div key={i} className="p-6 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800 rounded-2xl space-y-3">
+                    <h3 className="text-sm font-black uppercase tracking-tight text-zinc-800 dark:text-zinc-200">{item.title}</h3>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+             </div>
+          </section>
+        )}
+
+        {cs.bulletPoints && (
+          <section className="space-y-6 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800 rounded-2xl p-8">
+            <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">What Was Designed</h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {cs.bulletPoints.map((point: string, i: number) => (
+                <div key={i} className="flex gap-4">
+                  <CheckCircle2 className="w-5 h-5 text-blue-500 shrink-0" />
+                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{point}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {cs.usefulBullets && (
+          <section className="space-y-8 bg-blue-600 text-white rounded-3xl p-10 overflow-hidden relative group">
+             <Zap className="absolute top-[-20px] right-[-20px] w-64 h-64 text-blue-500/20 -rotate-12 group-hover:rotate-0 transition-transform duration-1000" />
+             <h2 className="text-xs font-black uppercase tracking-widest opacity-60 relative z-10">What Makes It Useful</h2>
+             <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 relative z-10">
+                {cs.usefulBullets.map((bullet: string, i: number) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-300" />
+                    <span className="text-lg font-bold tracking-tight">{bullet}</span>
+                  </div>
+                ))}
+             </div>
+          </section>
+        )}
+
+        {exp.id === "dj-trade" && (
+          <section className="space-y-8">
+             <div className="flex flex-col gap-2">
+               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">System Architecture</h2>
+               <p className="text-sm text-zinc-500 max-w-2xl">
+                 An end-to-end mapping of data flow, decision layers, and feedback loops that govern the DJ Trade operating environment.
+               </p>
+             </div>
+             <DJTradeFlowchart />
+          </section>
+        )}
+
+        {exp.id === "agent-board" && (
+          <section className="space-y-8">
+             <div className="flex flex-col gap-2">
+               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">Product Flow Architecture</h2>
+               <p className="text-sm text-zinc-500 max-w-2xl">
+                 The coordination protocol between human operators and AI agents, from intent capture to verified completion.
+               </p>
+             </div>
+             <AgentBoardFlowchart />
+          </section>
+        )}
+
+        {cs.images && cs.images.length > 1 && (
+          <section className="space-y-12">
+            <div className="flex flex-col gap-2 pt-8 border-t border-zinc-100 dark:border-zinc-800">
+              <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">Interface & Contextual Proof</h2>
+              <p className="text-sm text-zinc-500">How the visibility layer anchors coordination through artifacts and history.</p>
+            </div>
+            <div className="grid gap-20">
+              {cs.images.slice(1).map((img: any, i: number) => (
+                <div key={i} className="space-y-6 max-w-4xl mx-auto w-full">
+                  <div className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
+                    <img 
+                      src={img.src} 
+                      alt={img.story} 
+                      className="w-full object-cover" 
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="flex items-start gap-4 px-4">
+                    <div className="font-mono text-[10px] text-blue-500 font-bold bg-blue-500/10 px-2 py-1 rounded">
+                      FIG_{i + 1}
+                    </div>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 italic">
+                      {img.story}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {cs.outcome && cs.theIdea && (
+           <section className="pt-20 border-t border-zinc-100 dark:border-zinc-800 space-y-8 text-center max-w-3xl mx-auto">
+             <div className="space-y-4">
+               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">Outcome</h2>
+               <p className="text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight leading-snug">
+                 {cs.outcome}
+               </p>
+             </div>
+             {cs.closingLine && (
+               <div className="pt-8 border-t border-zinc-100 dark:border-zinc-800">
+                 <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-zinc-400">
+                   {cs.closingLine}
+                 </p>
+               </div>
+             )}
+           </section>
+        )}
+      </motion.div>
+    );
+  }
+
+  // Default Standard Layout
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -25,7 +285,7 @@ export function ExperimentDetail() {
     >
       <header className="space-y-8">
         <Link 
-          to="/operator-lab" 
+          to="/experiments" 
           className="inline-flex items-center gap-2 text-zinc-400 hover:text-blue-600 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -61,69 +321,7 @@ export function ExperimentDetail() {
 
       {/* Main Visualization Mockup */}
       <section className="relative aspect-video bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl">
-        {/* Technical Grid Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#18181b_1px,transparent_1px),linear-gradient(to_bottom,#18181b_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
-        
-        {/* Mock UI Elements */}
-        <div className="absolute inset-0 p-8 flex flex-col justify-between">
-          <div className="flex justify-between items-start">
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-lg">
-                <Terminal className="w-4 h-4 text-blue-400" />
-                <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">SYSTEM_READY</span>
-              </div>
-              <div className="bg-black/40 backdrop-blur-md border border-white/10 p-4 rounded-xl space-y-2 w-64">
-                <div className="flex justify-between text-[10px] font-mono text-zinc-500">
-                  <span>SIGNAL_STRENGTH</span>
-                  <span className="text-blue-400">98.2%</span>
-                </div>
-                <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: "98.2%" }}
-                    transition={{ duration: 2, delay: 0.5 }}
-                    className="h-full bg-blue-500"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-lg flex items-center justify-center">
-                  <Layers className="w-4 h-4 text-zinc-500" />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <div className="relative w-64 h-64 flex items-center justify-center">
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 border-2 border-dashed border-blue-500/20 rounded-full"
-              />
-              <motion.div 
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-4 border border-zinc-700 rounded-full"
-              />
-              <Cpu className="w-12 h-12 text-blue-500 animate-pulse" />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-end">
-            <div className="font-mono text-[10px] text-zinc-600 space-y-1">
-              <div>LATENCY: 12ms</div>
-              <div>UPTIME: 99.99%</div>
-            </div>
-            <div className="flex gap-4">
-              <div className="px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-md font-mono text-[10px] text-blue-400">
-                MODE: ANALYTIC
-              </div>
-            </div>
-          </div>
-        </div>
+        <ExperimentVisualizer id={exp.id} />
       </section>
 
       <div className="grid md:grid-cols-3 gap-12">
