@@ -761,7 +761,7 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute -inset-x-[15%] -top-[20%] -bottom-[45%] z-10 origin-center scale-[0.48] overflow-visible saturate-[1.34] md:-inset-x-[8%] md:-top-[14%] md:-bottom-[32%] md:scale-[0.5] md:overflow-visible md:saturate-[1.38] lg:-inset-x-[24%] lg:-top-[16%] lg:-bottom-[44%] lg:scale-[0.56] lg:saturate-[1.42]">
+    <div className="absolute -inset-x-[15%] -top-[20%] -bottom-[45%] z-10 origin-center scale-[0.48] overflow-visible saturate-[1.34] md:-inset-x-[20%] md:-top-[20%] md:-bottom-[45%] md:scale-[0.56] md:overflow-visible md:saturate-[1.38] lg:-inset-x-[30%] lg:-top-[24%] lg:-bottom-[50%] lg:scale-[0.78] lg:saturate-[1.42]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
