@@ -615,6 +615,28 @@ function PrismGem() {
           />
         </mesh>
 
+        <mesh ref={gemRef} geometry={geometry}>
+          <meshPhysicalMaterial
+            vertexColors
+            flatShading
+            roughness={0.045}
+            metalness={0.08}
+            transmission={0.012}
+            thickness={1.28}
+            ior={1.48}
+            reflectivity={1}
+            clearcoat={1}
+            clearcoatRoughness={0.02}
+            envMapIntensity={1.9}
+            bumpMap={voronoiDepthMap}
+            bumpScale={0.22}
+            transparent
+            opacity={1}
+            emissive={new THREE.Color("#374dff")}
+            emissiveIntensity={0.12}
+          />
+        </mesh>
+
         <mesh geometry={geometry} scale={1.014}>
           <meshBasicMaterial
             color="#d7e7ff"
