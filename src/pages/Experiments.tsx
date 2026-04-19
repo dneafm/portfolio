@@ -24,7 +24,7 @@ export function Experiments() {
             transition={{ duration: 0.8, delay: i * 0.1, ease: [0.23, 1, 0.32, 1] }}
           >
             <Link 
-              to={`/experiments/${exp.id}`}
+              to={`/operator-lab/${exp.id}`}
               className="group relative block bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm hover:border-blue-500/30 dark:hover:border-blue-400/20 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 p-8 space-y-8 rounded-2xl overflow-hidden"
             >
               {/* Corner Accents */}
