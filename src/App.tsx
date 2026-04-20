@@ -10,8 +10,6 @@ import { Casefiles } from "./pages/Casefiles";
 import { KyberNetwork } from "./pages/casefiles/KyberNetwork";
 import { Factor } from "./pages/casefiles/Factor";
 import { VNG } from "./pages/casefiles/VNG";
-import { DJTrade } from "./pages/casefiles/DJTrade";
-import { AgentBoard } from "./pages/casefiles/AgentBoard";
 import { Experiments } from "./pages/Experiments";
 import { ExperimentDetail } from "./pages/ExperimentDetail";
 import { Notes } from "./pages/Notes";
@@ -31,8 +29,8 @@ export default function App() {
             <Route path="casefiles/kyber-network" element={<KyberNetwork />} />
             <Route path="casefiles/factor" element={<Factor />} />
             <Route path="casefiles/vng" element={<VNG />} />
-            <Route path="casefiles/dj-trade" element={<DJTrade />} />
-            <Route path="casefiles/agentboard" element={<AgentBoard />} />
+            <Route path="casefiles/dj-trade" element={<Navigate to="/operator-lab/dj-trade" replace />} />
+            <Route path="casefiles/agentboard" element={<Navigate to="/operator-lab/agent-board" replace />} />
             <Route path="operator-lab" element={<Experiments />} />
             <Route path="operator-lab/:id" element={<ExperimentDetail />} />
             <Route path="experiments" element={<Navigate to="/operator-lab" replace />} />

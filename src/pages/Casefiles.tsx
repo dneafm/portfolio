@@ -4,24 +4,6 @@ import { motion } from "motion/react";
 
 const casefiles = [
   {
-    id: "dj-trade",
-    title: "DJ Trade",
-    subtitle: "A trading operations surface built for monitoring, review, and execution clarity",
-    environment: "Trading operations / decision support",
-    problem: "Dense trading activity was fragmented across reports, state changes, and execution signals, making it harder to scan priorities and act with confidence.",
-    role: "Product design, workflow design, interface direction",
-    outcome: "Turned noisy trading context into a clearer operational surface for review, comparison, and follow-up.",
-  },
-  {
-    id: "agentboard",
-    title: "AgentBoard / HumanBoard",
-    subtitle: "A board-native decision system for turning messy information into prioritized action",
-    environment: "Knowledge operations / AI-assisted workflow",
-    problem: "Knowledge work and AI context were fragmenting across notes, chats, and backlog clutter, making prioritization weaker and operational memory more fragile.",
-    role: "Product concept, workflow design, information architecture",
-    outcome: "Turned scattered ideas, task context, and handoffs into a structured operating layer with clearer prioritization and review.",
-  },
-  {
     id: "kyber-network",
     title: "Kyber Network",
     subtitle: "Designing clarity in a fast-moving DeFi environment",

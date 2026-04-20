@@ -102,6 +102,8 @@ export const experiments: any[] = [
           "DJ Trade was designed as a tool to standardize how trades are prepared, monitored, and reviewed.",
           "Instead of treating trading like a sequence of isolated clicks...",
           "It treats it like an operational workflow.",
+          "DJ Trade is where new strategies are forged, tested, and turned into operational workflows.",
+          "Reports are treated as live workflow objects rather than static outputs, so the interface can support follow-up and judgment instead of just display.",
           "It helps keep these parts connected:"
         ],
         bullets: ["Market context", "Setup quality", "Readiness checks", "Execution state", "Risk controls", "Degraded conditions", "Post-trade review"]
@@ -169,6 +171,7 @@ export const experiments: any[] = [
           "AgentBoard was designed as the coordination layer between human intent and agent execution.",
           "Instead of treating agents like isolated chat threads...",
           "It treats them like collaborators inside a visible work system.",
+          "The system is opinionated about priority, proof, blockers, and next action, so work stays reviewable instead of dissolving into chat history.",
           "It keeps these parts connected:"
         ],
         bullets: ["Task context", "Project state", "Blockers", "Proof notes", "Artifacts", "Handoffs", "Next actions"]

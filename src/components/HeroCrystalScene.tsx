@@ -761,20 +761,21 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute -inset-[20%] z-10 origin-center overflow-visible saturate-[1.34]">
+    <div className="absolute inset-x-[2%] -top-[2%] -bottom-[12%] z-10 origin-center scale-[0.5] overflow-x-hidden overflow-y-visible saturate-[1.34] md:inset-x-[1%] md:-top-[8%] md:-bottom-[22%] md:scale-[0.48] md:saturate-[1.36] lg:-inset-x-[24%] lg:-top-[16%] lg:-bottom-[44%] lg:scale-[0.56] lg:overflow-visible lg:saturate-[1.42]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute inset-x-[20%] top-[30%] h-28 rounded-full bg-blue-400/12 blur-3xl md:inset-x-[24%] md:h-30"
+        className="pointer-events-none absolute inset-x-[24%] top-[30%] h-28 rounded-full bg-blue-400/12 blur-3xl md:inset-x-[26%] md:h-30"
       />
       <motion.div
         animate={{ opacity: [0.08, 0.18, 0.08] }}
         transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-        className="pointer-events-none absolute right-[12%] top-[34%] h-32 w-32 rounded-full bg-violet-400/12 blur-3xl md:right-[16%] md:h-40 md:w-40"
+        className="pointer-events-none absolute right-[16%] top-[34%] h-32 w-32 rounded-full bg-violet-400/12 blur-3xl md:right-[18%] md:h-40 md:w-40"
       />
 
-      <Canvas className="h-full w-full" camera={{ position: [0.04, 0.08, 20.6], fov: 20.5 }} dpr={[1, 1.25]} gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}>
-        <fog attach="fog" args={["#070915", 18, 25]} />
+<<<<<<< Updated upstream
+      <Canvas className="h-full w-full" camera={{ position: [0.04, 0.08, 11.8], fov: 19.8 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
+        <fog attach="fog" args={["#070915", 9, 16]} />
         <Environment resolution={128}>
           <Lightformer form="ring" color="#dfe8ff" intensity={1.6} scale={5.2} position={[0, 0, 4.8]} />
           <Lightformer form="rect" color="#5f93ff" intensity={1.1} scale={[5.8, 1.4]} position={[-3.8, 1.4, 2.8]} rotation={[0, 0.5, 0.18]} />

@@ -30,6 +30,12 @@ const journeyChapters = [
 const proofCards = [
   {
     label: "Casefile",
+    title: "DJ Trade",
+    description: "An operator-facing trading surface focused on monitoring, review, and decision clarity under uncertainty.",
+    to: "/casefiles/dj-trade",
+  },
+  {
+    label: "Casefile",
     title: "Kyber Network",
     description: "Designing for DeFi pressure taught me how to communicate clearly in unstable environments.",
     to: "/casefiles/kyber-network",
