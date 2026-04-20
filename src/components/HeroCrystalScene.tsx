@@ -773,7 +773,6 @@ export function HeroCrystalScene() {
         className="pointer-events-none absolute right-[16%] top-[34%] h-32 w-32 rounded-full bg-violet-400/12 blur-3xl md:right-[18%] md:h-40 md:w-40"
       />
 
-<<<<<<< Updated upstream
       <Canvas className="h-full w-full" camera={{ position: [0.04, 0.08, 11.8], fov: 19.8 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
         <fog attach="fog" args={["#070915", 9, 16]} />
         <Environment resolution={128}>
