@@ -29,10 +29,10 @@ const journeyChapters = [
 
 const proofCards = [
   {
-    label: "Casefile",
+    label: "Operator Lab",
     title: "DJ Trade",
     description: "An operator-facing trading surface focused on monitoring, review, and decision clarity under uncertainty.",
-    to: "/casefiles/dj-trade",
+    to: "/operator-lab/dj-trade",
   },
   {
     label: "Casefile",
