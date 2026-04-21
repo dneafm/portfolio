@@ -7,14 +7,14 @@ const artifacts = [
     detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
   },
   {
-    src: "/dj-trade/dj-trade-readiness-preflight.png",
-    label: "READINESS_PREFLIGHT",
-    detail: "Preflight view shows how readiness and execution gating are surfaced before the trade moves forward.",
+    src: "/dj-trade/dj-trade-strategy-lab.png",
+    label: "STRATEGY_LAB",
+    detail: "Strategy Lab turns a plain-language trading idea into a structured drafting workflow with role-based inputs and an explicit output format.",
   },
   {
-    src: "/dj-trade/dj-trade-compare-view.png",
-    label: "COMPARE_VIEW",
-    detail: "Comparison flow gives the operator a cleaner way to inspect deltas, context shifts, and decision impact.",
+    src: "/dj-trade/dj-trade-workstation-new-bot.png",
+    label: "WORKSTATION_SETUP",
+    detail: "The workstation bot setup view keeps symbols, timeframes, and crew selection readable in one place before the workflow becomes live.",
   },
 ];
 
