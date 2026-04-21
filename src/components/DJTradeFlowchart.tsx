@@ -1,19 +1,13 @@
 import React from "react";
-import { motion } from "motion/react";
 import { 
-  Eye, 
-  Search, 
   PenTool, 
+  LayoutDashboard,
   ShieldCheck, 
   Zap, 
   RotateCcw,
-  ArrowRight,
   ArrowDown,
-  Activity,
-  CheckCircle2,
   TrendingUp,
   XCircle,
-  AlertTriangle
 } from "lucide-react";
 
 export function DJTradeFlowchart() {
@@ -21,20 +15,21 @@ export function DJTradeFlowchart() {
     <div className="relative left-1/2 w-screen max-w-none -translate-x-1/2 px-4 sm:px-6 lg:px-10 2xl:px-16">
       <div className="mx-auto flex w-full max-w-[1500px] flex-col items-center py-8 sm:py-12">
         
-        {/* Step 1: Market context forms */}
+        {/* Step 1: Build strategy */}
         <DiagramBox 
-          title="Market context forms" 
-          icon={<Eye className="w-4 h-4 text-blue-400" />}
+          title="Build strategy in Strategy Forge" 
+          subtitle="thesis • rules • setup"
+          icon={<PenTool className="w-4 h-4 text-blue-400" />}
           color="border-blue-500/30"
         />
 
         <VerticalArrow />
 
-        {/* Step 2: DJ Trade structures setup */}
+        {/* Step 2: Configure workstation */}
         <DiagramBox 
-          title="DJ Trade structures setup" 
-          subtitle="setup • risk • readiness"
-          icon={<Search className="w-4 h-4 text-teal-400" />}
+          title="Set up the Workstation" 
+          subtitle="bot • risk • readiness"
+          icon={<LayoutDashboard className="w-4 h-4 text-teal-400" />}
           color="border-teal-500/30"
           highlight
         />
@@ -45,7 +40,7 @@ export function DJTradeFlowchart() {
         <div className="flex flex-col items-center relative">
           <div className="px-8 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl flex items-center gap-3 shadow-xl z-10">
             <ShieldCheck className="w-4 h-4 text-red-500" />
-            <span className="text-xs font-black uppercase text-white tracking-widest">Ready to trade?</span>
+            <span className="text-xs font-black uppercase text-white tracking-widest">Execution ready?</span>
           </div>
           
           <VerticalArrow label="Is Valid?" />
@@ -58,7 +53,7 @@ export function DJTradeFlowchart() {
                  No <XCircle className="w-3 h-3 text-red-500" />
                </div>
                <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-[9px] font-mono text-red-400 uppercase tracking-tighter">
-                 Wait / Refine / Block
+                 Refine setup / keep blocked
                </div>
                
                {/* Loop Arrow Visual (back to market context) */}
@@ -75,8 +70,8 @@ export function DJTradeFlowchart() {
                </div>
                <div className="flex flex-col items-center">
                   <DiagramBox 
-                    title="Execute the trade" 
-                    subtitle="enter • monitor • exit"
+                    title="Run and monitor the trade" 
+                    subtitle="entry • management • exit"
                     icon={<Zap className="w-4 h-4 text-amber-500" />}
                     color="border-emerald-500/30"
                   />
@@ -84,7 +79,8 @@ export function DJTradeFlowchart() {
                   <VerticalArrow />
 
                   <DiagramBox 
-                    title="Review + reconcile result" 
+                    title="Review trade result" 
+                    subtitle="compare • reconcile • learn"
                     icon={<RotateCcw className="w-4 h-4 text-zinc-400" />}
                     color="border-zinc-700"
                   />
@@ -94,8 +90,8 @@ export function DJTradeFlowchart() {
                   <div className="p-6 bg-blue-500/5 border border-blue-500/40 rounded-3xl flex flex-col items-center gap-3 shadow-2xl shadow-blue-500/5">
                     <TrendingUp className="w-8 h-8 text-blue-500" />
                     <div className="text-center">
-                        <div className="text-xs font-black text-white uppercase tracking-widest">Consistency Gain</div>
-                        <div className="text-[9px] font-mono text-zinc-500 mt-1 uppercase">Improved method consistency</div>
+                        <div className="text-xs font-black text-white uppercase tracking-widest">Repeatable Workflow</div>
+                        <div className="text-[9px] font-mono text-zinc-500 mt-1 uppercase">strategy → workstation → review</div>
                     </div>
                   </div>
                </div>

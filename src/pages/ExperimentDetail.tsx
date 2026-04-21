@@ -173,10 +173,10 @@ export function ExperimentDetail() {
         {exp.id === "dj-trade" && (
           <section className="space-y-8">
              <div className="flex flex-col gap-2">
-               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">System Architecture</h2>
-               <p className="text-sm text-zinc-500 max-w-2xl">
-                 An end-to-end mapping of data flow, decision layers, and feedback loops that govern the DJ Trade operating environment.
-               </p>
+              <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">User Journey</h2>
+              <p className="text-sm text-zinc-500 max-w-2xl">
+                A step-by-step view of how a trader moves from strategy creation to workstation setup, execution, and review inside DJ Trade.
+              </p>
              </div>
              <DJTradeFlowchart />
           </section>
@@ -219,10 +219,10 @@ export function ExperimentDetail() {
         {exp.id === "agent-board" && (
           <section className="space-y-8">
              <div className="flex flex-col gap-2">
-               <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">Product Flow Architecture</h2>
-               <p className="text-sm text-zinc-500 max-w-2xl">
-                 The coordination protocol between human operators and AI agents, from intent capture to verified completion.
-               </p>
+              <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">User Journey</h2>
+              <p className="text-sm text-zinc-500 max-w-2xl">
+                A step-by-step view of how a user plans milestones and tasks, hands work off to agents, then reviews outcomes and tracks progress in AgentBoard.
+              </p>
              </div>
              <AgentBoardFlowchart />
           </section>

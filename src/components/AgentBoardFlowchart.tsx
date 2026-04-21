@@ -1,15 +1,10 @@
 import React from "react";
-import { motion } from "motion/react";
 import { 
-  User, 
-  Layout, 
+  ClipboardList,
+  Layout,
   Bot, 
   CheckCircle2, 
   RefreshCcw, 
-  ArrowRight,
-  ChevronRight,
-  Database,
-  Terminal,
   FileText,
   Activity,
   ArrowDown
@@ -20,19 +15,20 @@ export function AgentBoardFlowchart() {
     <div className="relative left-1/2 w-screen max-w-none -translate-x-1/2 px-4 sm:px-6 lg:px-10 2xl:px-16">
       <div className="mx-auto flex w-full max-w-[1500px] flex-col items-center py-8 sm:py-12">
         
-        {/* Step 1: Human Sets Goal */}
+        {/* Step 1: Plan milestones and tasks */}
         <DiagramBox 
-          title="Human sets goal" 
-          icon={<User className="w-4 h-4 text-blue-400" />}
+          title="List milestones and tasks" 
+          subtitle="scope • priorities • sequencing"
+          icon={<ClipboardList className="w-4 h-4 text-blue-400" />}
           color="border-blue-500/30"
         />
 
         <VerticalArrow />
 
-        {/* Step 2: AgentBoard Structures Work */}
+        {/* Step 2: Structure work */}
         <DiagramBox 
-          title="AgentBoard structures work" 
-          subtitle="context • state • blockers"
+          title="AgentBoard structures the board" 
+          subtitle="context • blockers • progress"
           icon={<Layout className="w-4 h-4 text-teal-400" />}
           color="border-teal-500/30"
           highlight
@@ -40,19 +36,20 @@ export function AgentBoardFlowchart() {
 
         <VerticalArrow />
 
-        {/* Step 3: Agent Executes Task */}
+        {/* Step 3: Handoff to agents */}
         <DiagramBox 
-          title="Agent executes task" 
-          subtitle="writes • builds • tests"
+          title="Hand off implementation to agents" 
+          subtitle="assign • execute • update"
           icon={<Bot className="w-4 h-4 text-orange-400" />}
           color="border-orange-500/30"
         />
 
         <VerticalArrow />
 
-        {/* Step 4: Proof + Status Recorded */}
+        {/* Step 4: Review result and record proof */}
         <DiagramBox 
-          title="Proof + status recorded" 
+          title="Review results and record proof" 
+          subtitle="artifacts • notes • status"
           icon={<FileText className="w-4 h-4 text-zinc-400" />}
           color="border-zinc-700"
         />
@@ -63,10 +60,10 @@ export function AgentBoardFlowchart() {
         <div className="flex flex-col items-center relative">
           <div className="px-8 py-4 bg-zinc-900 border border-zinc-700 rounded-2xl flex items-center gap-3 shadow-xl z-10">
             <Activity className="w-4 h-4 text-blue-500" />
-            <span className="text-xs font-black uppercase text-white tracking-widest">Human reviews</span>
+            <span className="text-xs font-black uppercase text-white tracking-widest">Progress on track?</span>
           </div>
           
-          <VerticalArrow label="Is Approved?" />
+          <VerticalArrow label="Keep moving?" />
 
           {/* Logic Split */}
           <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:gap-32">
@@ -76,7 +73,7 @@ export function AgentBoardFlowchart() {
                  No <RefreshCcw className="w-3 h-3 group-hover:rotate-180 transition-transform duration-700" />
                </div>
                <div className="p-3 bg-orange-500/10 border border-orange-500/30 rounded-xl text-[9px] font-mono text-orange-400 uppercase tracking-tighter">
-                 Refine / Unblock / Iterate
+                 Refine / unblock / hand back
                </div>
                
                {/* Loop Arrow Visual */}
@@ -94,8 +91,8 @@ export function AgentBoardFlowchart() {
                <div className="p-6 bg-emerald-500/5 border border-emerald-500/40 rounded-3xl flex flex-col items-center gap-3 shadow-2xl shadow-emerald-500/5">
                  <CheckCircle2 className="w-8 h-8 text-emerald-500" />
                  <div className="text-center">
-                    <div className="text-xs font-black text-white uppercase tracking-widest">Verified Completion</div>
-                    <div className="text-[9px] font-mono text-zinc-500 mt-1 uppercase">artifacts • proof • next workflow</div>
+                    <div className="text-xs font-black text-white uppercase tracking-widest">Tracked Progress</div>
+                    <div className="text-[9px] font-mono text-zinc-500 mt-1 uppercase">milestones • tasks • review loop</div>
                  </div>
                </div>
             </div>
