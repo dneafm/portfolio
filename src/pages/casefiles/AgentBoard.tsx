@@ -9,12 +9,12 @@ const artifacts = [
   {
     src: "/casefiles/agentboard/agentboard-project-milestones.png",
     label: "PROJECT_MILESTONES",
-    detail: "Compact project cards and milestone progress keep sequencing and execution state legible at a glance.",
+    detail: "Compact project cards keep sequencing and execution state legible at a glance.",
   },
   {
-    src: "/agentboard/agentboard-detail-drawer.jpg",
-    label: "DETAIL_DRAWER",
-    detail: "Task context, blockers, proofs, and handoffs stay attached to the work instead of disappearing into chat history.",
+    src: "/casefiles/agentboard/agentboard-execution-os-overview.png",
+    label: "CURRENT_SHELL",
+    detail: "The casefile now stays on fresh execution-shell imagery instead of older detail-drawer captures.",
   },
 ];
 

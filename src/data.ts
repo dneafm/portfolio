@@ -80,15 +80,15 @@ export const experiments: any[] = [
     id: "dj-trade",
     title: "DJ Trade: Standardizing Trading Workflow",
     status: "Case Study",
-    description: "Built a trading operations surface that turns roadmap milestones, readiness checks, and review loops into a clearer execution workflow.",
-    details: "DJ Trade turns manual trading from a messy, memory-heavy process into a structured operating workflow where milestone progress, readiness gates, review surfaces, and live execution context stay visible together.",
+    description: "Built a trading operations surface that turns readiness checks and review loops into a clearer execution workflow.",
+    details: "DJ Trade turns manual trading from a messy, memory-heavy process into a structured operating workflow where setup quality, review surfaces, and live execution context stay visible together.",
     caseStudy: {
-      headline: "Built a trading workflow surface that makes milestone progress, execution readiness, and review state visible before and during live decisions",
-      summary: "DJ Trade turns manual trading from a messy, memory-heavy process into a structured operating workflow where roadmap milestones, readiness checks, review surfaces, and execution context stay connected.",
+      headline: "Built a trading workflow surface that makes execution readiness and review state visible before and during live decisions",
+      summary: "DJ Trade turns manual trading from a messy, memory-heavy process into a structured operating workflow where readiness checks, review surfaces, and execution context stay connected.",
       metaStrip: [
         { label: "Role", value: "Product design, workflow design, trading operations UX" },
         { label: "Focus", value: "Trading workflow standardization" },
-        { label: "Outcome", value: "Clearer milestone progress, execution, and review discipline" }
+        { label: "Outcome", value: "Clearer execution and review discipline" }
       ],
       problem: [
         "Manual trading breaks down in predictable ways.",
@@ -103,11 +103,11 @@ export const experiments: any[] = [
           "Instead of treating trading like a sequence of isolated clicks...",
           "It treats it like an operational workflow.",
           "DJ Trade is where new strategies are forged, tested, and turned into operational workflows.",
-          "That means the product has to show real progress through the workflow itself, not just raw activity or generic status labels.",
+          "That means the product has to show real progress through the workflow itself, not just raw activity or vague status labels.",
           "Reports are treated as live workflow objects rather than static outputs, so the interface can support follow-up and judgment instead of just display.",
           "It helps keep these parts connected:"
         ],
-        bullets: ["Market context", "Milestone progress", "Setup quality", "Readiness checks", "Execution state", "Risk controls", "Degraded conditions", "Post-trade review"]
+        bullets: ["Market context", "Setup quality", "Readiness checks", "Execution state", "Risk controls", "Degraded conditions", "Post-trade review"]
       },
       aiIntegration: {
         title: "DJ Trade brings AI directly into the trading workflow.",
@@ -121,7 +121,6 @@ export const experiments: any[] = [
         closing: "By keeping AI inside the workflow, DJ Trade makes discretionary trading faster, clearer, and more consistent, without turning it into a black-box automation tool."
       },
       howItWorks: [
-        { title: "Milestones track real workflow progress", desc: "The system surfaces concrete stages like first paper entry, first round-trip close, and repeatable profitable loops instead of pretending generic status buckets are enough." },
         { title: "Structured setup review", desc: "A trade starts with clearer context, not just a feeling from the chart." },
         { title: "Readiness before execution", desc: "The tool checks whether the setup is actually ready, instead of letting execution happen on impulse." },
         { title: "Risk visible in the workflow", desc: "Position logic, degraded conditions, and trade readiness become part of the process, not an afterthought." },
@@ -131,21 +130,18 @@ export const experiments: any[] = [
       ],
       usefulBullets: [
         "Reduces emotional and inconsistent execution",
-        "Makes milestone progress legible instead of inferred",
         "Makes trade preparation more repeatable",
         "Brings risk and readiness checks forward",
         "Helps traders act with more structure under pressure",
         "Improves visibility during degraded or uncertain conditions",
         "Supports post-trade review and method refinement"
       ],
-      outcome: "DJ Trade moves manual trading away from reactive chart-watching and toward a more standardized operational method. The value is not only better interface clarity. It is the ability to show where the operator is in the workflow, what milestone has really been achieved, and what must be true before the next action is safe.",
-      closingLine: "DJ Trade helps standardize manual trading so progress is tied to real workflow milestones, not memory, impulse, or vague status labels.",
+      outcome: "DJ Trade moves manual trading away from reactive chart-watching and toward a more standardized operational method. The value is not only better interface clarity. It is the ability to show where the operator is in the workflow and what must be true before the next action is safe.",
+      closingLine: "DJ Trade helps standardize manual trading so progress is tied to real workflow structure, not memory, impulse, or vague status labels.",
       images: [
-        { src: "/dj-trade/dj-trade-hero-reports-queue.png", role: "hero", story: "Control-surface overview showing live state, reporting pressure, and operator guidance in one trading workspace." },
-        { src: "/dj-trade/dj-trade-snapshot-drawer.png", role: "support-1", story: "Snapshot drawer showing drill-down depth, evidence inspection, and review continuity." },
-        { src: "/dj-trade/dj-trade-compare-view.png", role: "support-2", story: "Compare view for evaluating what changed and why it matters before acting." },
-        { src: "/dj-trade/dj-trade-degraded-connection.png", role: "support-3", story: "Degraded-state handling that keeps operator trust visible under imperfect live conditions." },
-        { src: "/dj-trade/dj-trade-readiness-preflight.png", role: "support-4", story: "Readiness and preflight checks make the next milestone explicit before execution instead of relying on vague done/next labels." }
+        { src: "/dj-djtrade_v3_live_shell_overview.png", role: "hero", story: "Control-surface overview showing live state, system health, and operator guidance in one trading workspace." },
+        { src: "/dj-djtrade_v3_live_shell_overview.png", role: "support-1", story: "The same fresh shell view keeps the showcase anchored on the current UI instead of older internal captures." },
+        { src: "/dj-djtrade_v3_live_shell_overview.png", role: "support-2", story: "Showcase screenshots now stay consistent with the latest live shell rather than mixing older reporting-era images." }
       ]
     }
   },
@@ -200,8 +196,8 @@ export const experiments: any[] = [
       closingLine: "AgentBoard solves the coordination problem around AI agents, not just the execution problem.",
       images: [
         { src: "/casefiles/agentboard/agentboard-execution-os-overview.png", role: "hero", story: "Execution workspace overview showing project navigation, current focus, task picks, blockers, and handoff in one surface." },
-        { src: "/casefiles/agentboard/agentboard-project-milestones.png", role: "support-1", story: "Project and milestone view showing compact project cards, milestone progress, and board-level execution structure." },
-        { src: "/agentboard-detail-drawer.jpg", role: "support-2", story: "Detail drawer showing blocker, proof note, and handoff depth instead of shallow task tracking." }
+        { src: "/casefiles/agentboard/agentboard-project-milestones.png", role: "support-1", story: "Project view showing compact project cards and board-level execution structure." },
+        { src: "/casefiles/agentboard/agentboard-execution-os-overview.png", role: "support-2", story: "Fresh overview capture keeps the showcase aligned with the current AgentBoard shell instead of older review-center imagery." }
       ]
     }
   }

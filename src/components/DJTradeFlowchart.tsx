@@ -18,8 +18,8 @@ import {
 
 export function DJTradeFlowchart() {
   return (
-    <div className="w-full bg-[#0a0a0a] border border-zinc-800 rounded-3xl p-8 overflow-x-auto relative">
-      <div className="min-w-[1000px] flex flex-col items-center py-12">
+    <div className="relative left-1/2 w-screen max-w-none -translate-x-1/2 px-4 sm:px-6 lg:px-10 2xl:px-16">
+      <div className="mx-auto flex w-full max-w-[1500px] flex-col items-center py-8 sm:py-12">
         
         {/* Step 1: Market context forms */}
         <DiagramBox 
@@ -51,7 +51,7 @@ export function DJTradeFlowchart() {
           <VerticalArrow label="Is Valid?" />
 
           {/* Logic Split */}
-          <div className="flex items-start gap-32">
+          <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:gap-32">
             {/* NO Path (Wait / Refine / Block) */}
             <div className="flex flex-col items-center group">
                <div className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-2 flex items-center gap-2">
@@ -62,7 +62,7 @@ export function DJTradeFlowchart() {
                </div>
                
                {/* Loop Arrow Visual (back to market context) */}
-               <div className="absolute left-[20%] top-[40%] h-[45%] w-px border-l border-dashed border-red-500/40 -z-0">
+               <div className="absolute left-[12%] top-[42%] hidden h-[43%] w-px border-l border-dashed border-red-500/40 -z-0 lg:block">
                   <div className="absolute top-0 left-0 w-24 h-px border-t border-dashed border-red-500/40" />
                   <div className="absolute bottom-0 left-0 w-24 h-px border-b border-dashed border-red-500/40" />
                </div>
@@ -110,7 +110,7 @@ export function DJTradeFlowchart() {
 
 function DiagramBox({ title, subtitle, icon, color, highlight = false }: { title: string; subtitle?: string; icon: React.ReactNode; color: string; highlight?: boolean }) {
   return (
-    <div className={`px-10 py-6 rounded-2xl border ${color} ${highlight ? 'bg-zinc-900/50 shadow-2xl' : 'bg-zinc-950/50'} flex flex-col items-center gap-2 min-w-[320px] backdrop-blur-sm`}>
+    <div className={`flex w-full max-w-[min(92vw,420px)] flex-col items-center gap-2 rounded-2xl border px-6 py-5 sm:px-10 sm:py-6 ${color} ${highlight ? 'bg-zinc-900/50 shadow-2xl' : 'bg-zinc-950/50'} backdrop-blur-sm`}>
       <div className="p-2 rounded-full bg-zinc-900 border border-zinc-800 mb-1">
         {icon}
       </div>

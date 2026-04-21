@@ -94,17 +94,17 @@ export function ExperimentDetail() {
           </section>
           
           {cs.theIdea && (
-            <section className="space-y-6 max-w-3xl ml-auto text-right">
-              <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400">The Idea</h2>
+            <section className="space-y-5 max-w-3xl ml-auto text-right">
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-400">The Idea</h2>
               <div className="space-y-6">
-                <div className="text-xl text-zinc-600 dark:text-zinc-300 leading-relaxed font-black tracking-tight space-y-6">
+                <div className="text-lg text-zinc-600 dark:text-zinc-300/90 leading-8 font-medium tracking-normal space-y-5">
                   {Array.isArray(cs.theIdea.text)
                     ? cs.theIdea.text.map((p: any, i: number) => <p key={i}>{p}</p>)
                     : <p>{cs.theIdea.text}</p>}
                 </div>
                 <div className="flex flex-wrap justify-end gap-3">
                   {cs.theIdea.bullets.map((bullet: string, i: number) => (
-                    <div key={i} className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/5 px-3 py-1.5 rounded-full border border-blue-500/10">
+                    <div key={i} className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-300 bg-blue-500/5 px-3 py-1.5 rounded-full border border-blue-500/10">
                       <ChevronRight className="w-3 h-3" />
                       {bullet}
                     </div>
@@ -156,14 +156,14 @@ export function ExperimentDetail() {
         )}
 
         {cs.usefulBullets && (
-          <section className="space-y-8 bg-blue-600 text-white rounded-3xl p-10 overflow-hidden relative group">
-             <Zap className="absolute top-[-20px] right-[-20px] w-64 h-64 text-blue-500/20 -rotate-12 group-hover:rotate-0 transition-transform duration-1000" />
-             <h2 className="text-xs font-black uppercase tracking-widest opacity-60 relative z-10">What Makes It Useful</h2>
+          <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-100/80 p-10 text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900/45 dark:text-zinc-200 group space-y-8">
+             <Zap className="absolute top-[-20px] right-[-20px] w-64 h-64 text-zinc-400/10 dark:text-zinc-500/10 -rotate-12 group-hover:rotate-0 transition-transform duration-1000" />
+             <h2 className="relative z-10 text-xs font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-500">What Makes It Useful</h2>
              <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 relative z-10">
                 {cs.usefulBullets.map((bullet: string, i: number) => (
                   <div key={i} className="flex items-center gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-300" />
-                    <span className="text-lg font-bold tracking-tight">{bullet}</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
+                    <span className="text-base font-medium tracking-tight text-zinc-700 dark:text-zinc-200">{bullet}</span>
                   </div>
                 ))}
              </div>
