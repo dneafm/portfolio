@@ -761,16 +761,16 @@ function PrismGem() {
 
 export function HeroCrystalScene() {
   return (
-    <div className="absolute inset-x-[2%] -top-[2%] -bottom-[12%] z-10 origin-center scale-[0.5] overflow-x-hidden overflow-y-visible saturate-[1.34] md:inset-x-[1%] md:-top-[8%] md:-bottom-[22%] md:scale-[0.48] md:saturate-[1.36] lg:-inset-x-[24%] lg:-top-[16%] lg:-bottom-[44%] lg:scale-[0.56] lg:overflow-visible lg:saturate-[1.42]">
+    <div className="absolute inset-x-[-4%] -top-[1%] -bottom-[10%] z-10 origin-center scale-[0.62] overflow-x-hidden overflow-y-visible saturate-[1.36] md:inset-x-[1%] md:-top-[8%] md:-bottom-[22%] md:scale-[0.48] md:saturate-[1.36] lg:-inset-x-[24%] lg:-top-[16%] lg:-bottom-[44%] lg:scale-[0.56] lg:overflow-visible lg:saturate-[1.42]">
       <motion.div
         animate={{ opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 5.6, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute inset-x-[24%] top-[30%] h-28 rounded-full bg-blue-400/12 blur-3xl md:inset-x-[26%] md:h-30"
+        className="pointer-events-none absolute inset-x-[20%] top-[28%] h-32 rounded-full bg-blue-400/12 blur-3xl md:inset-x-[26%] md:h-30"
       />
       <motion.div
         animate={{ opacity: [0.08, 0.18, 0.08] }}
         transition={{ duration: 6.4, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-        className="pointer-events-none absolute right-[16%] top-[34%] h-32 w-32 rounded-full bg-violet-400/12 blur-3xl md:right-[18%] md:h-40 md:w-40"
+        className="pointer-events-none absolute right-[12%] top-[32%] h-36 w-36 rounded-full bg-violet-400/12 blur-3xl md:right-[18%] md:h-40 md:w-40"
       />
 
       <Canvas className="h-full w-full" camera={{ position: [0.04, 0.08, 11.8], fov: 19.8 }} dpr={[1, 1.75]} gl={{ alpha: true, antialias: true }}>
