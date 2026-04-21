@@ -12,9 +12,9 @@ const artifacts = [
     detail: "Agent operations view keeps runtime health, active versus idle lanes, recent results, and ownership visible when the operator needs to inspect who is working and what to send next.",
   },
   {
-    src: "/casefiles/agentboard/agentboard-review-center-focus.png",
-    label: "REVIEW_FOCUS",
-    detail: "Review-focused capture shows how follow-up, proof, and blockers stay connected when a task needs inspection.",
+    src: "/casefiles/agentboard/agentboard-rangepilot-task-picks.jpg",
+    label: "TASK_PICKS",
+    detail: "Task picks view shows how AgentBoard turns a project into a real operating queue, with NOW versus NEXT lanes, current agent assignment, verification state, and the next decision kept visible together.",
   },
 ];
 

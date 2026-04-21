@@ -197,7 +197,7 @@ export const experiments: any[] = [
       images: [
         { src: "/casefiles/agentboard/agentboard-projects-workspace.jpg", role: "hero", story: "Projects workspace shows AgentBoard as a real multi-project execution system with global triage, blocked tasks, priorities, progress, and durable project links in one board-native surface." },
         { src: "/casefiles/agentboard/agentboard-deerflow-agents.jpg", role: "support-1", story: "Agent operations view keeps runtime health, active versus idle lanes, recent results, and ownership visible so operators can see who is working and what to send next." },
-        { src: "/casefiles/agentboard/agentboard-review-center-focus.png", role: "support-2", story: "Focused review view shows how blockers, proof, and follow-up stay connected once work needs inspection." }
+        { src: "/casefiles/agentboard/agentboard-rangepilot-task-picks.jpg", role: "support-2", story: "Task picks view shows how AgentBoard turns a project into a real operating queue, with NOW versus NEXT lanes, current agent assignment, verification state, and the next decision kept visible together." }
       ]
     }
   }
