@@ -18,16 +18,16 @@ export function HeroCopy() {
       </div>
 
       <div className="space-y-3 md:space-y-5">
-        <h1 className="max-w-[8.2ch] text-[2.5rem] font-black leading-[0.84] tracking-[-0.04em] text-zinc-950 dark:text-zinc-50 sm:text-6xl md:max-w-none md:text-7xl md:tracking-tighter xl:text-[6.2rem]">
-          Design systems,
+        <h1 className="max-w-[9.5ch] text-[2.5rem] font-black leading-[0.84] tracking-[-0.04em] text-zinc-950 dark:text-zinc-50 sm:text-6xl md:max-w-none md:text-7xl md:tracking-tighter xl:text-[6.2rem]">
+          Product design
           <br />
-          <span className="text-blue-600 dark:text-blue-400">creative ops,</span>
+          <span className="text-blue-600 dark:text-blue-400">for operator tools,</span>
           <br />
-          and internal tools.
+          AI workflows, and internal systems.
         </h1>
 
-        <p className="max-w-[19.5rem] text-[0.92rem] font-medium leading-[1.55] text-zinc-600 dark:text-zinc-400 md:max-w-xl md:text-xl md:leading-relaxed">
-          Built in crypto design, now shifting toward workflows, internal tools, and clearer ways for teams to move faster with less noise.
+        <p className="max-w-[21rem] text-[0.92rem] font-medium leading-[1.55] text-zinc-600 dark:text-zinc-400 md:max-w-2xl md:text-xl md:leading-relaxed">
+          I design product surfaces for trading, AI, and internal operations where teams need clearer decisions, cleaner handoffs, and less workflow noise.
         </p>
       </div>
 
@@ -36,14 +36,14 @@ export function HeroCopy() {
           to="/casefiles"
           className="group inline-flex w-full items-center justify-center gap-3 bg-zinc-950 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-white transition-all hover:bg-blue-600 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-blue-500 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
         >
-          View Casefiles
+          View flagship work
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
         <Link
           to="/operator-lab"
           className="inline-flex w-full items-center justify-center gap-3 border border-zinc-300 px-6 py-3 text-[10px] font-black uppercase tracking-[0.24em] text-zinc-700 transition-all hover:border-blue-600 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-blue-400 dark:hover:text-blue-400 sm:w-auto md:px-8 md:py-4 md:text-xs md:tracking-[0.28em]"
         >
-          View Operator Lab
+          Explore operator products
         </Link>
       </div>
     </motion.div>

@@ -7,8 +7,8 @@ import { useTheme } from "@/context/ThemeContext";
 
 const navItems = [
   { path: "/", label: "Home" },
-  { path: "/casefiles", label: "Casefiles" },
-  { path: "/operator-lab", label: "Experiments" },
+  { path: "/casefiles", label: "Work" },
+  { path: "/operator-lab", label: "Operator Lab" },
   { path: "/cv", label: "CV" },
   { path: "/contact", label: "Contact" },
 ];
