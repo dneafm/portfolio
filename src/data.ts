@@ -196,7 +196,7 @@ export const experiments: any[] = [
       closingLine: "AgentBoard solves the coordination problem around AI agents, not just the execution problem.",
       images: [
         { src: "/casefiles/agentboard/agentboard-projects-workspace.jpg", role: "hero", story: "Projects workspace shows AgentBoard as a real multi-project execution system with global triage, blocked tasks, priorities, progress, and durable project links in one board-native surface." },
-        { src: "/casefiles/agentboard/agentboard-agents-dashboard.jpg", role: "support-1", story: "Agents dashboard keeps runtime state, queue health, blockers, and operator messaging visible so the team can see who owns work and what needs attention next." },
+        { src: "/casefiles/agentboard/agentboard-deerflow-agents.jpg", role: "support-1", story: "Agent operations view keeps runtime health, active versus idle lanes, recent results, and ownership visible so operators can see who is working and what to send next." },
         { src: "/casefiles/agentboard/agentboard-review-center-focus.png", role: "support-2", story: "Focused review view shows how blockers, proof, and follow-up stay connected once work needs inspection." }
       ]
     }

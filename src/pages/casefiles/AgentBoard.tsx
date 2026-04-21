@@ -7,9 +7,9 @@ const artifacts = [
     detail: "Projects workspace keeps global triage, blocked tasks, project priorities, progress, and durable project links visible in one board-native surface.",
   },
   {
-    src: "/casefiles/agentboard/agentboard-agents-dashboard.jpg",
-    label: "AGENTS_DASHBOARD",
-    detail: "Agents dashboard keeps runtime status, queue visibility, blockers, and operator messaging in one place when the team needs to inspect ownership and next action.",
+    src: "/casefiles/agentboard/agentboard-deerflow-agents.jpg",
+    label: "DEERFLOW_AGENTS",
+    detail: "Agent operations view keeps runtime health, active versus idle lanes, recent results, and ownership visible when the operator needs to inspect who is working and what to send next.",
   },
   {
     src: "/casefiles/agentboard/agentboard-review-center-focus.png",
