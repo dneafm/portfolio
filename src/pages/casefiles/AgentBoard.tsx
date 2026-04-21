@@ -7,14 +7,14 @@ const artifacts = [
     detail: "A board-native execution workspace that keeps project navigation, task picks, blockers, and handoff visible together.",
   },
   {
-    src: "/casefiles/agentboard/agentboard-project-milestones.png",
-    label: "PROJECT_MILESTONES",
-    detail: "Compact project cards keep sequencing and execution state legible at a glance.",
+    src: "/casefiles/agentboard/agentboard-roadmap-structure.png",
+    label: "ROADMAP_STRUCTURE",
+    detail: "Roadmap structure view keeps sequencing, planning, and execution context legible without flattening everything into one lane.",
   },
   {
-    src: "/casefiles/agentboard/agentboard-execution-os-overview.png",
-    label: "CURRENT_SHELL",
-    detail: "The casefile now stays on fresh execution-shell imagery instead of older detail-drawer captures.",
+    src: "/casefiles/agentboard/agentboard-review-center-focus.png",
+    label: "REVIEW_FOCUS",
+    detail: "Review-focused capture shows how follow-up, proof, and blockers stay connected when a task needs inspection.",
   },
 ];
 

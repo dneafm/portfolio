@@ -140,8 +140,8 @@ export const experiments: any[] = [
       closingLine: "DJ Trade helps standardize manual trading so progress is tied to real workflow structure, not memory, impulse, or vague status labels.",
       images: [
         { src: "/dj-djtrade_v3_live_shell_overview.png", role: "hero", story: "Control-surface overview showing live state, system health, and operator guidance in one trading workspace." },
-        { src: "/dj-djtrade_v3_live_shell_overview.png", role: "support-1", story: "The same fresh shell view keeps the showcase anchored on the current UI instead of older internal captures." },
-        { src: "/dj-djtrade_v3_live_shell_overview.png", role: "support-2", story: "Showcase screenshots now stay consistent with the latest live shell rather than mixing older reporting-era images." }
+        { src: "/dj-trade/dj-trade-readiness-preflight.png", role: "support-1", story: "Readiness and preflight framing show how execution gets gated before action instead of being left implicit." },
+        { src: "/dj-trade/dj-trade-compare-view.png", role: "support-2", story: "Comparison view helps the operator inspect what changed and why it matters before committing to a decision." }
       ]
     }
   },
@@ -196,8 +196,8 @@ export const experiments: any[] = [
       closingLine: "AgentBoard solves the coordination problem around AI agents, not just the execution problem.",
       images: [
         { src: "/casefiles/agentboard/agentboard-execution-os-overview.png", role: "hero", story: "Execution workspace overview showing project navigation, current focus, task picks, blockers, and handoff in one surface." },
-        { src: "/casefiles/agentboard/agentboard-project-milestones.png", role: "support-1", story: "Project view showing compact project cards and board-level execution structure." },
-        { src: "/casefiles/agentboard/agentboard-execution-os-overview.png", role: "support-2", story: "Fresh overview capture keeps the showcase aligned with the current AgentBoard shell instead of older review-center imagery." }
+        { src: "/casefiles/agentboard/agentboard-roadmap-structure.png", role: "support-1", story: "Roadmap structure view shows how priorities, sequencing, and execution planning stay legible without collapsing into one flat list." },
+        { src: "/casefiles/agentboard/agentboard-review-center-focus.png", role: "support-2", story: "Focused review view shows how blockers, proof, and follow-up stay connected once work needs inspection." }
       ]
     }
   }

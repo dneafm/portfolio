@@ -7,14 +7,14 @@ const artifacts = [
     detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
   },
   {
-    src: "/dj-djtrade_v3_live_shell_overview.png",
-    label: "LIVE_SHELL",
-    detail: "A fresh shell capture keeps the casefile tied to the current UI instead of older drill-down screenshots.",
+    src: "/dj-trade/dj-trade-readiness-preflight.png",
+    label: "READINESS_PREFLIGHT",
+    detail: "Preflight view shows how readiness and execution gating are surfaced before the trade moves forward.",
   },
   {
-    src: "/dj-djtrade_v3_live_shell_overview.png",
-    label: "CURRENT_OVERVIEW",
-    detail: "The showcase now uses current shell imagery consistently rather than mixing in older reporting-era frames.",
+    src: "/dj-trade/dj-trade-compare-view.png",
+    label: "COMPARE_VIEW",
+    detail: "Comparison flow gives the operator a cleaner way to inspect deltas, context shifts, and decision impact.",
   },
 ];
 
