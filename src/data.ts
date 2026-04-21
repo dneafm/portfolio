@@ -138,7 +138,7 @@ export const experiments: any[] = [
       outcome: "DJ Trade moves manual trading away from reactive chart-watching and toward a more standardized operational method. The value is not only better interface clarity. It is the ability to apply a trading method with more consistency, better checks, and stronger review.",
       closingLine: "DJ Trade helps standardize manual trading so decisions rely less on memory and impulse, and more on structured workflow.",
       images: [
-        { src: "/dj-djtrade_v3_reports_queue_wording_live_full.png", role: "hero", story: "Reporting queue reframed as a live operational surface, not a passive dashboard." },
+        { src: "/dj-djtrade_v3_live_shell_overview.png", role: "hero", story: "Control-surface overview showing live state, system health, and operator guidance in one trading workspace." },
         { src: "/dj-djtrade_v3_reports_snapshot_drawer.png", role: "support-1", story: "Snapshot drawer showing drill-down depth, evidence inspection, and review continuity." },
         { src: "/dj-djtrade_v3_reports_compare_ui.png", role: "support-2", story: "Compare view for evaluating what changed and why it matters before acting." },
         { src: "/dj-djtrade_v3_live_degraded_connection_ui.png", role: "support-3", story: "Degraded-state handling that keeps operator trust visible under imperfect live conditions." }
@@ -195,8 +195,8 @@ export const experiments: any[] = [
       outcome: "AgentBoard moves agent collaboration away from scattered conversations and toward a real operating system for work. The value is not just faster execution. It is better continuity, better review, and better trust in what got done.",
       closingLine: "AgentBoard solves the coordination problem around AI agents, not just the execution problem.",
       images: [
-        { src: "/casefiles/agentboard/agentboard-review-center-focus.png", role: "hero", story: "Review center view showing prioritized work, proof, and next action in one operating surface." },
-        { src: "/casefiles/agentboard/agentboard-roadmap-structure.png", role: "support-1", story: "Lane structure view showing roadmap shape, sequencing, and project-level prioritization." },
+        { src: "/casefiles/agentboard/agentboard-execution-os-overview.png", role: "hero", story: "Execution workspace overview showing project navigation, current focus, task picks, blockers, and handoff in one surface." },
+        { src: "/casefiles/agentboard/agentboard-project-milestones.png", role: "support-1", story: "Project and milestone view showing compact project cards, milestone progress, and board-level execution structure." },
         { src: "/agentboard-detail-drawer.jpg", role: "support-2", story: "Detail drawer showing blocker, proof note, and handoff depth instead of shallow task tracking." }
       ]
     }

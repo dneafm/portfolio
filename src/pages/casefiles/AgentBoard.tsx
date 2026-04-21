@@ -2,14 +2,14 @@ import { CasefileTemplate } from "@/components/CasefileTemplate";
 
 const artifacts = [
   {
-    src: "/agentboard/agentboard-review-center.png",
-    label: "REVIEW_CENTER",
-    detail: "A board-native review surface for turning noisy notes, ideas, and signals into structured action.",
+    src: "/casefiles/agentboard/agentboard-execution-os-overview.png",
+    label: "EXECUTION_OVERVIEW",
+    detail: "A board-native execution workspace that keeps project navigation, task picks, blockers, and handoff visible together.",
   },
   {
-    src: "/agentboard/agentboard-roadmap-view.png",
-    label: "ROADMAP_VIEW",
-    detail: "Separate lanes keep active work, bridge paths, and longer-horizon opportunities visible without flattening them into one queue.",
+    src: "/casefiles/agentboard/agentboard-project-milestones.png",
+    label: "PROJECT_MILESTONES",
+    detail: "Compact project cards and milestone progress keep sequencing and execution state legible at a glance.",
   },
   {
     src: "/agentboard/agentboard-detail-drawer.jpg",

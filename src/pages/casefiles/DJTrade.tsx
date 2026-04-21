@@ -2,9 +2,9 @@ import { CasefileTemplate } from "@/components/CasefileTemplate";
 
 const artifacts = [
   {
-    src: "/dj-djtrade_v3_reports_queue_wording_live_full.png",
-    label: "REPORTING_QUEUE",
-    detail: "Hero view showing reporting as an operational queue instead of a passive dashboard.",
+    src: "/dj-djtrade_v3_live_shell_overview.png",
+    label: "CONTROL_SURFACE",
+    detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
   },
   {
     src: "/dj-djtrade_v3_reports_snapshot_drawer.png",
