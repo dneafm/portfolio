@@ -7,9 +7,9 @@ const artifacts = [
     detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
   },
   {
-    src: "/dj-trade/dj-trade-strategy-lab.png",
-    label: "STRATEGY_LAB",
-    detail: "Strategy Lab turns a plain-language trading idea into a structured drafting workflow with role-based inputs and an explicit output format.",
+    src: "/dj-trade/dj-trade-readiness-preflight.png",
+    label: "READINESS_PREFLIGHT",
+    detail: "Execution-readiness checks make the pre-trade gate legible, so the operator can see what is safe, blocked, or still missing before proceeding.",
   },
   {
     src: "/dj-trade/dj-trade-workstation-new-bot.png",

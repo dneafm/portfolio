@@ -140,7 +140,7 @@ export const experiments: any[] = [
       closingLine: "DJ Trade helps standardize manual trading so progress is tied to real workflow structure, not memory, impulse, or vague status labels.",
       images: [
         { src: "/dj-djtrade_v3_live_shell_overview.png", role: "hero", story: "Control-surface overview showing live state, system health, and operator guidance in one trading workspace." },
-        { src: "/dj-trade/dj-trade-strategy-lab.png", role: "support-1", story: "Strategy Lab turns natural-language prompts and role picks into a structured drafting surface instead of leaving strategy definition scattered across notes and chats." },
+        { src: "/dj-trade/dj-trade-readiness-preflight.png", role: "support-1", story: "Execution-readiness preflight makes the gating checks visible before a trade can move forward, so the operator sees what is safe, blocked, or still incomplete." },
         { src: "/dj-trade/dj-trade-workstation-new-bot.png", role: "support-2", story: "Workstation setup makes symbol, timeframe, crew, and settlement choices legible in one handoff so a new bot can be configured without losing the execution context." }
       ]
     }
