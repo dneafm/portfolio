@@ -7,14 +7,14 @@ const artifacts = [
     detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
   },
   {
-    src: "/dj-trade/dj-trade-readiness-preflight.png",
-    label: "READINESS_PREFLIGHT",
-    detail: "Execution-readiness checks make the pre-trade gate legible, so the operator can see what is safe, blocked, or still missing before proceeding.",
-  },
-  {
     src: "/dj-trade/dj-trade-workstation-new-bot.png",
     label: "WORKSTATION_SETUP",
-    detail: "The workstation bot setup view keeps symbols, timeframes, and crew selection readable in one place before the workflow becomes live.",
+    detail: "The workstation bot setup view keeps bot name, symbols, timeframes, and crew composition readable in one place before execution begins.",
+  },
+  {
+    src: "/dj-trade/dj-trade-compare-view.png",
+    label: "COMPARE_VIEW",
+    detail: "The compare view gives the operator a cleaner way to inspect deltas, context shifts, and likely decision impact before acting.",
   },
 ];
 
