@@ -7,14 +7,14 @@ const artifacts = [
     detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
   },
   {
-    src: "/dj-trade/dj-trade-workstation-new-bot.png",
-    label: "WORKSTATION_SETUP",
-    detail: "The workstation bot setup view keeps bot name, symbols, timeframes, and crew composition readable in one place before execution begins.",
+    src: "/dj-trade/dj-trade-position-monitor.jpg",
+    label: "POSITION_MONITOR",
+    detail: "The position monitor turns open exposure into one scanable surface, showing total risk, unrealized PNL, and per-symbol bot context before the operator intervenes.",
   },
   {
-    src: "/dj-trade/dj-trade-compare-view.png",
-    label: "COMPARE_VIEW",
-    detail: "The compare view gives the operator a cleaner way to inspect deltas, context shifts, and likely decision impact before acting.",
+    src: "/dj-trade/dj-trade-workstation-configure-bot.jpg",
+    label: "WORKSTATION_SETUP",
+    detail: "The new bot configuration flow keeps symbol selection, timeframe, settlement window, and crew deployment together so a workstation bot can be shaped without bouncing between screens.",
   },
 ];
 

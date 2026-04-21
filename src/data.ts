@@ -141,7 +141,8 @@ export const experiments: any[] = [
       images: [
         { src: "/dj-djtrade_v3_live_shell_overview.png", role: "hero", story: "Control-surface overview showing live state, system health, and operator guidance in one trading workspace." },
         { src: "/dj-trade/dj-trade-workstation-new-bot.png", role: "support-1", story: "Workstation setup keeps bot name, symbols, timeframes, crew roles, and settlement choices legible in one place before the workflow goes live." },
-        { src: "/dj-trade/dj-trade-compare-view.png", role: "support-2", story: "Comparison flow gives the operator a clearer way to inspect deltas, context shifts, and decision impact before acting." }
+        { src: "/dj-trade/dj-trade-position-monitor.jpg", role: "support-2", story: "Position Monitor turns open exposure into one scanable surface, showing total risk, unrealized PNL, and per-symbol bot context before the operator intervenes." },
+        { src: "/dj-trade/dj-trade-workstation-configure-bot.jpg", role: "support-3", story: "The new bot configuration flow keeps symbol selection, timeframe, settlement window, and crew deployment together so the operator can shape a workstation bot without jumping between surfaces." }
       ]
     }
   },
