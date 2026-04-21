@@ -2,24 +2,29 @@ import { CasefileTemplate } from "@/components/CasefileTemplate";
 
 const artifacts = [
   {
-    src: "/dj-djtrade_v3_live_shell_overview.png",
+    src: "/dj-trade/dj-trade-hero-reports-queue.png",
     label: "CONTROL_SURFACE",
-    detail: "Hero overview showing live state, system health, and operator guidance in one trading control surface.",
+    detail: "Hero overview showing live state, reporting pressure, and operator guidance in one trading control surface.",
   },
   {
-    src: "/dj-djtrade_v3_reports_snapshot_drawer.png",
+    src: "/dj-trade/dj-trade-snapshot-drawer.png",
     label: "SNAPSHOT_DRAWER",
     detail: "Drill-down evidence layer for inspecting what changed and why it matters.",
   },
   {
-    src: "/dj-djtrade_v3_reports_compare_ui.png",
+    src: "/dj-trade/dj-trade-compare-view.png",
     label: "COMPARE_VIEW",
     detail: "Supports side-by-side review, comparison, and faster decision-making.",
   },
   {
-    src: "/dj-djtrade_v3_live_degraded_connection_ui.png",
+    src: "/dj-trade/dj-trade-degraded-connection.png",
     label: "DEGRADED_STATE",
     detail: "Makes failure states visible so the operator can judge trust before acting.",
+  },
+  {
+    src: "/dj-trade/dj-trade-readiness-preflight.png",
+    label: "READINESS_PRECHECK",
+    detail: "Preflight and readiness checks make workflow progress explicit before execution.",
   },
 ];
 
@@ -27,7 +32,7 @@ export function DJTrade() {
   return (
     <CasefileTemplate
       title="DJ Trade"
-      subtitle="Built a trading operations surface for monitoring, reconciliation, and execution clarity."
+      subtitle="Built a trading operations surface for milestone-aware monitoring, reconciliation, and execution clarity."
       context="Operator-facing trading workflow / high-noise monitoring environment"
       role="Product design, workflow design, interface design, and implementation direction"
       problem="Trading activity was fragmented across reports, states, and execution signals. The issue was not lack of data, but operator overload: too many moving parts, unclear priority, and weak visibility into what deserved attention first."
@@ -37,7 +42,7 @@ export function DJTrade() {
             DJ Trade started as an attempt to make dense trading activity easier to monitor, review, and act on. I approached it less like a market dashboard and more like an operational surface: what needs attention now, what changed, what is degraded, and what decision should happen next.
           </p>
           <p>
-            The work focused on scanability under pressure, clearer comparison paths, and stronger trust signals before execution. DJ Trade is where new strategies are forged, tested, and turned into operational workflows. Reports were treated as live workflow objects rather than static outputs, so the interface could support follow-up and judgment instead of just display.
+            The work focused on scanability under pressure, clearer comparison paths, stronger trust signals before execution, and a milestone model that reflects real workflow progress instead of vague status buckets. DJ Trade is where new strategies are forged, tested, and turned into operational workflows. Reports were treated as live workflow objects rather than static outputs, so the interface could support follow-up and judgment instead of just display.
           </p>
         </>
       }
@@ -78,9 +83,9 @@ export function DJTrade() {
           </div>
         </div>
       }
-      outcome="The result moved the experience away from a generic market dashboard and toward a decision-support tool. Its value is not only visual polish, but the way it structures noisy trading context into clearer operational judgment."
-      lessons="In trading workflows, clarity comes less from simplification and more from useful structure. Operators need to see priority, confidence, and degraded conditions without digging through noise."
-      nextSteps="I would push the system further with stronger execution-readiness views, more explicit follow-up states, and tighter links between reports, comparison, and action history."
+      outcome="The result moved the experience away from a generic market dashboard and toward a decision-support tool. Its value is not only visual polish, but the way it structures noisy trading context into milestone-aware operational judgment."
+      lessons="In trading workflows, clarity comes less from simplification and more from useful structure. Operators need to see milestone progress, confidence, readiness, and degraded conditions without digging through noise."
+      nextSteps="I would push the system further with stronger milestone proof, tighter execution-readiness views, and clearer links between reports, comparison, and action history."
     />
   );
 }
