@@ -195,7 +195,7 @@ export const experiments: any[] = [
       outcome: "AgentBoard moves agent collaboration away from scattered conversations and toward a real operating system for work. The value is not just faster execution. It is better continuity, better review, and better trust in what got done.",
       closingLine: "AgentBoard solves the coordination problem around AI agents, not just the execution problem.",
       images: [
-        { src: "/casefiles/agentboard/agentboard-execution-os-overview.png", role: "hero", story: "Execution workspace overview showing project navigation, current focus, task picks, blockers, and handoff in one surface." },
+        { src: "/casefiles/agentboard/agentboard-project-milestones.png", role: "hero", story: "Project and milestone view shows AgentBoard as a real execution system where projects, task picks, blockers, and verified progress stay connected." },
         { src: "/casefiles/agentboard/agentboard-roadmap-structure.png", role: "support-1", story: "Roadmap structure view shows how priorities, sequencing, and execution planning stay legible without collapsing into one flat list." },
         { src: "/casefiles/agentboard/agentboard-review-center-focus.png", role: "support-2", story: "Focused review view shows how blockers, proof, and follow-up stay connected once work needs inspection." }
       ]

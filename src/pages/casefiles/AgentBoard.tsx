@@ -2,9 +2,9 @@ import { CasefileTemplate } from "@/components/CasefileTemplate";
 
 const artifacts = [
   {
-    src: "/casefiles/agentboard/agentboard-execution-os-overview.png",
-    label: "EXECUTION_OVERVIEW",
-    detail: "A board-native execution workspace that keeps project navigation, task picks, blockers, and handoff visible together.",
+    src: "/casefiles/agentboard/agentboard-project-milestones.png",
+    label: "PROJECT_MILESTONES",
+    detail: "Project and milestone view keeps project state, task picks, blockers, and verified progress visible in one board-native surface.",
   },
   {
     src: "/casefiles/agentboard/agentboard-roadmap-structure.png",
