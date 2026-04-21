@@ -2,14 +2,14 @@ import { CasefileTemplate } from "@/components/CasefileTemplate";
 
 const artifacts = [
   {
-    src: "/casefiles/agentboard/agentboard-project-milestones.png",
-    label: "PROJECT_MILESTONES",
-    detail: "Project and milestone view keeps project state, task picks, blockers, and verified progress visible in one board-native surface.",
+    src: "/casefiles/agentboard/agentboard-projects-workspace.jpg",
+    label: "PROJECTS_WORKSPACE",
+    detail: "Projects workspace keeps global triage, blocked tasks, project priorities, progress, and durable project links visible in one board-native surface.",
   },
   {
-    src: "/casefiles/agentboard/agentboard-roadmap-structure.png",
-    label: "ROADMAP_STRUCTURE",
-    detail: "Roadmap structure view keeps sequencing, planning, and execution context legible without flattening everything into one lane.",
+    src: "/casefiles/agentboard/agentboard-agents-dashboard.jpg",
+    label: "AGENTS_DASHBOARD",
+    detail: "Agents dashboard keeps runtime status, queue visibility, blockers, and operator messaging in one place when the team needs to inspect ownership and next action.",
   },
   {
     src: "/casefiles/agentboard/agentboard-review-center-focus.png",
