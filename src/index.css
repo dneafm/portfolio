@@ -25,12 +25,20 @@
 }
 
 @media print {
+  html,
   body {
     background: #ffffff !important;
+    color: #18181b !important;
   }
 
-  header,
-  footer,
+  #root > div,
+  .dossier-grid {
+    background: #ffffff !important;
+    background-image: none !important;
+  }
+
+  #root > div > header,
+  #root > div > footer,
   .cv-download-actions {
     display: none !important;
   }
@@ -41,8 +49,18 @@
   }
 
   .cv-print-page {
+    background: #ffffff !important;
+    color: #18181b !important;
     box-shadow: none !important;
     min-height: auto !important;
+    break-after: page;
     page-break-after: always;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cv-print-page header,
+  .cv-print-page footer {
+    display: flex !important;
   }
 }
