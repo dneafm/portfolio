@@ -2,6 +2,8 @@ import { motion } from "motion/react";
 import { Download, Mail, Linkedin, Twitter, Globe, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const CV_PDF_PATH = "/Hoang-Pham-CV.pdf";
+
 export function CV() {
   return (
     <div className="max-w-4xl mx-auto space-y-12 pb-20">
@@ -11,7 +13,7 @@ export function CV() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-2xl shadow-black/40 dark:shadow-black/60 min-h-[1100px] font-sans selection:bg-blue-50 dark:selection:bg-blue-900/30 selection:text-blue-700 dark:selection:text-blue-300 relative overflow-hidden transition-colors duration-300"
+        className="cv-print-page bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-2xl shadow-black/40 dark:shadow-black/60 min-h-[1100px] font-sans selection:bg-blue-50 dark:selection:bg-blue-900/30 selection:text-blue-700 dark:selection:text-blue-300 relative overflow-hidden transition-colors duration-300"
       >
         {/* Top Header Band */}
         <div className="h-1.5 bg-blue-600 w-full" />
@@ -43,10 +45,16 @@ export function CV() {
               </div>
             </div>
 
-            <div className="flex flex-col items-end gap-4">
-              <button className="group inline-flex items-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-3 text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-xl shadow-zinc-900/10 dark:shadow-white/5 hover:shadow-blue-600/20">
+            <div className="cv-download-actions flex flex-col items-end gap-4">
+              <a
+                href={CV_PDF_PATH}
+                download="Hoang-Pham-CV.pdf"
+                type="application/pdf"
+                className="group inline-flex items-center gap-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-6 py-3 text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 dark:hover:bg-blue-500 transition-all shadow-xl shadow-zinc-900/10 dark:shadow-white/5 hover:shadow-blue-600/20"
+                aria-label="Download Hoang Pham CV as a PDF"
+              >
                 <Download className="w-4 h-4" /> Download CV
-              </button>
+              </a>
               <div className="flex gap-2">
                 <a href="#" className="p-3 bg-zinc-50 dark:bg-zinc-950 text-zinc-400 dark:text-zinc-600 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all rounded-xl border border-zinc-100 dark:border-zinc-800">
                   <Twitter className="w-4 h-4" />
@@ -265,7 +273,7 @@ export function CV() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-2xl shadow-black/40 dark:shadow-black/60 min-h-[1100px] font-sans selection:bg-blue-50 dark:selection:bg-blue-900/30 selection:text-blue-700 dark:selection:text-blue-300 relative overflow-hidden transition-colors duration-300"
+        className="cv-print-page bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-2xl shadow-black/40 dark:shadow-black/60 min-h-[1100px] font-sans selection:bg-blue-50 dark:selection:bg-blue-900/30 selection:text-blue-700 dark:selection:text-blue-300 relative overflow-hidden transition-colors duration-300"
       >
         <div className="p-8 md:p-16">
           {/* Header Section - Page 2 (Smaller) */}
