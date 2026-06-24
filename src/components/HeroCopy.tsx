@@ -19,15 +19,15 @@ export function HeroCopy() {
 
       <div className="space-y-3 md:space-y-5">
         <h1 className="max-w-[9.5ch] text-[2.5rem] font-black leading-[0.84] tracking-[-0.04em] text-zinc-950 dark:text-zinc-50 sm:text-6xl md:max-w-none md:text-7xl md:tracking-tighter xl:text-[6.2rem]">
-          Designing systems
+          Graphic designer
           <br />
-          <span className="text-blue-600 dark:text-blue-400">for trading, AI,</span>
+          <span className="text-blue-600 dark:text-blue-400">who builds systems</span>
           <br />
-          and internal operations.
+          for trading, AI, and ops.
         </h1>
 
         <p className="max-w-[21rem] text-[0.92rem] font-medium leading-[1.55] text-zinc-600 dark:text-zinc-400 md:max-w-2xl md:text-xl md:leading-relaxed">
-          I design interfaces and workflows for trading, AI, and internal operations where teams need clearer decisions, cleaner handoffs, and less workflow noise.
+          I start from graphic craft — layout, hierarchy, clarity — then extend into interfaces, dashboards, and tools that teams can actually use.
         </p>
       </div>
 

@@ -56,10 +56,10 @@ export function ProductFocus() {
             <p className="text-[10px] font-black uppercase tracking-[0.32em] text-blue-600 dark:text-blue-400">Design-focused version</p>
             <div className="space-y-4">
               <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-6xl">
-                Designer building systems for dashboards, workflows, and automation.
+                Graphic designer building systems for dashboards, workflows, and automation.
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-300 md:text-lg">
-                I design practical systems and interfaces that help teams operate more clearly and efficiently, with a focus on dashboards, workflows, admin tools, and automation layers that reduce friction and improve execution.
+                I start from graphic craft — layout, hierarchy, clarity — then extend into systems, interfaces, and tools that help teams operate more clearly.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
