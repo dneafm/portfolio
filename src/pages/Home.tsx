@@ -7,14 +7,14 @@ const capabilityChapters = [
   {
     eyebrow: "What I help with",
     title: "Operator interfaces",
-    aside: "Decision-heavy product surfaces built to stay legible under pressure.",
+    aside: "Decision-heavy interfaces built to stay legible under pressure.",
     icon: LayoutPanelTop,
     accent: "from-blue-500/20 to-cyan-400/10",
   },
   {
     eyebrow: "What I help with",
     title: "Workflow and review systems",
-    aside: "Queues, handoffs, approvals, and operational state designed to keep teams moving.",
+    aside: "Queues, handoffs, approvals, and operational state built to keep teams moving.",
     icon: Workflow,
     accent: "from-violet-500/20 to-fuchsia-400/10",
   },
@@ -30,12 +30,12 @@ const capabilityChapters = [
 const backgroundChapters = [
   {
     eyebrow: "Background",
-    title: "Started in crypto product design.",
+    title: "Started in crypto design work.",
     aside: "Clear communication in volatile, high-context systems.",
   },
   {
     eyebrow: "Current focus",
-    title: "Now designing workflow-first internal products.",
+    title: "Now designing workflow-first internal systems.",
     aside: "Trading tools, review systems, and operator-facing AI workflows.",
   },
 ];
@@ -44,7 +44,7 @@ const proofCards = [
   {
     label: "Operator Lab",
     title: "DJ Trade",
-    description: "Trading workflow product work focused on review clarity, execution context, and operator trust under uncertainty.",
+    description: "Trading workflow design focused on review clarity, execution context, and operator trust under uncertainty.",
     to: "/operator-lab/dj-trade",
   },
   {
@@ -52,18 +52,6 @@ const proofCards = [
     title: "AgentBoard",
     description: "An agent coordination workspace for project triage, assignment, replay, and durable operator context.",
     to: "/operator-lab/agent-board",
-  },
-  {
-    label: "Casefile",
-    title: "Kyber Network",
-    description: "Background credibility in DeFi product design, where clarity mattered in fast-moving, unstable conditions.",
-    to: "/casefiles/kyber-network",
-  },
-  {
-    label: "Casefile",
-    title: "Factor",
-    description: "System-oriented product work focused on reusable structure, operating rhythm, and clearer team workflows.",
-    to: "/casefiles/factor",
   },
 ];
 
@@ -78,7 +66,7 @@ export function Home() {
           <div className="max-w-3xl space-y-4">
             <p className="text-[10px] font-black uppercase tracking-[0.32em] text-blue-600 dark:text-blue-400">What I help with</p>
             <h2 className="text-3xl font-black leading-tight tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">
-              I design operator-facing products that make complex workflows easier to trust, use, and ship.
+              I design interfaces for complex workflows that are easier to trust, use, and ship.
             </h2>
           </div>
 
@@ -144,15 +132,11 @@ export function Home() {
         <div className="flex items-end justify-between gap-6 border-b border-zinc-200 pb-5 dark:border-zinc-800">
           <div className="space-y-3">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 dark:text-zinc-500">Proof</p>
-            <h2 className="text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">Flagship work first, background credibility second.</h2>
+            <h2 className="text-3xl font-black tracking-tight text-zinc-950 dark:text-zinc-50 md:text-4xl">Flagship design work, without the mixed creative signal.</h2>
           </div>
-          <Link to="/casefiles" className="hidden items-center gap-2 text-[11px] font-black uppercase tracking-[0.24em] text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 md:inline-flex">
-            View all
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2">
           {proofCards.map((card, index) => (
             <motion.div
               key={card.title}
@@ -187,26 +171,26 @@ export function Home() {
           <div className="space-y-4">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 dark:text-blue-400">Next chapter</p>
             <h2 className="max-w-2xl text-3xl font-black leading-tight tracking-tight md:text-5xl">
-              I help teams turn messy, high-context workflows into products operators can actually use.
+              I help teams turn messy, high-context workflows into systems operators can actually use.
             </h2>
           </div>
           <div className="space-y-5 md:pl-8">
             <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
-              Especially for internal tools, AI-assisted workflows, and operator-facing product surfaces where clarity, triage, and execution support need to work together.
+              Especially for internal tools, AI-assisted workflows, and operator-facing interfaces where clarity, triage, and execution support need to work together.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                to="/operator-lab"
+                to="/product-focus"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-950 px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-white transition-colors hover:bg-blue-600 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-blue-400"
               >
-                Explore operator products
+                What I do
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/contact"
+                to="/cv"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-zinc-300/80 px-6 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-zinc-700 transition-colors hover:border-blue-400 hover:text-blue-600 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-blue-500 dark:hover:text-blue-400"
               >
-                Contact
+                Open CV
               </Link>
             </div>
           </div>
